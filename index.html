@@ -291,6 +291,23 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 html.sem-scroll{overflow:hidden}
 @keyframes sobe{from{transform:translateY(40px); opacity:.4} to{transform:none; opacity:1}}
 .gr{font-family:var(--f-greek); font-size:18px; line-height:1}
+.li-sub{font-weight:700; margin:12px 0 8px}
+.li-tabwrap{overflow-x:auto}
+.li-tab{width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; font-size:15px; background:var(--surface); border:1.5px solid var(--line); border-radius:12px; overflow:hidden}
+.li-tab th, .li-tab td{padding:8px 6px; text-align:center; border-bottom:1px solid var(--line); hyphens:manual}
+.li-tab th:nth-child(-n+2), .li-tab td:nth-child(-n+2){width:19%}
+.li-tab th:nth-child(3), .li-tab td:nth-child(3){width:23%}
+.li-tab tbody tr:last-child td{border-bottom:none}
+.li-tab th{font-size:12px; font-weight:700; line-height:1.25; color:var(--muted); background:var(--surface-2)}
+@media (max-width:440px){ .li-tab{font-size:14px} .li-tab th{font-size:11px} }
+.li-tab td.sim{color:var(--ok); font-weight:700}
+.li-tab td.nao{color:var(--bad); font-weight:700}
+.li-tab td:last-child{text-align:left}
+.lq{display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:14px; border:2px dashed var(--accent); background:var(--surface)}
+.lq-n{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.lq-caso{font-size:17px; font-weight:700}
+.lq-ops{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+@media (max-width:440px){ .lq-ops{grid-template-columns:1fr} }
 /* ---------- Continuar e recomeçar ---------- */
 .mrow{display:grid; grid-template-columns:1fr auto; gap:8px}
 .reset-b{width:52px; border-radius:var(--r); border:2px solid var(--line); background:var(--surface); font-size:22px; color:var(--muted)}
@@ -377,7 +394,7 @@ const CONTEUDO = {
   ],
 
   mundos: [
-    { n:1, letra:'α', curto:'Conhecer', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:12, especiais:[{k:'ligar', set:'problemas'}], teste:false },
+    { n:1, letra:'α', curto:'Conhecer', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:12, especiais:[{k:'ligar', set:'problemas'}, {k:'sprint', set:'condicoes'}], teste:false },
     { n:2, letra:'β', curto:'Tipos', titulo:'Tipos de conhecimento', resumo:'Proposicional, prático e por contacto, com o exercício da Julieta.', nPerguntas:12, especiais:[{k:'ligar', set:'tipos'}, {k:'sprint', set:'tipos'}], teste:true },
     { n:3, letra:'γ', curto:'Ceticismo', titulo:'Será possível conhecer?', resumo:'Problema da possibilidade, o desafio cético, os argumentos céticos e Pirro de Élis.', nPerguntas:13, especiais:[{k:'ligar', set:'ceticismo'}, {k:'sprint', set:'ceticos'}], teste:true },
     { n:4, letra:'δ', curto:'Regressão', titulo:'A regressão infinita e a resposta fundacionalista', resumo:'O argumento cético, a sua validade e as crenças básicas.', nPerguntas:9, especiais:[{k:'ordem'}], teste:true },
@@ -404,12 +421,19 @@ const CONTEUDO = {
           ['Conhecimento','É uma <b>relação entre um sujeito e um objeto</b>. Em todos os casos de conhecimento há pelo menos estes dois elementos.'],
           ['Autoconhecimento','Quando alguém se tenta conhecer a si próprio, o <b>sujeito e o objeto coincidem</b>.'] ]},
         { t:'As condições para haver conhecimento (pp. 12–13)', l:[
-          ['Condições de quê?','Para responder a «<b>O que é o conhecimento?</b>», os filósofos perguntam: <b>o que tem de acontecer para podermos dizer que alguém SABE alguma coisa?</b> Essas coisas que têm de acontecer chamam-se as <b>condições do conhecimento</b>. Por exemplo: para a Ana saber que Lisboa é a capital de Portugal, o que é preciso?'],
-          ['A resposta','A definição tradicional (a seguir) diz que são três: a Ana tem de <b>acreditar</b> nisso, tem de ser <b>verdade</b> e ela tem de ter <b>boas razões</b> (justificação). Mas primeiro é preciso perceber duas palavras: <b>necessária</b> e <b>suficiente</b>.'],
-          ['Necessária','É <b>obrigatória</b>: se faltar, a coisa <b>não acontece</b>. Mas, sozinha, pode <b>não chegar</b>.<br>Exemplo: <b>ser um animal</b> é necessário para ser um cão. Um cão é sempre um animal; se não é animal, não pode ser cão. Mas ser animal não chega: um gato também é animal e não é cão.'],
-          ['Suficiente','<b>Chega sozinha</b>: se estiver presente, a coisa acontece <b>de certeza</b>.<br>Exemplo: <b>ser um cão</b> é suficiente para ser um animal. Se é cão, é de certeza animal. Mas não é obrigatório: há animais que não são cães.'],
-          ['Truque','Necessária = «<b>sem isto, não</b>». Suficiente = «<b>com isto, sim, de certeza</b>».'],
-          ['Aplicado ao conhecimento','<b>Crença</b>, <b>verdade</b> e <b>justificação</b> são, cada uma, <b>necessárias</b>: se faltar uma, não há conhecimento. Mas nenhuma <b>chega sozinha</b> (só acreditar não chega; só ser verdade não chega). As <b>três juntas</b> são <b>suficientes</b>: se alguém acredita, é verdade e tem boas razões, então sabe de certeza.'] ]},
+          ['1. A pergunta','O que tem de acontecer para podermos dizer que alguém <b>SABE</b> alguma coisa? Essas coisas chamam-se <b>condições do conhecimento</b>.'],
+          ['2. Duas palavras-chave','<b>Necessária</b> = «sem isto, <b>NÃO</b>». Se faltar, não acontece.<br><b>Suficiente</b> = «com isto, <b>SIM</b>, de certeza». Se estiver lá, acontece.'],
+          ['3. Como se ligam: o concerto','Para entrar num concerto precisas de: (1) <b>bilhete</b>, (2) <b>documento de identificação</b>, (3) ter <b>mais de 16 anos</b>.<br>• Cada uma é <b>NECESSÁRIA</b>: se faltar uma, não entras.<br>• Nenhuma sozinha é <b>SUFICIENTE</b>: só o bilhete não chega, só o documento não chega, só a idade não chega.<br>• As três <b>JUNTAS</b> são <b>SUFICIENTES</b>: com as três, entras de certeza.<br><b>Ideia principal:</b> várias condições necessárias, juntas, tornam-se suficientes.'],
+          ['4. Aplicado ao conhecimento','É exatamente igual. Para a Ana saber que Lisboa é a capital de Portugal precisa de: (1) <b>acreditar</b> nisso (CRENÇA), (2) <b>ser verdade</b> (VERDADE), (3) ter <b>boas razões</b> (JUSTIFICAÇÃO).<br>• Cada uma é <b>NECESSÁRIA</b>: se faltar uma, não há conhecimento.<br>• Nenhuma sozinha é <b>SUFICIENTE</b>: só acreditar não chega; acreditar em algo verdadeiro por sorte não chega; ter boas razões para algo falso não chega.<br>• As três <b>JUNTAS</b> são <b>SUFICIENTES</b>: crença + verdade + justificação = conhecimento.'],
+          ['Nos testes','Por isso os testes dizem: «condições necessárias e <b>conjuntamente</b> suficientes» (conjuntamente = as três juntas).'] ],
+          tabela:{ titulo:'5. Em tabela', cab:['Crença','Verdade','Justifi\u00adcação','Há conhecimento?'], linhas:[
+            ['✓','✓','✓','SIM'], ['✗','✓','✓','NÃO (falta crença)'], ['✓','✗','✓','NÃO (falta verdade)'], ['✓','✓','✗','NÃO (falta justificação)'] ]} },
+        { t:'6. Exemplos do manual', l:[
+          ['Falta a crença','O Carlos leu numa revista médica que o álcool em excesso provoca cirroses, mas pensou que era falso → <b>não sabe</b>.'],
+          ['Falta a verdade','Há muito tempo havia razões para acreditar que a Terra era plana, mas era falso → <b>ninguém sabia</b> isso.'],
+          ['Falta a justificação','A Teresa acredita que a Terra é maior do que a Lua porque ouviu dizer que o tamanho dos nomes exprime o tamanho das coisas → é verdade, mas foi sorte: <b>não sabe</b>.'],
+          ['Tem as três','A Luísa acredita, por estudos científicos que leu, que o albinismo tem causa genética → <b>sabe</b>.'] ]},
+        { t:'7. Minijogo rápido: sabe ou não sabe?', quiz:'condicoes', l:[] },
         { t:'A definição tradicional (pp. 12–13)', l:[
           ['Conhecimento','= <b>crença verdadeira justificada</b>. Vem de Platão, no diálogo <i>Teeteto</i>. Define o conhecimento <b>proposicional</b>.'],
           ['Tripartida','Indica <b>três condições necessárias</b>: crença, verdade e justificação. S sabe que P se <b>acreditar</b> em P, se P for <b>verdadeira</b> e se tiver uma <b>justificação adequada</b> para acreditar em P. Juntas, são uma condição <b>suficiente</b>. Basta faltar uma para não haver conhecimento.'],
@@ -429,12 +453,7 @@ const CONTEUDO = {
           ['O que é','Ter <b>boas razões</b> para acreditar que a proposição é verdadeira. Ligam a crença à verdade, para que a convicção <b>não se deva ao acaso</b>.'],
           ['Boas razões','Ler num manual de História que D. Pedro V defendeu a abolição da escravatura; <b>ouvir o vento</b> para dizer que está vento lá fora.'],
           ['Más razões','Gostar do nome do rei; ter sonhado com vento ou ter lido uma ventania num romance.'],
-          ['Não basta','Podemos ter boas razões para acreditar em algo falso (na Antiguidade havia razões para acreditar que a Terra era plana).'] ]},
-        { t:'Exemplos para treinar', l:[
-          ['Luísa','Acredita, por estudos científicos, que o albinismo tem causa genética → <b>tem</b> conhecimento.'],
-          ['Teresa','Acredita que a Terra é maior do que a Lua porque o nome é maior → <b>não tem</b>: verdadeira, mas mal justificada.'],
-          ['Carlos','Leu que o álcool em excesso provoca cirroses, mas pensou que era falso → <b>não tem</b>: falta a crença.'],
-          ['João','Acredita que vai chover só porque lhe apetece, e chove → <b>não tem</b>: palpite, sem justificação.'] ]}
+          ['Não basta','Podemos ter boas razões para acreditar em algo falso (na Antiguidade havia razões para acreditar que a Terra era plana).'] ]}
       ],
       truque:'Para saber se alguém sabe, verifica as 3 condições por ordem: <b>acredita? é verdade? tem boas razões?</b> Se faltar uma, não há conhecimento.' },
 
@@ -591,6 +610,9 @@ const CONTEUDO = {
     { id:'m1-56', m:1, t:'mc', q:'Na definição tradicional, a crença, a verdade e a justificação, as três juntas, são:', o:['uma condição suficiente para haver conhecimento','uma condição que não chega para haver conhecimento','opcionais','apenas uma opinião'], e:'Juntas chegam: se alguém acredita, é verdade e tem boas razões, então sabe.' },
     { id:'m1-57', m:1, t:'vf', q:'Na definição tradicional, a verdade, sozinha, é suficiente para haver conhecimento.', a:false, e:'É necessária (não se sabe o que é falso), mas não chega: um palpite pode ser verdadeiro e não é conhecimento.' },
     { id:'m1-58', m:1, t:'vf', q:'Uma condição necessária é obrigatória, mas sozinha pode não chegar.', a:true, e:'Necessária = «sem isto, não». Suficiente = «com isto, sim, de certeza».' },
+    { id:'m1-59', m:1, t:'mc', q:'Para entrar num concerto é preciso bilhete, documento de identificação e ter mais de 16 anos. O bilhete, sozinho, é uma condição:', o:['necessária, mas não suficiente','suficiente, mas não necessária','necessária e suficiente','nem necessária nem suficiente'], e:'Sem bilhete não entras (necessária), mas só o bilhete não chega (não é suficiente).' },
+    { id:'m1-60', m:1, t:'vf', q:'Na definição tradicional, a crença, a verdade e a justificação são condições necessárias e conjuntamente suficientes.', a:true, e:'Cada uma é necessária; as três juntas (conjuntamente) são suficientes.' },
+    { id:'m1-61', m:1, t:'mc', q:'«Condições conjuntamente suficientes» quer dizer que:', o:['as condições, todas juntas, chegam para haver conhecimento','cada condição chega sozinha','basta ter uma das condições','as condições não são precisas'], e:'Conjuntamente = as três juntas. Crença + verdade + justificação = conhecimento.' },
     // Manual, pp. 8–13
     { id:'m1-36', m:1, t:'mc', q:'Quais são os dois elementos comuns a todos os casos de conhecimento?', o:['o sujeito e o objeto','a crença e a dúvida','a razão e a experiência','a verdade e a opinião'], e:'O sujeito é quem conhece e o objeto é aquilo que é conhecido (manual, p. 9).' },
     { id:'m1-37', m:1, t:'mc', q:'No conhecimento, o sujeito é:', o:['quem conhece','aquilo que é conhecido','a justificação da crença','a proposição verdadeira'], e:'Sujeito = quem conhece; objeto = aquilo que é conhecido.' },
@@ -841,6 +863,23 @@ const CONTEUDO = {
         {x:'Duas coisas iguais a uma terceira são iguais entre si.', c:'pri'}
       ]
     },
+    condicoes: {
+      mundo:1, titulo:'Sabe ou não sabe?', instrucao:'Lê o caso e escolhe: sabe, ou que condição falta.',
+      cats:[ {k:'sabe', l:'Sabe', dica:'tem as três condições'}, {k:'cr', l:'Não sabe – falta crença', dica:'não acredita'}, {k:'ve', l:'Não sabe – falta verdade', dica:'é falso'}, {k:'ju', l:'Não sabe – falta justificação', dica:'foi sorte ou as razões não prestam'} ],
+      porque:{ sabe:'Tem as três condições: acredita, é verdade e tem boas razões.', cr:'Falta a crença: não acredita, por isso não sabe, mesmo sendo verdade e havendo boas razões.', ve:'Falta a verdade: é falso, e não se pode saber o que é falso, mesmo acreditando e tendo razões.', ju:'Falta a justificação: acredita e é verdade, mas foi sorte ou as razões não prestam.' },
+      itens:[
+        {x:'O Carlos leu numa revista médica que o álcool em excesso provoca cirroses, mas pensou que era falso.', c:'cr', e:'Exemplo do manual: é verdade e havia boas razões, mas o Carlos não acredita.'},
+        {x:'Há muito tempo, as pessoas tinham razões para acreditar que a Terra era plana, e acreditavam nisso.', c:'ve', e:'Exemplo do manual: acreditavam e tinham razões, mas era falso, por isso ninguém sabia.'},
+        {x:'A Teresa acredita que a Terra é maior do que a Lua porque ouviu dizer que o tamanho dos nomes exprime o tamanho das coisas.', c:'ju', e:'Exemplo do manual: acredita e é verdade, mas a razão não presta; acertou por sorte.'},
+        {x:'A Luísa acredita, por estudos científicos que leu, que o albinismo tem causa genética.', c:'sabe', e:'Exemplo do manual: acredita, é verdade e tem boas razões.'},
+        {x:'O Rui acredita que amanhã há teste de Filosofia porque a professora o disse na aula e o escreveu no sumário. E há mesmo teste.', c:'sabe'},
+        {x:'A Inês acredita que o autocarro passa às 8h porque viu o horário na paragem. Mas o horário mudou ontem e o autocarro agora passa às 8h15.', c:'ve', e:'Tinha uma boa razão e acreditava, mas a crença é falsa.'},
+        {x:'O Tiago acha que a resposta certa é a B só porque gosta da letra B. E a B está mesmo certa.', c:'ju', e:'Acredita e é verdade, mas gostar da letra não é uma razão: foi sorte.'},
+        {x:'A Marta olha pela janela, vê a chuva a cair e acredita que está a chover. Está mesmo a chover.', c:'sabe'},
+        {x:'O Pedro leu num livro de ciências que o Sol é uma estrela, mas acha que é mentira e não acredita.', c:'cr', e:'É verdade e o livro é uma boa razão, mas o Pedro não acredita.'},
+        {x:'O João acredita que vai chover amanhã só porque lhe apetece. E no dia seguinte chove.', c:'ju', e:'Acredita e é verdade, mas «porque me apetece» não é uma razão: é um palpite.'}
+      ]
+    },
     /* Grupo III da Simulação do Teste: tabela a priori / a posteriori (escolhe 4 de cada) */
     tabela: {
       mundo:5, titulo:'Tabela a priori / a posteriori', instrucao:'Liga cada frase à coluna certa.',
@@ -997,7 +1036,7 @@ const CONTEUDO = {
     { id:'c09', m:1, aberta:false, frente:'Epistemologia', verso:'Área da filosofia que estuda o conhecimento (teoria do conhecimento). Do grego epistéme (conhecimento) + logos (estudo).', exemplo:'Problemas: definição, possibilidade e origem do conhecimento.' },
     { id:'c10', m:1, aberta:false, frente:'Os três problemas da epistemologia', verso:'Definição: “O que é conhecer?”\nPossibilidade: “Será possível conhecer alguma coisa?”\nOrigem: “O conhecimento provém da razão ou da experiência?”', exemplo:'Saem no teste: possibilidade e origem.' },
     { id:'c11', m:1, aberta:false, frente:'Definição tradicional de conhecimento', verso:'Crença verdadeira justificada (Platão, Teeteto). S sabe que P se e só se: S acredita que P; P é verdadeira; S tem justificação para acreditar que P.', exemplo:'O João acerta na chuva por palpite: crença verdadeira, não justificada → não sabe.' },
-    { id:'c12', m:1, aberta:false, frente:'Condições do conhecimento: necessária vs. suficiente', verso:'São as condições para alguém SABER alguma coisa (para haver conhecimento): crença, verdade e justificação.\nNecessária = obrigatória («sem isto, não»): se faltar, não há conhecimento, mas sozinha pode não chegar.\nSuficiente = chega sozinha («com isto, sim, de certeza»): se estiver presente, há conhecimento.\nExemplo: ser animal é necessário para ser cão (mas não chega); ser cão é suficiente para ser animal.', exemplo:'Na definição tradicional, cada condição é necessária e as três juntas seriam suficientes.' },
+    { id:'c12', m:1, aberta:false, frente:'Condições do conhecimento: necessária vs. suficiente', verso:'São as condições para alguém SABER alguma coisa (para haver conhecimento): crença, verdade e justificação. Cada uma é necessária e as três são conjuntamente suficientes (como bilhete + documento + idade para entrar num concerto).\nNecessária = obrigatória («sem isto, não»): se faltar, não há conhecimento, mas sozinha pode não chegar.\nSuficiente = chega sozinha («com isto, sim, de certeza»): se estiver presente, há conhecimento.\nExemplo: ser animal é necessário para ser cão (mas não chega); ser cão é suficiente para ser animal.', exemplo:'Na definição tradicional, cada condição é necessária e as três juntas seriam suficientes.' },
     { id:'c13', m:2, aberta:false, frente:'Conhecimento proposicional', verso:'Saber-que: saber que uma proposição é verdadeira. Também se chama conhecimento factual. É o que a epistemologia mais estuda.', exemplo:'“Sei que Lisboa é a capital de Portugal.”' },
     { id:'c14', m:2, aberta:false, frente:'Conhecimento prático', verso:'Saber-fazer: ter uma competência.', exemplo:'“Sei andar de bicicleta”, “Sei nadar”, “Sei tocar guitarra”.' },
     { id:'c15', m:2, aberta:false, frente:'Conhecimento por contacto', verso:'Familiaridade: conhecer diretamente pessoas, lugares ou coisas.', exemplo:'“Conheço o Porto”, “Conheço a Maria”, “Conheço o sabor da manga”.' },
@@ -1218,6 +1257,7 @@ function inicio(){
       '<button class="acao final" id="b-sim" type="button"><span class="t">Simulação do Teste</span><span class="d">' + (ps ? '<b>Continua: ' + descreverSim(ps) + '</b>' : 'Igual ao teste real: 4 grupos, com tabela e desenvolvimento' + (S.simulacao ? ' · melhor: ' + virgula(S.simulacao.melhor) + ' valores' : '')) + '</span></button>' +
     '</section>' +
     '<section style="display:flex;flex-direction:column;gap:10px"><div class="sec-h"><h2>Minijogos rápidos</h2></div><div class="minis">' +
+      '<button class="mini-b" data-mini="sprint:condicoes" type="button">Sabe ou não sabe?</button>' +
       '<button class="mini-b" data-mini="sprint:apriori" type="button">A priori ou a posteriori?</button>' +
       '<button class="mini-b" data-mini="sprint:tipos" type="button">Tipos de conhecimento</button>' +
       '<button class="mini-b" data-mini="sprint:ceticos" type="button">Tipos de ceticismo</button>' +
@@ -1518,7 +1558,7 @@ function telaLigar(ctx, key, done){
 function minijogo(cod, nome){
   const [k, set] = cod.split(':');
   combo = 0;
-  const TEMA = { 'sprint:apriori':5, 'sprint:tipos':2, 'sprint:ceticos':3, 'ordem':4, 'ligar:problemas':1 };
+  const TEMA = { 'sprint:condicoes':1, 'sprint:apriori':5, 'sprint:tipos':2, 'sprint:ceticos':3, 'ordem':4, 'ligar:problemas':1 };
   jogar(nome, [{ k, set }], r => {
     const pct = r.total ? r.cred / r.total : 0;
     limpar(); topo();
@@ -1801,10 +1841,38 @@ function telaDesenvolvimento(ctx, dev, st, gravar, done){
    ===================================================================== */
 function htmlLicao(n){
   const L = C.licoes[n]; if (!L) return '';
+  const tabela = t => '<p class="li-sub">' + esc(t.titulo) + '</p><div class="li-tabwrap"><table class="li-tab"><thead><tr>' + t.cab.map(c => '<th>' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' +
+    t.linhas.map(l => '<tr>' + l.map((c, i) => '<td class="' + (c === '✓' || c === 'SIM' ? 'sim' : (c === '✗' || /^NÃO/.test(c)) ? 'nao' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
   return '<div class="licao"><p class="li-ideia">' + L.ideia + '</p>' +
-    L.seccoes.map(s => '<section class="li-sec"><h3>' + esc(s.t) + '</h3><dl>' + s.l.map(r => '<div class="li-row"><dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd></div>').join('') + '</dl></section>').join('') +
+    L.seccoes.map(s => '<section class="li-sec"><h3>' + esc(s.t) + '</h3>' +
+      (s.l.length ? '<dl>' + s.l.map(r => '<div class="li-row"><dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd></div>').join('') + '</dl>' : '') +
+      (s.tabela ? tabela(s.tabela) : '') + (s.quiz ? htmlQuiz(s.quiz) : '') + '</section>').join('') +
     '<p class="li-truque"><b>Truque:</b> ' + L.truque + '</p></div>';
 }
+/* Minijogo dentro da lição: um caso de cada vez, com explicação (os cliques tratam-se em baixo) */
+function htmlQuiz(key, ordem, k, certas){
+  const set = C.classificar[key];
+  ordem = ordem || baralhar(set.itens.map((_, i) => i)); k = k || 0; certas = certas || 0;
+  const dados = ' data-set="' + key + '" data-ordem="' + ordem.join(',') + '" data-k="' + k + '" data-certas="' + certas + '"';
+  if (k >= ordem.length) return '<div class="lq"' + dados + '><p class="fb-msg">Acertaste ' + certas + ' de ' + ordem.length + '.</p><p class="lead small">' + (certas === ordem.length ? 'Perfeito: já sabes ver que condição falta.' : 'Revê a tabela e tenta outra vez.') + '</p><button class="btn primary lq-rep" type="button">Repetir com outra ordem</button></div>';
+  const it = set.itens[ordem[k]];
+  return '<div class="lq"' + dados + '><p class="lq-n">Caso ' + (k + 1) + ' de ' + ordem.length + '</p><p class="lq-caso">' + esc(it.x) + '</p>' +
+    '<div class="lq-ops">' + set.cats.map(c => '<button class="opt lq-b" data-c="' + c.k + '" type="button"><span>' + esc(c.l) + '</span></button>').join('') + '</div><div class="fb" hidden></div></div>';
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('.lq-b, .lq-next, .lq-rep'); if (!b) return;
+  const box = b.closest('.lq'), key = box.dataset.set, set = C.classificar[key];
+  const ordem = box.dataset.ordem.split(',').map(Number), k = +box.dataset.k, certas = +box.dataset.certas;
+  if (b.classList.contains('lq-rep')){ box.outerHTML = htmlQuiz(key); return; }
+  if (b.classList.contains('lq-next')){ box.outerHTML = htmlQuiz(key, ordem, k + 1, certas); return; }
+  if (box.dataset.feito) return; box.dataset.feito = '1';
+  const it = set.itens[ordem[k]], ok = b.dataset.c === it.c;
+  box.querySelectorAll('.lq-b').forEach(x => { x.disabled = true; if (x.dataset.c === it.c) x.classList.add('right'); });
+  if (!ok) b.classList.add('wrong');
+  if (ok){ acerto(); box.dataset.certas = certas + 1; } else erro(it.id);
+  const fb = box.querySelector('.fb'); fb.hidden = false; fb.className = 'fb pop-in ' + (ok ? 'is-ok' : 'is-bad');
+  fb.innerHTML = '<p class="fb-msg">' + (ok ? 'Certo!' : 'Ainda não.') + '</p><p class="fb-e">' + esc(it.e || set.porque[it.c]) + '</p><button class="btn primary lq-next" type="button">' + (k + 1 < ordem.length ? 'Próximo caso' : 'Ver resultado') + '</button>';
+});
 /* Painel por cima do jogo, para rever a matéria sem perder a pergunta onde se vai */
 function abrirMateria(n){
   fecharMateria();

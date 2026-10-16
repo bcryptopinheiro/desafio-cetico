@@ -66,7 +66,7 @@ ok(C.cartoes.every((c) => c.m >= 1 && c.m <= 5), 'todos os cartões têm tema (m
 console.log('— Lições (matéria antes das perguntas) —');
 for (const m of C.mundos) {
   const L = C.licoes[m.n];
-  ok(L && L.ideia && L.truque && L.seccoes.length && L.seccoes.every((s) => s.t && s.l.length && s.l.every((r) => r.length === 2)), `mundo ${m.n}: lição com secções e truque`);
+  ok(L && L.ideia && L.truque && L.seccoes.length && L.seccoes.every((s) => s.t && (s.l.length || s.tabela || (s.quiz && C.classificar[s.quiz])) && s.l.every((r) => r.length === 2)), `mundo ${m.n}: lição com secções e truque`);
 }
 
 console.log('— App (funciona sem internet) —');
