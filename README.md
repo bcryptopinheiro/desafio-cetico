@@ -7,12 +7,17 @@ Site: https://bcryptopinheiro.github.io/desafio-cetico/
 
 ## O que tem
 
-- **Aprender a matéria**: a matéria dos 5 mundos explicada, com exemplos e truques. Cada mundo abre com a sua lição antes das perguntas, e o botão «Matéria» deixa revê-la a meio do jogo
-- 5 mundos que se desbloqueiam com 70%, com 1 a 3 estrelas
+- **Botão «Continuar»** no topo: leva sempre ao próximo passo certo (o jogo a meio, o mundo seguinte, a simulação ou a revisão dos erros)
+- **Plano até ao teste**: o aluno indica a data do teste e o jogo diz o que fazer hoje
+- 5 mundos que se desbloqueiam com 70%, com tempo estimado e 1 a 3 estrelas. **A matéria vem aos bocadinhos**: uma parte curta, perguntas só sobre essa parte, a parte seguinte… e os desafios no fim. Ao repetir um mundo, pode-se escolher «só perguntas». O botão «Matéria» deixa rever a lição toda a meio do jogo
+- **Respostas escritas dentro dos mundos** («Explica», «Justifica», «Distingue», incluindo a Julieta e o exercício 9): o aluno escreve (fica guardado), compara com a resposta-modelo e marca os pontos que incluiu
+- **Matéria toda**: as lições completas de cada tema, para ler ou rever de seguida
+- **Opções equilibradas**: as respostas erradas são plausíveis e do mesmo tamanho que a certa, para o tamanho não denunciar a resposta (o `verificar.mjs` controla isto)
 - Minijogos: escolha múltipla, verdadeiro ou falso, completa a frase, classifica rápido (60 s), ordena o argumento, liga
 - Cartões de estudo por tema (com as respostas abertas do teste), revisão dos erros e teste final de 0 a 20
 - **Simulação do Teste** no formato do teste real: Grupo I escolha múltipla, Grupo II verdadeiro ou falso, Grupo III tabela a priori/a posteriori, Grupo IV desenvolvimento sobre o ceticismo (autoavaliação com checklist)
-- Fundo animado de slime (pode ser desligado nas definições) e som opcional
+- **Modo relaxar (ASMR)**: fundo animado de slime (toca nos blobs) com som «squish»; durante as partes de matéria o fundo fica mais discreto. Tudo opcional nas definições
+- Ecrã inicial arrumado: minijogos, «O que sai no teste», definições e recomeçar ficam em secções que abrem
 
 ## Guardar e recomeçar
 
@@ -45,9 +50,9 @@ Outros ficheiros:
 No objeto `CONTEUDO.perguntas`, a primeira opção de `o` é sempre a certa (o jogo baralha as opções):
 
 ```js
-{ id:'m2-30', m:2, t:'mc', q:'Pergunta', o:['CERTA','errada','errada','errada'], e:'Explicação' }
-{ id:'m2-31', m:2, t:'vf', q:'Afirmação', a:true, e:'Explicação' }
-{ id:'m2-32', m:2, t:'completa', q:'Frase com ___ no sítio da palavra', o:['CERTA','errada','errada','errada'], e:'...' }
+{ id:'m2-50', m:2, s:0, t:'mc', q:'Pergunta', o:['CERTA','errada','errada','errada'], e:'Explicação' }
+{ id:'m2-51', m:2, s:0, t:'vf', q:'Afirmação', a:true, e:'Explicação' }
+{ id:'m2-52', m:2, s:0, t:'completa', q:'Frase com ___ no sítio da palavra', o:['CERTA','errada','errada','errada'], e:'...' }
 ```
 
-`m` é o número do mundo (1–5) e cada `id` tem de ser único. Com `destaque:true`, a pergunta conta para o mínimo de perguntas de matéria nova no teste final.
+`m` é o número do mundo (1–5) e `s` é a secção da lição desse mundo onde a matéria é explicada (começa em 0; a pergunta só aparece depois dessa parte). Cada `id` tem de ser único. Com `destaque:true`, a pergunta conta para o mínimo de perguntas de matéria nova no teste final.

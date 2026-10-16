@@ -69,6 +69,33 @@ for (const m of C.mundos) {
   ok(L && L.ideia && L.truque && L.seccoes.length && L.seccoes.every((s) => s.t && (s.l.length || s.tabela || (s.quiz && C.classificar[s.quiz])) && s.l.every((r) => r.length === 2)), `mundo ${m.n}: lição com secções e truque`);
 }
 
+console.log('— Matéria aos bocadinhos dentro dos mundos —');
+ok(P.every((p) => Number.isInteger(p.s) && C.licoes[p.m].seccoes[p.s] && !C.licoes[p.m].seccoes[p.s].quiz), 'cada pergunta indica a secção da lição (s) onde a matéria é explicada');
+for (const m of C.mundos) {
+  const L = C.licoes[m.n].seccoes, partes = m.partes || [];
+  const usadas = partes.flat(), ensino = L.map((s, i) => i).filter((i) => !L[i].quiz);
+  const semPerg = partes.filter((g) => !P.some((p) => p.m === m.n && g.includes(p.s)));
+  ok(partes.length >= 3 && partes.length <= 5 && ensino.every((i) => usadas.includes(i)) && !semPerg.length && usadas.join() === [...usadas].sort((a, b) => a - b).join(),
+    `mundo ${m.n}: ${partes.length} partes de matéria pela ordem da lição, todas com perguntas a seguir`);
+}
+
+console.log('— Respostas escritas dentro dos mundos —');
+const E = C.escritas;
+ok(new Set(E.map((e) => e.id)).size === E.length, `ids únicos (${E.length} respostas escritas)`);
+for (const m of C.mundos) {
+  const es = E.filter((e) => e.m === m.n);
+  ok(es.length >= 2 && es.every((e) => m.partes.flat().includes(e.s) && e.pontos.length >= 3 && e.modelo.length > 200), `mundo ${m.n}: ${es.length} respostas escritas com secção, 3 pontos e resposta-modelo`);
+}
+ok(E.some((e) => /contraditório|Exercício 9/.test(e.pergunta)) && E.some((e) => /Julieta/.test(e.pergunta)), 'respostas escritas dos exercícios que saem no teste (Julieta e exercício 9)');
+
+console.log('— Opções equilibradas (o tamanho não pode denunciar a resposta certa) —');
+const mcs = P.filter((p) => p.t !== 'vf');
+const pos = [0, 0, 0, 0];
+mcs.forEach((p) => { const L = p.o.map((s) => s.length); pos[Math.min(3, L.filter((l) => l > L[0]).length)]++; });
+const pct = pos.map((x) => Math.round(x / mcs.length * 100));
+ok(pct.every((x) => x <= 40), `a certa é a 1.ª/2.ª/3.ª/4.ª mais comprida em ${pct.join('/')}% das perguntas (nenhuma posição acima de 40%)`);
+ok(!P.some((p) => /Indica o tipo de conhecimento|é conhecimento:/.test(p.q) && p.o.some((o) => /^a (priori|posteriori)$/.test(o))), 'nas perguntas de tipos de conhecimento, «a priori/a posteriori» não aparece como opção (seria ambíguo)');
+
 console.log('— App (funciona sem internet) —');
 const sw = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
 const files = [...sw.split('const FILES = [')[1].split('];')[0].matchAll(/'([^']+)'/g)].map((m) => m[1]);
