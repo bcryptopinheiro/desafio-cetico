@@ -31,6 +31,8 @@ ok(P.filter((p) => p.t === 'completa').every((p) => p.q.includes('___')), 'compl
 ok(P.every((p) => p.e && p.e.length > 5), 'todas as perguntas têm explicação');
 // (as lições podem dizer que Descartes e Hume não saem; o que não pode haver são perguntas ou cartões sobre eles)
 ok(!/Descartes|Hume/i.test(JSON.stringify([C.perguntas, C.classificar, C.cartoes, C.ligar, C.simulacao])), 'não há perguntas nem cartões sobre Descartes ou Hume (não saem)');
+const discutiveis = ['sólidos ocupam espaço', 'fruto da macieira', 'Em quantos argumentos'];
+ok(discutiveis.every((f) => !JSON.stringify(C).includes(f)), 'sem exemplos discutíveis (o manual e os apontamentos não estão de acordo)');
 for (const m of C.mundos) ok(P.filter((p) => p.m === m.n).length >= m.nPerguntas, `mundo ${m.n}: banco chega para ${m.nPerguntas} perguntas por jogo`);
 const vfEx = P.filter((p) => p.t === 'vf' && /Julieta|cético radical|ceticismo radical/.test(p.q));
 ok(vfEx.length >= 6, `pelo menos 6 V/F sobre os exercícios 1 e 9 (${vfEx.length})`);
