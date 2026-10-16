@@ -969,12 +969,13 @@ function acerto(){
   let msg = '+10 XP';
   if (combo % 5 === 0){ S.xp += 5; msg += ' · +5 bónus (' + combo + ' seguidas!)'; }
   guardar(); toast(msg, 'xp'); mostrarCombo();
-  FUNDO.squishTodos();
+  FUNDO.squishTodos(); // animação do fundo (o som toca à parte, mesmo com o fundo desligado)
   const depois = nivel(S.xp).i;
-  if (depois > antes) setTimeout(() => toast('Subiste para o Nível ' + (depois + 1) + ': ' + C.niveis[depois].nome + '!'), 400);
+  tocar('certo');
+  if (depois > antes){ setTimeout(() => toast('Subiste para o Nível ' + (depois + 1) + ': ' + C.niveis[depois].nome + '!'), 400); setTimeout(() => tocar('nivel'), 350); }
 }
 function erro(id){
-  combo = 0; mostrarCombo();
+  combo = 0; mostrarCombo(); tocar('errado');
   if (id){ S.erros[id] = { s:0 }; guardar(); }
 }
 
@@ -1072,7 +1073,8 @@ function inicio(){
     '<section style="display:flex;flex-direction:column;gap:10px"><div class="sec-h"><h2>Definições</h2></div><div class="minis">' +
       '<button class="mini-b" id="d-fundo" type="button" aria-pressed="' + S.def.fundo + '">Fundo: ' + (S.def.fundo ? 'ligado' : 'desligado') + '</button>' +
       '<button class="mini-b" id="d-som" type="button" aria-pressed="' + S.def.som + '">Som: ' + (S.def.som ? 'ligado' : 'desligado') + '</button>' +
-    '</div></section>' +
+      (S.def.som ? '<button class="mini-b" id="d-teste-som" type="button">Testar o som</button>' : '') +
+    '</div>' + (S.def.som ? '<p class="small muted">Ouves um som ao acertar, ao errar, ao subir de nível e ao tocar nos blobs. No iPhone, se o telemóvel estiver em silêncio (botão lateral), não se ouve nada: tira-o do silêncio e sobe o volume.</p>' : '') + '</section>' +
     '<footer class="rodape"><p>O progresso fica guardado neste browser, neste dispositivo: XP, estrelas, jogos a meio, erros, cartões e o texto que escreves. Podes sair a meio e continuar depois.</p><div class="row" id="reset-row"><button class="link-b" id="b-reset" type="button">Apagar todo o progresso</button></div></footer>' +
   '</div>';
 
@@ -1094,8 +1096,9 @@ function inicio(){
   liga('r-simul', () => { delete S.prog.sim; }, 'Simulação recomeçada.');
   liga('r-erros', () => { S.erros = {}; }, 'Revisão dos erros limpa.');
   liga('r-cart', () => { S.cartoes = {}; }, 'Cartões todos por saber.');
+  const ts = $('#d-teste-som'); if (ts) ts.onclick = () => tocar('certo');
   $('#d-fundo').onclick = () => { S.def.fundo = !S.def.fundo; guardar(); FUNDO.aplicar(); inicio(); };
-  $('#d-som').onclick = () => { S.def.som = !S.def.som; guardar(); if (S.def.som) somSquish(); inicio(); };
+  $('#d-som').onclick = () => { S.def.som = !S.def.som; guardar(); if (S.def.som) tocar('certo'); inicio(); };
   $('#b-reset').onclick = () => {
     $('#reset-row').innerHTML = '<span>Apagar XP, estrelas, jogos a meio, erros e cartões?</span><button class="btn danger" id="r-sim" type="button">Sim, apagar</button><button class="btn ghost" id="r-nao" type="button">Cancelar</button>';
     $('#r-sim').onclick = () => { const d = S.def; S = base(); S.def = d; guardar(); inicio(); toast('Progresso apagado.'); };
@@ -1782,34 +1785,51 @@ function confetis(){
 /* =====================================================================
    SOM "SQUISH" (Web Audio, sem ficheiros) — desligado por defeito
    ===================================================================== */
-let AC = null, RUIDO = null;
-function somSquish(){
-  if (!S.def.som) return;
-  try {
-    if (!AC){ const A = window.AudioContext || window.webkitAudioContext; if (!A) return; AC = new A(); }
-    if (AC.state === 'suspended') AC.resume();
-    const t = AC.currentTime;
-    // corpo grave e mole: seno que desce de tom
-    const o = AC.createOscillator(), g = AC.createGain();
-    o.type = 'sine';
-    o.frequency.setValueAtTime(200 + Math.random() * 60, t);
-    o.frequency.exponentialRampToValueAtTime(65, t + 0.2);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.16, t + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.24);
-    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + 0.26);
-    // parte "molhada": ruído filtrado que fecha
-    if (!RUIDO){
-      const len = Math.floor(AC.sampleRate * 0.16); RUIDO = AC.createBuffer(1, len, AC.sampleRate);
-      const d = RUIDO.getChannelData(0); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
-    }
-    const n = AC.createBufferSource(), f = AC.createBiquadFilter(), ng = AC.createGain();
-    n.buffer = RUIDO; f.type = 'lowpass'; f.Q.value = 5;
-    f.frequency.setValueAtTime(1600, t); f.frequency.exponentialRampToValueAtTime(260, t + 0.15);
-    ng.gain.value = 0.05;
-    n.connect(f); f.connect(ng); ng.connect(AC.destination); n.start(t);
-  } catch(e){}
+// Os sons ficam entre 300 e 3000 Hz: é o que os altifalantes dos telemóveis conseguem tocar
+// (sons muito graves, abaixo de ~250 Hz, quase não se ouvem num telemóvel).
+let AC = null;
+function audio(){
+  if (!AC){ const A = window.AudioContext || window.webkitAudioContext; if (!A) return null; AC = new A(); }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
 }
+// iPhone/Android: o som só arranca depois de um toque, por isso "acorda-se" o áudio no primeiro toque
+document.addEventListener('pointerdown', () => { if (S.def.som) try { audio(); } catch(e){} }, { passive:true, capture:true });
+
+/* Desenha um som num contexto de áudio (também serve para o testar sem colunas, com OfflineAudioContext) */
+function desenharSom(ac, dest, t, tipo){
+  const out = ac.createGain(); out.gain.value = 0.9; out.connect(dest);
+  const tom = (atraso, f0, f1, dur, vol, forma) => {
+    const o = ac.createOscillator(), g = ac.createGain(), t0 = t + atraso;
+    o.type = forma || 'sine';
+    o.frequency.setValueAtTime(f0, t0); o.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(out); o.start(t0); o.stop(t0 + dur + 0.03);
+  };
+  const ruido = (f0, f1, dur, vol) => { // parte "molhada" do squish: ruído filtrado que fecha
+    const len = Math.floor(ac.sampleRate * dur), buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+    const n = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+    n.buffer = buf; f.type = 'bandpass'; f.Q.value = 1.4;
+    f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    g.gain.value = vol; n.connect(f); f.connect(g); g.connect(out); n.start(t);
+  };
+  if (tipo === 'certo'){ // squish + brilho a subir
+    ruido(2600, 700, 0.16, 0.45); tom(0, 640, 220, 0.2, 0.32);
+    tom(0.09, 880, 1320, 0.14, 0.16);
+  } else if (tipo === 'errado'){ // "blop" suave a descer, nada agressivo
+    tom(0, 392, 262, 0.22, 0.26, 'triangle'); tom(0.05, 330, 220, 0.2, 0.12);
+  } else if (tipo === 'nivel'){ // pequeno arpejo
+    [523, 659, 784, 1047].forEach((f, i) => tom(i * 0.09, f, f * 1.01, 0.22, 0.2, 'triangle'));
+  } else { // toque num blob
+    ruido(2200, 520, 0.15, 0.45); tom(0, 560, 190, 0.18, 0.3);
+  }
+}
+function tocar(tipo){
+  if (!S.def.som) return;
+  try { const ac = audio(); if (ac) desenharSom(ac, ac.destination, ac.currentTime + 0.01, tipo); } catch(e){}
+}
+function somSquish(){ tocar('squish'); }
 
 /* =====================================================================
    FUNDO DE SLIME — metaballs num canvas de baixa resolução, ampliado
@@ -1957,7 +1977,6 @@ const FUNDO = (() => {
   function squishTodos(){
     if (!pronto || !raf) return;
     blobs.forEach(b => squish(b, 0.26));
-    somSquish();
   }
   function toque(e){
     if (!raf || !e.target || !e.target.closest) return;
