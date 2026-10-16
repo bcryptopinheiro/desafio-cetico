@@ -377,52 +377,77 @@ const CONTEUDO = {
   ],
 
   mundos: [
-    { n:1, letra:'α', curto:'Conhecer', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:10, especiais:[{k:'ligar', set:'problemas'}], teste:false },
-    { n:2, letra:'β', curto:'Tipos', titulo:'Tipos de conhecimento', resumo:'Proposicional, prático e por contacto, com o exercício da Julieta.', nPerguntas:10, especiais:[{k:'ligar', set:'tipos'}, {k:'sprint', set:'tipos'}], teste:true },
-    { n:3, letra:'γ', curto:'Ceticismo', titulo:'Será possível conhecer?', resumo:'Problema da possibilidade, o desafio cético, os três argumentos céticos e Pirro de Élis.', nPerguntas:11, especiais:[{k:'ligar', set:'ceticismo'}, {k:'sprint', set:'ceticos'}], teste:true },
+    { n:1, letra:'α', curto:'Conhecer', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:12, especiais:[{k:'ligar', set:'problemas'}], teste:false },
+    { n:2, letra:'β', curto:'Tipos', titulo:'Tipos de conhecimento', resumo:'Proposicional, prático e por contacto, com o exercício da Julieta.', nPerguntas:12, especiais:[{k:'ligar', set:'tipos'}, {k:'sprint', set:'tipos'}], teste:true },
+    { n:3, letra:'γ', curto:'Ceticismo', titulo:'Será possível conhecer?', resumo:'Problema da possibilidade, o desafio cético, os três argumentos céticos e Pirro de Élis.', nPerguntas:13, especiais:[{k:'ligar', set:'ceticismo'}, {k:'sprint', set:'ceticos'}], teste:true },
     { n:4, letra:'δ', curto:'Regressão', titulo:'A regressão infinita e a resposta fundacionalista', resumo:'O argumento cético, a sua validade e as crenças básicas.', nPerguntas:9, especiais:[{k:'ordem'}], teste:true },
-    { n:5, letra:'ε', curto:'Origem', titulo:'De onde vem o conhecimento?', resumo:'Problema da origem, racionalismo e empirismo, a priori e a posteriori.', nPerguntas:9, especiais:[{k:'ligar', set:'origem'}, {k:'sprint', set:'apriori'}], teste:true }
+    { n:5, letra:'ε', curto:'Origem', titulo:'De onde vem o conhecimento?', resumo:'Problema da origem, racionalismo e empirismo, a priori e a posteriori.', nPerguntas:11, especiais:[{k:'ligar', set:'origem'}, {k:'sprint', set:'apriori'}], teste:true }
   ],
 
   /* Lições: a matéria explicada, mostrada ANTES das perguntas de cada mundo.
-     Cada secção tem linhas [termo, explicação] (pode ter <b>negrito</b> e <i>itálico</i>). */
+     Segue o manual (pp. 8–19) e as fichas (pp. 13–18). Cada secção tem linhas [termo, explicação]
+     (pode ter <b>negrito</b> e <i>itálico</i>). */
   licoes: {
-    1: { ideia:'Antes de perguntar se podemos conhecer, é preciso saber o que é conhecer.',
+    1: { ideia:'Antes de perguntar se podemos conhecer, é preciso saber o que é conhecer. (Manual, pp. 8–13)',
       seccoes:[
-        { t:'A epistemologia', l:[
-          ['Epistemologia','Área da filosofia que estuda o <b>conhecimento</b> (também se chama <b>teoria do conhecimento</b>). Vem do grego <i>epistéme</i> (conhecimento) + <i>logos</i> (estudo).'] ]},
-        { t:'Os 3 problemas da epistemologia', l:[
-          ['Definição','«<b>O que é conhecer?</b>» Quais são as condições necessárias e suficientes para alguém saber que algo é o caso?'],
-          ['Possibilidade','«<b>Será possível conhecer alguma coisa?</b>» ou «Será que temos crenças justificadas?» (Mundo 3)'],
-          ['Origem','«<b>Qual é a origem do conhecimento: a razão ou a experiência?</b>» (Mundo 5)'] ]},
-        { t:'Condições', l:[
+        { t:'A epistemologia (p. 8)', l:[
+          ['Epistemologia','A parte da filosofia que estuda o <b>conhecimento</b>. Também se chama <b>filosofia do conhecimento</b> ou <b>teoria do conhecimento</b>. Vem da palavra grega para conhecimento, <i>epistéme</i> (+ <i>logos</i>, estudo).'] ]},
+        { t:'Os 3 problemas da epistemologia (p. 8)', l:[
+          ['1. Definição','«<b>O que é o conhecimento?</b>» (ou «O que é conhecer?»). Resposta estudada: a definição tradicional.'],
+          ['2. Possibilidade','«<b>O conhecimento é possível?</b>» (ou «Será que temos crenças justificadas?»). Resposta estudada: o ceticismo radical (Mundo 3).'],
+          ['3. Origem','«<b>Qual é a origem do conhecimento?</b>» Provém da razão ou da experiência? (Mundo 5)'],
+          ['Nota','No manual, os problemas da possibilidade e da origem também têm as teorias de Descartes e de Hume, mas a professora disse que <b>não saem</b>.'] ]},
+        { t:'O que é o conhecimento: sujeito e objeto (p. 9)', l:[
+          ['Não é raro','Todos temos conhecimentos: saber o caminho de casa, saber coser um botão, conhecer os vizinhos, saber multiplicar… «Conhecer» e «saber» têm um significado semelhante.'],
+          ['Sujeito','<b>Quem conhece.</b>'],
+          ['Objeto','<b>Aquilo que é conhecido.</b>'],
+          ['Conhecimento','É uma <b>relação entre um sujeito e um objeto</b>. Em todos os casos de conhecimento há pelo menos estes dois elementos.'],
+          ['Autoconhecimento','Quando alguém se tenta conhecer a si próprio, o <b>sujeito e o objeto coincidem</b>.'] ]},
+        { t:'Condições (pp. 12–13)', l:[
           ['Necessária','Sem ela <b>não há</b> conhecimento.'],
           ['Suficiente','Se estiver presente, <b>há</b> conhecimento.'] ]},
-        { t:'Definição tradicional (Platão, Teeteto)', l:[
-          ['Conhecimento','= <b>crença verdadeira justificada</b>. S sabe que P se e só se: <b>1)</b> S acredita que P; <b>2)</b> P é verdadeira; <b>3)</b> S tem justificação para acreditar que P. Cada condição é necessária; as três juntas seriam suficientes.'],
-          ['Crença','É contraditório dizer «sei que o mar tem ondas, mas não acredito nisso». Mas a crença sozinha não basta: «acredito em extraterrestres» não é saber que existem.'],
-          ['Verdade','Só se sabe o que é verdadeiro: o conhecimento é <b>factivo</b>.'],
-          ['Justificação','Sozinha não basta: na Antiguidade havia boas razões para acreditar que a Terra era plana, e não é.'],
-          ['Crença verdadeira','Também não basta: pode ser verdadeira <b>por sorte</b>. O João acredita que vai chover só porque lhe apetece, e chove: não sabia, era um palpite.'],
-          ['Crença e conhecimento','Todo o conhecimento é uma crença, mas <b>nem todas as crenças são conhecimento</b>.'],
-          ['A calculadora','Não «sabe» que 356 ÷ 4 = 89: não tem estados mentais nem crenças; só dá o resultado porque foi programada.'] ]},
-        { t:'Exemplos do manual', l:[
+        { t:'A definição tradicional (pp. 12–13)', l:[
+          ['Conhecimento','= <b>crença verdadeira justificada</b>. Vem de Platão, no diálogo <i>Teeteto</i>. Define o conhecimento <b>proposicional</b>.'],
+          ['Tripartida','Indica <b>três condições necessárias</b>: crença, verdade e justificação. S sabe que P se <b>acreditar</b> em P, se P for <b>verdadeira</b> e se tiver uma <b>justificação adequada</b> para acreditar em P. Juntas, são uma condição <b>suficiente</b>. Basta faltar uma para não haver conhecimento.'],
+          ['Exemplo do manual','Os autores sabem que os Países Baixos são uma monarquia porque: a) acreditam nisso; b) é verdade; c) têm justificação (leram em livros fidedignos e falaram com pessoas que lá vivem).'] ]},
+        { t:'1.ª condição: a crença', l:[
+          ['O que é','Ter uma crença é <b>acreditar numa proposição</b>, considerá-la verdadeira. É um <b>estado mental</b> de adesão a uma ideia. Pode ter <b>graus de convicção</b> variados: achar que é provavelmente verdadeira ou ter a certeza firme.'],
+          ['Necessária','Dizer «conheço P, mas não acredito em P» é <b>contraditório</b> (ou «sei que o mar tem ondas, mas não acredito nisso»).'],
+          ['O cartoon da Lua','Quem diz «Eu não acredito que o homem tenha ido à Lua» <b>não sabe</b> que fomos à Lua: <b>falta-lhe a crença</b> (mesmo sendo verdade e havendo provas).'],
+          ['Não basta','As crenças podem ser verdadeiras ou falsas; só as verdadeiras podem ser conhecimento. «Acredito em extraterrestres» não é saber.'],
+          ['A calculadora','Não «sabe» que 356 ÷ 4 = 89: não tem estados mentais nem crenças.'] ]},
+        { t:'2.ª condição: a verdade', l:[
+          ['Necessária','Uma crença falsa <b>não é conhecimento</b>. Não podemos saber que os pardais falam, porque não falam. Podemos saber <b>que</b> uma proposição é falsa, mas não podemos <b>conhecer</b> uma proposição falsa.'],
+          ['Redundante','Não há conhecimento falso: «<b>conhecimento verdadeiro</b>» é uma expressão <b>redundante</b>. O conhecimento é <b>factivo</b>.'],
+          ['Na prática','Quando percebemos que nos enganámos, dizemos «julgava», «pensava» ou «acreditava», e não «sabia». Não se diz que Aristóteles <b>sabia</b> que o coração era o órgão do pensamento, mas que <b>acreditava</b> nisso.'],
+          ['Não basta','Uma crença verdadeira <b>por sorte</b> não é conhecimento: o aluno que acerta num palpite sem compreender o assunto não sabe.'] ]},
+        { t:'3.ª condição: a justificação', l:[
+          ['O que é','Ter <b>boas razões</b> para acreditar que a proposição é verdadeira. Ligam a crença à verdade, para que a convicção <b>não se deva ao acaso</b>.'],
+          ['Boas razões','Ler num manual de História que D. Pedro V defendeu a abolição da escravatura; <b>ouvir o vento</b> para dizer que está vento lá fora.'],
+          ['Más razões','Gostar do nome do rei; ter sonhado com vento ou ter lido uma ventania num romance.'],
+          ['Não basta','Podemos ter boas razões para acreditar em algo falso (na Antiguidade havia razões para acreditar que a Terra era plana).'] ]},
+        { t:'Exemplos para treinar', l:[
           ['Luísa','Acredita, por estudos científicos, que o albinismo tem causa genética → <b>tem</b> conhecimento.'],
           ['Teresa','Acredita que a Terra é maior do que a Lua porque o nome é maior → <b>não tem</b>: verdadeira, mas mal justificada.'],
-          ['Carlos','Leu que o álcool em excesso provoca cirroses, mas pensou que era falso → <b>não tem</b>: falta a crença.'] ]}
+          ['Carlos','Leu que o álcool em excesso provoca cirroses, mas pensou que era falso → <b>não tem</b>: falta a crença.'],
+          ['João','Acredita que vai chover só porque lhe apetece, e chove → <b>não tem</b>: palpite, sem justificação.'] ]}
       ],
       truque:'Para saber se alguém sabe, verifica as 3 condições por ordem: <b>acredita? é verdade? tem boas razões?</b> Se faltar uma, não há conhecimento.' },
 
-    2: { ideia:'Há três maneiras de “saber”. A pista está no que vem a seguir ao verbo.',
+    2: { ideia:'Há três tipos principais de conhecimento. O que os distingue é o <b>objeto</b>: aquilo que se conhece. (Manual, pp. 10–11)',
       seccoes:[
-        { t:'Os 3 tipos de conhecimento', l:[
-          ['Proposicional','<b>Saber-que</b>: saber que uma proposição é verdadeira. Também se chama conhecimento <b>factual</b>. É o que a epistemologia mais estuda. Ex.: «Sei que Lisboa é a capital de Portugal.»'],
-          ['Prático','<b>Saber-fazer</b>: ter uma competência. Ex.: «Sei andar de bicicleta», «Sei nadar», «Sei tocar guitarra».'],
-          ['Por contacto','<b>Familiaridade</b>: conhecer diretamente pessoas, lugares ou coisas. Ex.: «Conheço o Porto», «Conheço a Maria», «Conheço o sabor da manga».'] ]},
-        { t:'Proposição', l:[
-          ['Proposição','Pensamento expresso por uma <b>frase declarativa</b>, que pode ser verdadeiro ou falso. «Fecha a porta!» e «Que horas são?» não exprimem proposições.'],
-          ['Atenção','Escreve-se <b>proposicional</b> (de proposição), não «proporcional».'] ]},
-        { t:'Exercício 1 do manual (sai no teste)', l:[
+        { t:'Os 3 tipos e o seu objeto (p. 11)', l:[
+          ['Prático','<b>Saber-fazer.</b> O objeto é uma <b>aptidão ou capacidade</b>: o sujeito sabe realizar uma ação ou atividade. Ex.: saber fritar ovos.'],
+          ['Por contacto','O sujeito conhece <b>diretamente</b> algo, através dos <b>sentidos externos</b> (visão, audição, tato…). O objeto são lugares, animais, plantas, pessoas, objetos físicos. Ex.: conhecer o Castelo dos Mouros. Também se chama conhecimento por <b>familiaridade</b>.'],
+          ['Proposicional','<b>Saber-que.</b> O objeto são <b>proposições</b> (verdadeiras). Conhecer proposicionalmente é <b>conhecer ideias</b>. Ex.: saber o que é uma alucinação. Também se chama conhecimento factual.'],
+          ['Na escola','A maior parte do que se aprende na escola (História, Biologia…) é conhecimento <b>proposicional</b>. É também o que a epistemologia mais estuda.'],
+          ['Proposição','O pensamento expresso por uma <b>frase declarativa</b>, que pode ser verdadeiro ou falso. «Fecha a porta!» e «Que horas são?» não exprimem proposições. Escreve-se <b>proposicional</b>, não «proporcional».'] ]},
+        { t:'A tabela da Alice (p. 10)', l:[
+          ['Prático','A. Alice sabe <b>andar de bicicleta</b>. B. Alice sabe <b>fazer chá</b>. C. Alice <b>consegue assobiar</b> o hino nacional.'],
+          ['Por contacto','D. Alice conhece o <b>Museu Nacional de Arte Antiga</b>. E. Alice conhece a <b>diretora da sua escola</b>. F. Alice conhece o <b>seu corpo</b>.'],
+          ['Proposicional','G. Alice sabe que <b>Platão foi um filósofo grego</b>. H. Alice sabe que <b>um soneto tem catorze versos</b>. I. Alice <b>compreende a teoria da relatividade</b>.'],
+          ['São Tomé (p. 10)','Qual é o tipo de conhecimento que nos permite saber <b>sem ter uma experiência direta</b>? O <b>proposicional</b>: posso saber que Platão foi um filósofo grego sem o ter conhecido. O por contacto exige contacto direto.'] ]},
+        { t:'Exercício 1 da ficha: a Julieta (sai no teste)', l:[
           ['A','A Julieta sabe preparar batidos de frutas → <b>prático</b>'],
           ['B','Conhece de trás para a frente o sítio onde o Mondego nasce → <b>por contacto</b> (um lugar)'],
           ['C','Sabe qual é a diferença entre um romance e uma novela → <b>proposicional</b>'],
@@ -431,36 +456,53 @@ const CONTEUDO = {
           ['F','Sabe o que é um neutrino → <b>proposicional</b>'],
           ['G','Conhece o primeiro namorado da sua mãe → <b>por contacto</b> (uma pessoa)'] ]}
       ],
-      truque:'«Sei <b>que</b>…» → proposicional. «Sei + verbo» (sei <b>fazer</b>, sei preparar, sei comer) → prático. «<b>Conheço</b>» + pessoa, lugar ou sabor → por contacto. Cuidado: «sabe» nem sempre é proposicional! «Sabe o que é um neutrino» pode dizer-se «sabe que um neutrino é…», por isso é proposicional.' },
+      truque:'Pergunta: <b>qual é o objeto?</b> Uma <b>ação/capacidade</b> (sabe fazer, consegue, sabe comer, sabe preparar) → prático. Uma <b>pessoa, lugar ou coisa</b> conhecida diretamente pelos sentidos → por contacto. Uma <b>ideia/proposição</b> (sabe que…, sabe o que é…, compreende uma teoria) → proposicional. Cuidado: «sabe» nem sempre é proposicional!' },
 
-    3: { ideia:'O cético desafia a nossa pretensão de saber. Este é um dos temas que sai no teste.',
+    3: { ideia:'O cético desafia a nossa pretensão de saber. É um dos temas que saem no teste. (Manual, pp. 15–19; ficha, p. 13)',
       seccoes:[
-        { t:'O problema da possibilidade', l:[
-          ['Formulação','«<b>Será possível conhecer alguma coisa?</b>» ou «<b>Será que temos crenças justificadas?</b>»'] ]},
-        { t:'O que é ser cético', l:[
-          ['No dia a dia','Cético = quem duvida («sou um pouco cético quanto ao sushi»). Isto <b>não</b> é ceticismo filosófico.'],
-          ['Em filosofia','O cético <b>põe em causa a possibilidade do conhecimento</b>. Para ser cético quanto ao sushi, teria de achar que <b>não é de todo possível saber</b> se o sushi é saboroso.'],
-          ['Desafio cético','Na forma mais radical: nenhum conhecimento é possível, por isso devemos <b>suspender o juízo</b> sobre todas as coisas.'] ]},
-        { t:'Radical e moderado', l:[
-          ['Radical','Põe em causa <b>todo</b> e qualquer conhecimento.'],
-          ['Moderado','Só põe em causa <b>certos domínios</b>: livre-arbítrio, moral, existência de Deus, religião. «Na religião só há opiniões» → basta ser moderado.'],
-          ['Pirro de Élis','(c. 365–270 a.C.) O mais antigo e radical. Nunca sabemos como as coisas realmente são → <b>suspender o juízo</b> (não considerar nada verdadeiro nem falso) → paz de espírito, tranquilidade, felicidade.'] ]},
-        { t:'Os 3 argumentos céticos', l:[
-          ['Ilusão dos sentidos','Os sentidos às vezes enganam-nos (um pau parece partido dentro de água; uma miragem no deserto; a estrada parece molhada num dia de calor) → não podemos confiar neles.'],
-          ['Diversidade de opiniões','As pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão.'],
-          ['Regressão infinita','Cada crença precisa de outra para a justificar, sem fim → nenhuma fica justificada → não há conhecimento. (É o principal; vês tudo no Mundo 4.)'],
-          ['Atenção','As <b>crenças básicas autoevidentes</b> não são um argumento cético: são a resposta do fundacionalismo.'] ]},
-        { t:'Objeção: o ceticismo radical é contraditório (exercício 9, sai no teste)', l:[
-          ['Autorrefutação','O cético radical diz que nada se pode conhecer. Mas, ao dizê-lo, apresenta a tese como verdadeira: pretende <b>saber pelo menos uma coisa</b>, que nada se pode saber. Se a tese fosse verdadeira, nem o próprio cético a poderia conhecer. Por isso <b>refuta-se a si mesmo</b>.'],
-          ['E mais','Se nenhuma crença está justificada, as premissas do próprio cético também não estão.'] ]}
+        { t:'O problema da possibilidade (p. 15)', l:[
+          ['Formulação','«<b>Será o conhecimento possível?</b>» «Saberemos o que julgamos saber?» (ou «Será que temos crenças justificadas?»)'],
+          ['De onde vem','Quando temos crenças falsas, não nos apercebemos disso: vivemos na <b>ilusão</b> de que sabemos. E se isso estiver a acontecer agora, com crenças importantes?'],
+          ['Exemplo do manual','Acreditamos que o <b>mundo exterior</b> é real e que as <b>outras pessoas</b> existem mesmo (não são sonhos ou alucinações). Mas como podemos <b>justificar</b> essa crença? Se não a conseguirmos justificar, <b>não é conhecimento, mesmo que seja verdadeira</b>.'],
+          ['Alucinações','São erros percetivos: percecionamos objetos que nem existem. Para quem alucina, é igual a ver um oásis a sério.'] ]},
+        { t:'O que é ser cético (p. 16; ficha p. 13)', l:[
+          ['Ceticismo','A perspetiva filosófica que responde «<b>não</b>» à pergunta «Será o conhecimento possível?».'],
+          ['No dia a dia','Cético = quem duvida («sou um pouco cético quanto ao sushi»). Isto <b>não</b> é ceticismo filosófico: para isso teria de achar que <b>não é de todo possível saber</b> se o sushi é saboroso.'],
+          ['Em filosofia','O cético <b>põe em causa a possibilidade do conhecimento</b>: desafia a nossa pretensão de saber.'] ]},
+        { t:'Radical e moderado (p. 16)', l:[
+          ['Radical','É <b>global</b>: duvida da possibilidade de <b>todo e qualquer</b> conhecimento. Defende que não existe realmente conhecimento e que aquilo a que chamamos conhecimento <b>não passa de uma ilusão</b> (p. 17).'],
+          ['Moderado','É <b>regional ou localizado</b>: duvida do conhecimento em <b>algumas áreas, mas não noutras</b>. Ex.: duvidar que haja conhecimento na <b>Ética e na Estética</b>, mas não na Física e na Matemática; ou sobre o livre-arbítrio, a moral, a existência de Deus, a religião.'],
+          ['Pirrónico','Ao ceticismo radical também se chama <b>ceticismo pirrónico</b>, por causa de Pirro.'] ]},
+        { t:'Pirro e outros céticos (p. 16; ficha p. 13)', l:[
+          ['Pirro de Élis','(c. 360–270 a.C. no manual; c. 365–270 a.C. na ficha) O mais antigo e radical. Como <b>não podemos ter a certeza de nada</b>, não devemos afirmar que uma ideia é verdadeira nem que é falsa: devemos <b>suspender o juízo</b>.'],
+          ['Suspender o juízo','É <b>suspender a crença</b>: <b>não acreditar nem deixar de acreditar</b> na ideia em causa. Para Pirro, isso liberta-nos dos desejos e traz a <b>paz de espírito</b> e a tranquilidade, para sermos felizes.'],
+          ['Sexto Empírico','Pirro <b>não escreveu nenhum livro</b>. As suas ideias foram apresentadas por outros céticos, como Sexto Empírico (c. 160–210 d.C.), na obra <i>Hipóteses Pirrónicas</i>.'],
+          ['Francisco Sanches','(c. 1551–1623) Filósofo cético, matemático e médico <b>português</b>, autor de <i>Que Nada se Sabe</i>.'] ]},
+        { t:'O argumento do ceticismo radical (p. 17)', l:[
+          ['Argumento','Se as nossas crenças não estão justificadas, então não temos conhecimento. As nossas crenças não estão justificadas. Logo, não temos conhecimento.'],
+          ['Válido','É um <b>modus ponens</b>, por isso é <b>válido</b>. Mas será <b>sólido</b> (premissas verdadeiras)? A 1.ª premissa é plausível: sem justificação não há conhecimento.'],
+          ['A 2.ª premissa','«As nossas crenças não estão justificadas.» Os céticos pirrónicos defenderam-na com vários argumentos: a <b>regressão infinita da justificação</b> (Mundo 4) e os <b>enganos sensoriais</b>.'] ]},
+        { t:'Os argumentos céticos (pp. 17–19)', l:[
+          ['Enganos sensoriais','(Também chamado <b>ilusão dos sentidos</b>.) Por vezes os sentidos enganam-nos: um avião parece pequeno no céu, mas é enorme; com luz azul, objetos de outra cor parecem azuis; com a mão fria, a água morna parece quente; um lápis parece partido dentro de água; na ilusão de Müller-Lyer, figuras iguais parecem de tamanhos diferentes; uma miragem no deserto. Os céticos dizem: se os enganos existem, <b>pode suceder que sejamos sempre enganados</b>; então as justificações dos sentidos são <b>inadequadas e sem valor epistémico</b>.'],
+          ['Regressão infinita','Cada crença precisa de outra para a justificar, e essa de outra, sem fim → nenhuma crença fica justificada → não há conhecimento. (Mundo 4)'],
+          ['Diversidade de opiniões','As pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão. (Vem dos apontamentos; no esquema do manual, p. 19, só aparecem os enganos sensoriais e a regressão infinita.)'],
+          ['Atenção','As <b>crenças básicas autoevidentes</b> não são um argumento cético: são a resposta do fundacionalismo.'],
+          ['Desafio cético','Como quase todos achamos que temos conhecimentos, o ceticismo lança um desafio: <b>como mostrar que temos realmente conhecimento e não uma ilusão de conhecimento?</b> (p. 18)'] ]},
+        { t:'Objeção: o ceticismo radical é contraditório (p. 19; exercício 9)', l:[
+          ['Autorrefutação','O cético radical diz que o conhecimento não é possível, mas assim <b>pretende ter um conhecimento</b>: o de que o conhecimento não é possível. Se a tese fosse verdadeira, nem ele a poderia conhecer.'],
+          ['E mais (manual)','Para <b>pensar e dizer</b> que o conhecimento não é possível é preciso <b>conhecer várias coisas</b>: o significado das palavras usadas e algumas regras de gramática.'],
+          ['Conclusão','Sendo contraditório, o ceticismo radical <b>autorrefuta-se</b>. Também: se nenhuma crença está justificada, as premissas do cético também não estão.'],
+          ['Esquema (p. 19)','<b>Tese:</b> o conhecimento não é possível. <b>Argumentos:</b> dos enganos sensoriais e da regressão infinita da justificação. <b>Objeção:</b> é contraditório (autorrefutante).'] ]}
       ],
-      truque:'Duvida de <b>tudo</b> → radical. Duvida só de <b>um domínio</b> → moderado. Só desconfia de uma coisa do dia a dia → <b>não é</b> ceticismo filosófico.' },
+      truque:'Duvida de <b>tudo</b> → radical (global, pirrónico). Duvida só de <b>algumas áreas</b> → moderado (regional). Só desconfia de uma coisa do dia a dia → <b>não é</b> ceticismo filosófico.' },
 
-    4: { ideia:'O principal argumento cético, passo a passo, e a resposta do fundacionalismo.',
+    4: { ideia:'O principal argumento cético, passo a passo, e a resposta do fundacionalismo. (Manual, p. 17; fichas, pp. 13–15)',
       seccoes:[
         { t:'A ideia', l:[
           ['Os “porquês”','Como uma criança: «Come a sopa!» «Porquê?» «Porque te faz bem.» «Porquê?»… Podemos sempre pedir justificação. «Porque sim!» não justifica nada: só mostra que a pessoa desistiu.'],
-          ['Cadeia sem fim','Cada justificação é outra crença, que também precisa de justificação.'] ]},
+          ['O diálogo do manual','«Não deves só decorar.» «Porquê?» «Porque esqueces.» «Como sabes?» «Aconteceu a muitas pessoas.» «Como sabes que te acontece a ti?» «Li num livro de Psicologia.» «Como sabes que não está errado?»… e a conversa podia continuar.'],
+          ['Cadeia sem fim','A crença A é justificada com a B, a B com a C, a C com a D… Cada justificação é outra crença, que também precisa de justificação.'],
+          ['Sexto Empírico','O que se apresenta como demonstração precisa também de ser demonstrado, até ao infinito; a consequência é a <b>suspensão do juízo</b>, porque não temos um ponto de partida para o raciocínio.'] ]},
         { t:'O argumento (decora a ordem)', l:[
           ['P1','As nossas crenças justificam-se com base noutras crenças.'],
           ['P2','Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.'],
@@ -468,31 +510,33 @@ const CONTEUDO = {
           ['P4','Se nunca temos crenças justificadas, não há conhecimento. (Liga-se à definição tradicional: sem justificação não há conhecimento.)'],
           ['C','Logo, não há conhecimento.'],
           ['Válido','Se as premissas forem verdadeiras, a conclusão também é. Quem não aceita a conclusão tem de <b>rejeitar pelo menos uma premissa</b>.'] ]},
-        { t:'A resposta fundacionalista', l:[
-          ['Fundacionalismo','Rejeita a <b>premissa 1</b>: nem todas as crenças se justificam com base noutras. Aceita a 2, a 3 e a 4.'],
-          ['Crenças básicas','<b>Autoevidentes</b>: justificam-se a si mesmas, não precisam de outras.'],
+        { t:'A resposta fundacionalista (ficha, p. 15)', l:[
+          ['Fundacionalismo','Uma das mais célebres respostas ao ceticismo. Rejeita a <b>premissa 1</b>: nem todas as crenças se justificam com base noutras. Das premissas 1 a 4, <b>só a 1 é falsa</b>.'],
+          ['Crenças básicas','(Ou fundacionais.) São <b>autoevidentes</b>: não precisam de ser justificadas por outras crenças, <b>justificam-se a si mesmas</b>.'],
           ['Não-básicas','Não são autoevidentes: são <b>inferidas</b> a partir de outras crenças.'],
-          ['Metáfora','Como as <b>fundações (alicerces)</b> de um edifício: sustentam tudo sem serem sustentadas. A cadeia de justificação termina nas crenças básicas, logo <b>não há regressão infinita</b>.'] ]}
+          ['Metáfora','Como os <b>alicerces (fundações)</b> de um edifício: sustentam tudo sem serem sustentados. As crenças básicas são a base sólida das restantes. A cadeia termina nelas, logo <b>não há regressão infinita</b>.'],
+          ['De onde vêm?','Racionalistas: as crenças básicas vêm da <b>razão</b> (a priori). Empiristas: vêm da <b>experiência</b> (a posteriori). (Mundo 5)'] ]}
       ],
       truque:'O fundacionalista só diz que a <b>premissa 1</b> é falsa. Se a pergunta for «que premissa rejeita?», a resposta é sempre a 1.' },
 
-    5: { ideia:'De onde vem o conhecimento: da razão ou da experiência? E como distinguir a priori de a posteriori.',
+    5: { ideia:'De onde vem o conhecimento: da razão ou da experiência? E como distinguir a priori de a posteriori. (Manual, p. 14; fichas, pp. 15–18)',
       seccoes:[
         { t:'O problema da origem (sai no teste)', l:[
           ['Formulação','«<b>Qual é a origem do conhecimento? Provém da razão ou da experiência?</b>»'],
           ['Resposta-modelo','O problema da origem do conhecimento consiste em saber qual é a fonte do nosso conhecimento: se é a razão, independentemente da experiência, ou a experiência sensível.'] ]},
         { t:'Duas respostas', l:[
           ['Racionalismo','A principal fonte é a <b>razão</b>. As crenças básicas são conhecidas <b>a priori</b>. É possível conhecimento a priori sobre o mundo.'],
-          ['Empirismo','A principal fonte é a <b>experiência sensível</b> (do grego <i>empeiria</i>). As crenças básicas são <b>a posteriori</b>. O a priori só diz respeito a relações entre ideias, não informa sobre o mundo.'],
+          ['Empirismo','A principal fonte é a <b>experiência sensível</b> (do grego <i>empeiria</i>, experiência). As crenças básicas são <b>a posteriori</b>. O a priori só diz respeito a relações entre ideias, não informa sobre o mundo.'],
           ['Ligação','O fundacionalismo diz que há crenças básicas; o problema da origem pergunta de onde vêm. Há fundacionalistas racionalistas e empiristas.'] ]},
-        { t:'A priori e a posteriori', l:[
-          ['A priori','Pode saber-se <b>só pelo pensamento</b>, sem experiência. Matemática, lógica, geometria. Ex.: «Nenhum solteiro é casado», «2 + 2 = 4», «As esferas não têm arestas».'],
-          ['A posteriori','Só se sabe <b>pela experiência</b>, olhando para o mundo. Física, química, biologia, história, geografia. Ex.: «Os ursos polares são brancos», «A água é H2O», «A Maria tem o cabelo castanho».'] ]},
+        { t:'Duas modalidades de conhecimento proposicional (p. 14)', l:[
+          ['Fontes','O conhecimento proposicional adquire-se de duas maneiras: pelo <b>pensamento</b> → a priori; pela <b>experiência</b> → a posteriori.'],
+          ['A priori','Significa <b>anterior à experiência</b>. Pode saber-se <b>só pelo pensamento</b>, sem observar nada. Matemática, lógica, geometria. Ex.: «Um triângulo tem três lados», «O todo é maior do que a parte», «O dobro de 30 é metade de 120», «723 + 168 = 891», «Tudo o que é verde é colorido», «Duas coisas iguais a uma terceira são iguais entre si», «Nenhum solteiro é casado», «As esferas não têm arestas».'],
+          ['A posteriori','Significa <b>posterior à experiência</b>. Só pode saber-se <b>pela experiência</b>, observando o mundo. Também se chama conhecimento <b>empírico</b> (de <i>empeiría</i>). Física, química, biologia, história, geografia. Ex.: «As avestruzes não voam», «A segunda maior cidade portuguesa é o Porto», «A Suíça é um país europeu», «Em Portugal o ensino secundário termina no 12.º ano», «As baleias são mamíferos», «Os ursos polares são brancos», «A água é H2O», «A Maria tem o cabelo castanho».'] ]},
         { t:'Armadilhas', l:[
-          ['Calculadora','Saber 2 + 2 = 4 numa calculadora continua a ser <b>a priori</b>: <b>podia</b> saber-se só pelo pensamento.'],
-          ['Conceitos','Precisamos de experiência para aprender o que é «solteiro», mas não para saber que «nenhum solteiro é casado» é verdade.'],
+          ['Calculadora','Saber 2 + 2 = 4 numa calculadora continua a ser <b>a priori</b>: <b>podia</b> saber-se só pelo pensamento. O a priori pode obter-se pelo pensamento, mas a experiência também permite essa aquisição.'],
+          ['Conceitos','Na infância precisamos de experiência para aprender os conceitos (1, 2, 3, somar, «solteiro»…) e treinar o raciocínio. Depois descobrimos coisas novas só a pensar. Saber a priori <b>não é recordar experiências</b>: posso nunca ter somado 99 + 98 e saber que dá 197.'],
           ['Esfera','A definição de esfera é a priori; «A Terra é aproximadamente esférica» é a posteriori.'],
-          ['Existência','«Os solteiros não são casados» é a priori, mas não diz se existe algum solteiro. Pode o a priori informar sobre o mundo? Racionalistas: sim. Empiristas: não.'] ]}
+          ['Existência','«Os solteiros não são casados» é a priori, mas não diz se existe algum solteiro. «Se foi o Smith ou o Jones e não foi o Smith, foi o Jones» também não diz se houve assalto. Pode o a priori informar sobre o mundo? <b>Racionalistas: sim. Empiristas: não.</b>'] ]}
       ],
       truque:'Pergunta: «<b>o contrário podia ser verdade sem contradição?</b>» Sim (os ursos podiam ser castanhos) → a posteriori. Não (um solteiro casado é contraditório) → a priori.' }
   },
@@ -536,6 +580,24 @@ const CONTEUDO = {
     { id:'m1-34', m:1, t:'vf', destaque:true, q:'A Teresa sabe que a Terra é maior do que a Lua, porque a sua crença é verdadeira.', a:false, e:'É uma crença verdadeira, mas mal justificada (o tamanho dos nomes não diz nada sobre o tamanho das coisas).' },
     { id:'m1-35', m:1, t:'vf', destaque:true, q:'O Carlos não tem conhecimento de que o álcool em excesso provoca cirroses, porque não acredita no que leu.', a:true, e:'Falta a condição da crença.' },
 
+    // Manual, pp. 8–13
+    { id:'m1-36', m:1, t:'mc', q:'Quais são os dois elementos comuns a todos os casos de conhecimento?', o:['o sujeito e o objeto','a crença e a dúvida','a razão e a experiência','a verdade e a opinião'], e:'O sujeito é quem conhece e o objeto é aquilo que é conhecido (manual, p. 9).' },
+    { id:'m1-37', m:1, t:'mc', q:'No conhecimento, o sujeito é:', o:['quem conhece','aquilo que é conhecido','a justificação da crença','a proposição verdadeira'], e:'Sujeito = quem conhece; objeto = aquilo que é conhecido.' },
+    { id:'m1-38', m:1, t:'mc', q:'Segundo o manual, o conhecimento é:', o:['uma relação entre um sujeito e um objeto','uma opinião muito firme','uma crença qualquer','aquilo que a maioria pensa'], e:'Há sempre quem conhece (sujeito) e aquilo que é conhecido (objeto).' },
+    { id:'m1-39', m:1, t:'vf', q:'No autoconhecimento, o sujeito e o objeto do conhecimento coincidem.', a:true, e:'Quando alguém se tenta conhecer a si próprio, é ao mesmo tempo quem conhece e aquilo que é conhecido.' },
+    { id:'m1-40', m:1, t:'vf', q:'Segundo o manual, «conhecer» e «saber» têm um significado semelhante.', a:true, e:'É o que diz o manual na p. 9.' },
+    { id:'m1-41', m:1, t:'mc', q:'Porque se diz que a definição tradicional de conhecimento é «tripartida»?', o:['Porque indica três condições necessárias: crença, verdade e justificação.','Porque há três tipos de conhecimento.','Porque tem três problemas.','Porque foi escrita por três filósofos.'], e:'Tripartida = em três partes: crença, verdade e justificação.' },
+    { id:'m1-42', m:1, t:'mc', q:'Um homem diz: «Eu não acredito que o homem tenha ido à Lua.» Porque é que não sabe que os seres humanos foram à Lua?', o:['Porque lhe falta a crença.','Porque a afirmação é falsa.','Porque não há justificação nenhuma.','Porque é conhecimento por contacto.'], e:'É verdade e há provas, mas ele não acredita. Sem crença não há conhecimento.' },
+    { id:'m1-43', m:1, t:'mc', q:'Ter uma crença é:', o:['acreditar numa proposição, considerá-la verdadeira (um estado mental de adesão a uma ideia)','ter a certeza absoluta de algo','saber algo verdadeiro','ter uma opinião religiosa'], e:'As crenças podem ter graus de convicção variados: do «provavelmente verdadeiro» à certeza firme.' },
+    { id:'m1-44', m:1, t:'vf', q:'Uma crença tem sempre de ser uma certeza absoluta.', a:false, e:'As crenças podem ter graus de convicção muito variados.' },
+    { id:'m1-45', m:1, t:'vf', q:'A expressão «conhecimento verdadeiro» é redundante.', a:true, e:'Não há conhecimento falso: se é conhecimento, é verdadeiro.' },
+    { id:'m1-46', m:1, t:'vf', q:'Podemos saber que uma proposição é falsa, mas não podemos conhecer uma proposição falsa.', a:true, e:'Ex.: posso saber que é falso que os pardais falam, mas não posso saber que os pardais falam.' },
+    { id:'m1-47', m:1, t:'mc', q:'Porque é que não se diz que Aristóteles «sabia» que o coração era o órgão do pensamento, mas sim que «acreditava» nisso?', o:['Porque a crença era falsa, e não se conhece o que é falso.','Porque Aristóteles não acreditava nisso.','Porque não tinha nenhuma razão.','Porque é conhecimento a priori.'], e:'A verdade é condição necessária: quando a crença é falsa dizemos «julgava», «pensava» ou «acreditava».' },
+    { id:'m1-48', m:1, t:'mc', q:'Qual destas é uma boa justificação para acreditar que D. Pedro V defendeu a abolição da escravatura?', o:['Ler isso num manual de História.','Gostar do nome do rei.','Ter sonhado com isso.','Ter lido isso num romance.'], e:'Uma justificação adequada são boas razões que ligam a crença à verdade (manual, p. 13).' },
+    { id:'m1-49', m:1, t:'mc', q:'Qual destas justifica a crença de que está vento lá fora?', o:['Ouvir o vento.','Ter sonhado com vento ontem.','Ler a descrição de uma ventania num romance.','Gostar de dias de vento.'], e:'Ouvir o vento é uma boa razão; sonhos e romances não justificam.' },
+    { id:'m1-50', m:1, t:'mc', q:'Os autores do manual sabem que os Países Baixos são uma monarquia porque:', o:['acreditam nisso, é verdade e leram-no em livros fidedignos e falaram com quem lá vive','é uma opinião comum','ouviram um palpite','é conhecido a priori'], e:'É o exemplo do manual das três condições: crença, verdade e justificação.' },
+    { id:'m1-51', m:1, t:'mc', q:'A justificação adequada consiste em:', o:['boas razões para acreditar que a proposição é verdadeira, para que a convicção não se deva ao acaso','acreditar com muita força','a maioria das pessoas concordar','a proposição ser útil'], e:'As boas razões ligam a crença à verdade da proposição.' },
+    { id:'m1-52', m:1, t:'completa', q:'A epistemologia também se chama filosofia do ___ ou teoria do conhecimento.', o:['conhecimento','ser','valor','argumento'], e:'Filosofia do conhecimento = teoria do conhecimento = epistemologia.' },
     /* ---------- Mundo 2 · Tipos de conhecimento (sai no teste) ---------- */
     { id:'m2-01', m:2, t:'mc', q:'“Sei andar de bicicleta” é conhecimento:', o:['prático','proposicional','por contacto','a priori'], e:'É saber-fazer: uma competência. Conhecimento prático.' },
     { id:'m2-02', m:2, t:'mc', q:'“Conheço o Porto” é conhecimento:', o:['por contacto','proposicional','prático','a posteriori'], e:'Conhecer diretamente um lugar é conhecimento por contacto (familiaridade).' },
@@ -575,6 +637,20 @@ const CONTEUDO = {
     { id:'m2-35', m:2, t:'vf', destaque:true, q:'Sempre que uma frase usa o verbo “saber”, o conhecimento é proposicional.', a:false, e:'“Sabe preparar”, “sabe comer” são saber-fazer (prático). Só “sabe que…” é proposicional.' },
     { id:'m2-36', m:2, t:'vf', destaque:true, q:'“A Julieta conhece de trás para a frente o sítio onde o rio Mondego nasce” é conhecimento por contacto.', a:true, e:'Conhece diretamente um lugar.' },
 
+    // Manual, pp. 10–11 (a Alice)
+    { id:'m2-37', m:2, t:'mc', q:'«Alice consegue assobiar o hino nacional» é conhecimento:', o:['prático','proposicional','por contacto','a priori'], e:'O objeto é uma capacidade (assobiar). Não é preciso a palavra «sabe» para ser prático.' },
+    { id:'m2-38', m:2, t:'mc', q:'«Alice compreende a teoria da relatividade» é conhecimento:', o:['proposicional','prático','por contacto','a posteriori'], e:'O objeto são ideias (proposições) da teoria. Está na tabela do manual como proposicional.' },
+    { id:'m2-39', m:2, t:'mc', q:'«Alice conhece o seu corpo» é conhecimento:', o:['por contacto','proposicional','prático','a priori'], e:'Conhecimento direto, através dos sentidos. Está na tabela do manual como por contacto.' },
+    { id:'m2-40', m:2, t:'mc', q:'«Alice conhece o Museu Nacional de Arte Antiga» é conhecimento:', o:['por contacto','proposicional','prático','a priori'], e:'Conhecer diretamente um lugar.' },
+    { id:'m2-41', m:2, t:'mc', q:'«Alice sabe que um soneto tem catorze versos» é conhecimento:', o:['proposicional','prático','por contacto','a posteriori'], e:'«Sabe que…» + proposição.' },
+    { id:'m2-42', m:2, t:'mc', q:'No conhecimento por contacto, o sujeito conhece diretamente algo:', o:['através dos sentidos externos (visão, audição, tato…)','só através do pensamento','através de livros','através de uma competência'], e:'O objeto são lugares, animais, plantas, pessoas, objetos físicos (manual, p. 11).' },
+    { id:'m2-43', m:2, t:'mc', q:'No conhecimento prático, o objeto de conhecimento é:', o:['uma aptidão ou capacidade','uma proposição','um lugar ou uma pessoa','uma crença básica'], e:'O sujeito sabe realizar uma ação ou atividade (ex.: fritar ovos).' },
+    { id:'m2-44', m:2, t:'mc', q:'No conhecimento proposicional, o objeto de conhecimento são:', o:['proposições (ideias)','capacidades','lugares e pessoas','os sentidos'], e:'Conhecer proposicionalmente é conhecer ideias.' },
+    { id:'m2-45', m:2, t:'mc', q:'Qual é o tipo de conhecimento que nos permite saber sem ter uma experiência direta?', o:['proposicional','por contacto','prático','nenhum'], e:'Posso saber que Platão foi um filósofo grego sem o ter conhecido. O por contacto exige contacto direto.' },
+    { id:'m2-46', m:2, t:'vf', q:'Saber o que é uma alucinação é conhecimento proposicional.', a:true, e:'É o exemplo do manual (Oliver Sacks).' },
+    { id:'m2-47', m:2, t:'vf', q:'Saber fritar ovos é conhecimento por contacto.', a:false, e:'É conhecimento prático: uma capacidade.' },
+    { id:'m2-48', m:2, t:'vf', q:'Conhecer o Castelo dos Mouros é conhecimento por contacto.', a:true, e:'Conhecer diretamente um lugar.' },
+    { id:'m2-49', m:2, t:'vf', q:'A maior parte dos conhecimentos adquiridos na escola, por exemplo em História ou Biologia, é proposicional.', a:true, e:'É o que diz o manual na p. 11.' },
     /* ---------- Mundo 3 · Possibilidade e ceticismo (sai no teste) ---------- */
     { id:'m3-01', m:3, t:'mc', q:'Em filosofia, um cético é quem:', o:['põe em causa a possibilidade do conhecimento','tem dúvidas sobre se o sushi é bom','acredita em tudo','defende que há crenças básicas'], e:'O cético filosófico desafia a nossa pretensão de saber: põe em causa a possibilidade do conhecimento.' },
     { id:'m3-02', m:3, t:'mc', q:'Pirro de Élis defendia que devemos:', o:['suspender o juízo sobre tudo','confiar nos sentidos','usar a razão como fonte do conhecimento','procurar crenças básicas'], e:'Como nunca podemos saber como as coisas realmente são, Pirro defendia a suspensão do juízo sobre tudo.' },
@@ -583,7 +659,7 @@ const CONTEUDO = {
     { id:'m3-05', m:3, t:'mc', q:'O ceticismo moderado:', o:['limita-se a certos tipos ou domínios de conhecimento','põe em causa todo o conhecimento','diz que tudo é conhecido','rejeita a premissa 1'], e:'Moderado = só certos domínios: livre-arbítrio, moralidade, existência de Deus.' },
     { id:'m3-06', m:3, t:'mc', q:'Segundo Pirro, suspender o juízo permite:', o:['libertarmo-nos dos desejos e alcançar a paz de espírito, para sermos felizes','conhecer a verdade absoluta','ganhar todas as discussões','justificar todas as crenças'], e:'A suspensão do juízo traz tranquilidade (paz de espírito) e, assim, felicidade.' },
     { id:'m3-07', m:3, t:'mc', q:'“Suspender o juízo” significa:', o:['não considerar nada verdadeiro nem falso','considerar tudo falso','acreditar em tudo','confiar apenas na razão'], e:'Suspender o juízo é não afirmar nem negar: nada é tido como verdadeiro nem como falso.' },
-    { id:'m3-08', m:3, t:'mc', q:'Pirro de Élis viveu aproximadamente entre:', o:['365 e 270 a.C.','1596 e 1650','1711 e 1776','100 e 200 d.C.'], e:'Pirro de Élis (c. 365–270 a.C.) é o mais antigo e radical dos céticos.' },
+    { id:'m3-08', m:3, t:'mc', q:'Pirro de Élis viveu aproximadamente entre:', o:['365 e 270 a.C.','1596 e 1650','1711 e 1776','100 e 200 d.C.'], e:'Pirro de Élis (c. 365–270 a.C. na ficha; o manual diz c. 360–270 a.C.) é o mais antigo e radical dos céticos.' },
     { id:'m3-09', m:3, t:'mc', q:'O argumento cético da ilusão dos sentidos diz que:', o:['os sentidos enganam-nos, logo não podemos confiar neles','as pessoas discordam sobre tudo','há crenças autoevidentes','a razão é a fonte do conhecimento'], e:'Se os sentidos por vezes nos enganam, não podemos confiar neles para conhecer.' },
     { id:'m3-10', m:3, t:'mc', q:'O argumento cético da diversidade de opiniões diz que:', o:['as pessoas discordam sobre tudo e não há forma segura de saber quem tem razão','os sentidos enganam-nos','as crenças justificam-se noutras crenças','o conhecimento vem da experiência'], e:'A discordância constante mostraria que não há forma segura de saber quem tem razão.' },
     { id:'m3-11', m:3, t:'mc', q:'Qual destas perguntas também formula o problema da possibilidade do conhecimento?', o:['“Será que temos crenças justificadas?”','“Qual é a fonte do conhecimento?”','“O que é uma proposição?”','“O que é conhecer?”'], e:'Possibilidade: “Será possível conhecer alguma coisa?” ou “Será que temos crenças justificadas?”.' },
@@ -622,6 +698,26 @@ const CONTEUDO = {
     { id:'m3-43', m:3, t:'vf', destaque:true, q:'A estrada parecer molhada num dia de calor é um exemplo de engano dos sentidos.', a:true, e:'Tal como a miragem no deserto ou o pau que parece partido dentro de água.' },
     { id:'m3-44', m:3, t:'vf', destaque:true, q:'Para defender que na religião não há conhecimento, só opiniões, é preciso ser cético radical.', a:false, e:'Basta ser cético moderado, porque só põe em causa o conhecimento num domínio.' },
 
+    // Manual, pp. 15–19
+    { id:'m3-45', m:3, t:'mc', q:'Diz-se que o ceticismo radical é global porque:', o:['duvida da possibilidade de todo e qualquer conhecimento','duvida só de algumas áreas','aceita todo o conhecimento','só fala do mundo'], e:'Radical = global. Moderado = regional ou localizado.' },
+    { id:'m3-46', m:3, t:'mc', q:'O ceticismo moderado é:', o:['regional ou localizado: duvida do conhecimento em algumas áreas, mas não noutras','global: duvida de todo o conhecimento','o mesmo que o ceticismo pirrónico','uma forma de fundacionalismo'], e:'Ex.: duvidar que haja conhecimento na Ética e na Estética, mas não na Física e na Matemática.' },
+    { id:'m3-47', m:3, t:'mc', q:'Qual é o exemplo do manual de um cético moderado?', o:['Duvidar que haja conhecimento na Ética e na Estética, mas não na Física e na Matemática.','Duvidar de todo o conhecimento.','Duvidar que o sushi seja saboroso.','Aceitar todas as opiniões.'], e:'O moderado só põe em causa certas áreas.' },
+    { id:'m3-48', m:3, t:'vf', q:'Ao ceticismo radical também se chama ceticismo pirrónico.', a:true, e:'O nome vem de Pirro de Élis.' },
+    { id:'m3-49', m:3, t:'vf', q:'Pirro escreveu vários livros a defender o ceticismo.', a:false, e:'Pirro não escreveu nenhum livro. As suas ideias foram apresentadas por outros céticos, como Sexto Empírico.' },
+    { id:'m3-50', m:3, t:'mc', q:'Quem apresentou e desenvolveu as ideias de Pirro na obra «Hipóteses Pirrónicas»?', o:['Sexto Empírico','Francisco Sanches','Platão','Aristóteles'], e:'Sexto Empírico (c. 160–210 d.C.).' },
+    { id:'m3-51', m:3, t:'mc', q:'Francisco Sanches, autor de «Que Nada se Sabe», foi:', o:['um filósofo cético, matemático e médico português','um filósofo fundacionalista grego','um empirista inglês','o autor da definição tradicional'], e:'Viveu c. 1551–1623.' },
+    { id:'m3-52', m:3, t:'mc', q:'Segundo o manual, suspender o juízo é suspender a crença, ou seja:', o:['não acreditar nem deixar de acreditar na ideia em causa','acreditar em tudo','deixar de acreditar em tudo','acreditar só no que é útil'], e:'Não se afirma que a ideia é verdadeira nem que é falsa.' },
+    { id:'m3-53', m:3, t:'mc', q:'Para o ceticismo radical, aquilo a que chamamos conhecimento:', o:['não passa de uma ilusão','é sempre verdadeiro','vem só da razão','é sempre conhecimento por contacto'], e:'Não existe realmente conhecimento (manual, p. 17).' },
+    { id:'m3-54', m:3, t:'mc', q:'«Se as nossas crenças não estão justificadas, então não temos conhecimento. As nossas crenças não estão justificadas. Logo, não temos conhecimento.» Que premissa os céticos pirrónicos defenderam com vários argumentos?', o:['A segunda: «As nossas crenças não estão justificadas.»','A primeira: «Se as nossas crenças não estão justificadas, então não temos conhecimento.»','A conclusão.','Nenhuma.'], e:'A 1.ª premissa é plausível. A 2.ª é defendida com a regressão infinita e os enganos sensoriais.' },
+    { id:'m3-55', m:3, t:'vf', q:'O argumento «Se as nossas crenças não estão justificadas, não temos conhecimento; não estão justificadas; logo, não temos conhecimento» é válido (é um modus ponens).', a:true, e:'É válido. A questão é se é sólido, isto é, se as premissas são verdadeiras.' },
+    { id:'m3-56', m:3, t:'mc', q:'Um avião parece pequeno no céu, mas é enorme; com a mão fria, a água morna parece quente. Estes exemplos servem o argumento:', o:['dos enganos sensoriais','da regressão infinita','da diversidade de opiniões','fundacionalista'], e:'Argumento dos enganos sensoriais (ou da ilusão dos sentidos).' },
+    { id:'m3-57', m:3, t:'mc', q:'Segundo o argumento dos enganos sensoriais, como os sentidos às vezes nos enganam:', o:['pode suceder que sejamos sempre enganados, e as justificações dos sentidos são inadequadas','os sentidos nunca nos enganam','basta usar dois sentidos','o conhecimento vem da razão'], e:'Isso compromete a justificação das nossas crenças (manual, p. 18).' },
+    { id:'m3-58', m:3, t:'vf', q:'«Argumento dos enganos sensoriais» e «argumento da ilusão dos sentidos» são nomes para o mesmo argumento.', a:true, e:'O manual chama-lhe argumento dos enganos sensoriais.' },
+    { id:'m3-59', m:3, t:'mc', q:'Segundo o manual, em que consiste o desafio cético?', o:['Mostrar que temos realmente conhecimento e não uma ilusão de conhecimento.','Mostrar que o sushi é saboroso.','Provar que Deus existe.','Decorar o argumento da regressão.'], e:'Como quase todos achamos que sabemos, o ceticismo desafia-nos a prová-lo (p. 18).' },
+    { id:'m3-60', m:3, t:'vf', q:'Para pensar e dizer que o conhecimento não é possível, é preciso conhecer várias coisas, como o significado das palavras e algumas regras de gramática.', a:true, e:'É a segunda parte da objeção do manual: o ceticismo radical autorrefuta-se.' },
+    { id:'m3-61', m:3, t:'mc', q:'Acreditamos que o mundo exterior e as outras pessoas são reais. Que problema levanta o manual?', o:['Como justificar essa crença; se não a justificarmos, não é conhecimento, mesmo que seja verdadeira.','Essa crença é falsa.','Essa crença é a priori.','Essa crença é conhecimento prático.'], e:'É assim que o manual apresenta o problema da possibilidade do conhecimento (p. 15).' },
+    { id:'m3-62', m:3, t:'vf', q:'Uma crença verdadeira que não conseguimos justificar é conhecimento.', a:false, e:'Sem justificação não há conhecimento, mesmo que a crença seja verdadeira.' },
+    { id:'m3-63', m:3, t:'mc', q:'Segundo o esquema do manual, o ceticismo radical tem como tese, argumentos e objeção:', o:['Tese: o conhecimento não é possível. Argumentos: enganos sensoriais e regressão infinita. Objeção: é contraditório.','Tese: há crenças básicas. Argumento: a priori. Objeção: é válido.','Tese: o conhecimento vem da razão. Argumento: a calculadora. Objeção: a Lua.','Tese: só há conhecimento prático. Argumento: a Alice. Objeção: o sushi.'], e:'Esquema da p. 19 do manual.' },
     /* ---------- Mundo 4 · Regressão infinita e fundacionalismo ---------- */
     { id:'m4-01', m:4, t:'mc', q:'O argumento da regressão infinita conclui que:', o:['não há conhecimento','há crenças básicas','os sentidos enganam','o conhecimento vem da razão'], e:'Conclusão: “Logo, não há conhecimento.”' },
     { id:'m4-02', m:4, t:'mc', q:'O argumento da regressão infinita é:', o:['válido','inválido','uma definição','uma crença básica'], e:'É válido: se as premissas forem verdadeiras, a conclusão também é.' },
@@ -649,6 +745,8 @@ const CONTEUDO = {
     { id:'m4-25', m:4, t:'mc', destaque:true, q:'“A justificação da crença A é a crença B, a de B é a crença C, e assim sucessivamente.” Que dificuldade levanta esta situação?', o:['A regressão infinita da justificação: a cadeia nunca termina, logo nenhuma crença fica justificada e não há conhecimento.','A ilusão dos sentidos.','A diversidade de opiniões.','A autorrefutação do ceticismo.'], e:'Sem justificação não há conhecimento, porque a justificação é condição necessária.' },
     { id:'m4-24', m:4, t:'completa', q:'A conclusão do argumento da regressão infinita é: “Logo, não há ___.”', o:['conhecimento','crenças','premissas','experiência'], e:'Conclusão: “Logo, não há conhecimento.”' },
 
+    { id:'m4-26', m:4, t:'mc', q:'Segundo Sexto Empírico, qual é a consequência da regressão infinita da justificação?', o:['A suspensão do juízo, porque não temos um ponto de partida para o raciocínio.','Que há crenças básicas.','Que os sentidos enganam.','Que o conhecimento vem da razão.'], e:'Cada demonstração precisa de ser demonstrada, até ao infinito (manual, p. 17).' },
+    { id:'m4-27', m:4, t:'mc', q:'Para os fundacionalistas, o que distingue as crenças básicas das não-básicas?', o:['As básicas são autoevidentes e justificam-se a si mesmas; as não-básicas são inferidas de outras crenças.','As básicas são falsas e as não-básicas verdadeiras.','As básicas vêm dos livros e as não-básicas da escola.','Não há diferença.'], e:'É a pergunta 2 da revisão da ficha (p. 18).' },
     /* ---------- Mundo 5 · Origem do conhecimento (sai no teste) ---------- */
     { id:'m5-01', m:5, t:'mc', q:'“O conhecimento provém da razão ou da experiência?” formula o problema da:', o:['origem','definição','possibilidade','justificação moral'], e:'Problema da origem: qual é a fonte do conhecimento?' },
     { id:'m5-02', m:5, t:'mc', q:'Qual das frases identifica corretamente o problema da origem do conhecimento?', o:['Saber qual é a fonte do conhecimento: a razão, independentemente da experiência, ou a experiência sensível.','Saber se é possível conhecer alguma coisa.','Saber o que é conhecer.','Saber se temos crenças justificadas.'], e:'Resposta-modelo: o problema da origem consiste em saber qual é a fonte do nosso conhecimento.' },
@@ -678,7 +776,18 @@ const CONTEUDO = {
     { id:'m5-26', m:5, t:'mc', destaque:true, q:'“A Maria tem o cabelo castanho” é conhecida:', o:['a posteriori: só se sabe olhando para ela','a priori: basta compreender os conceitos','a priori: é uma verdade da lógica','por contacto, e por isso a priori'], e:'O contrário podia ser verdade sem contradição: a Maria podia ser loura.' },
     { id:'m5-27', m:5, t:'mc', destaque:true, q:'“As esferas não têm arestas” é conhecida:', o:['a priori: basta compreender o conceito de esfera','a posteriori: é preciso observar esferas','a posteriori: é uma verdade da física','por contacto'], e:'Uma esfera com arestas seria contraditória.' },
     { id:'m5-28', m:5, t:'vf', destaque:true, q:'“A Maria tem o cabelo castanho” é conhecida a priori.', a:false, e:'É a posteriori: só se sabe olhando para ela.' },
-    { id:'m5-29', m:5, t:'vf', destaque:true, q:'“As esferas não têm arestas” é conhecida a priori.', a:true, e:'Basta compreender o conceito de esfera.' }
+    { id:'m5-29', m:5, t:'vf', destaque:true, q:'“As esferas não têm arestas” é conhecida a priori.', a:true, e:'Basta compreender o conceito de esfera.' },
+    // Manual, p. 14
+    { id:'m5-30', m:5, t:'mc', q:'«A posteriori» significa:', o:['posterior à experiência','anterior à experiência','independente da razão','sem justificação'], e:'Só pode ser adquirido através da experiência.' },
+    { id:'m5-31', m:5, t:'mc', q:'«A priori» significa:', o:['anterior à experiência','posterior à experiência','através dos sentidos','por contacto'], e:'Pode ser adquirido pensando, sem recorrer à experiência.' },
+    { id:'m5-32', m:5, t:'mc', q:'O conhecimento a posteriori também se chama:', o:['conhecimento empírico','conhecimento racional','conhecimento prático','conhecimento por contacto'], e:'De «empeiría», palavra grega para experiência.' },
+    { id:'m5-33', m:5, t:'mc', q:'Qual destas proposições é conhecida a priori?', o:['Tudo o que é verde é colorido.','As baleias são mamíferos.','A Suíça é um país europeu.','As avestruzes não voam.'], e:'Basta pensar nos conceitos de verde e de colorido.' },
+    { id:'m5-34', m:5, t:'mc', q:'Qual destas proposições é conhecida a posteriori?', o:['A segunda maior cidade portuguesa é o Porto.','O todo é maior do que a parte.','Duas coisas iguais a uma terceira são iguais entre si.','723 + 168 = 891'], e:'É preciso observar o mundo para o saber.' },
+    { id:'m5-35', m:5, t:'mc', q:'Segundo o manual, o conhecimento proposicional pode adquirir-se de duas maneiras:', o:['pelo pensamento (a priori) e pela experiência (a posteriori)','pela razão e pela fé','pelos livros e pela escola','pela crença e pela dúvida'], e:'As duas modalidades de conhecimento proposicional (p. 14).' },
+    { id:'m5-36', m:5, t:'vf', q:'Para saber que o dobro de 30 é metade de 120 é preciso usar a máquina de calcular.', a:false, e:'Basta pensar um pouco e fazer a conta mentalmente: é a priori.' },
+    { id:'m5-37', m:5, t:'vf', q:'Saber algo a priori é apenas recordar experiências feitas na infância.', a:false, e:'Posso nunca ter somado 99 + 98 e saber a priori que dá 197.' },
+    { id:'m5-38', m:5, t:'vf', q:'O conhecimento a priori pode ser obtido pelo pensamento, mas a experiência também permite essa aquisição.', a:true, e:'Ex.: ver um resultado na calculadora. Continua a ser a priori, porque podia saber-se só a pensar.' },
+    { id:'m5-39', m:5, t:'vf', q:'«Em Portugal o ensino secundário termina no 12.º ano» é conhecido a priori.', a:false, e:'É a posteriori: é preciso informação sobre o mundo.' }
   ],
 
   /* Minijogo "Classifica rápido". c = categoria certa; e = explicação opcional */
@@ -708,7 +817,17 @@ const CONTEUDO = {
         {x:'As esferas não têm arestas.', c:'pri', e:'É a priori: basta compreender o conceito de esfera.'},
         {x:'A Maria tem o cabelo castanho.', c:'pos', e:'É a posteriori: só se sabe olhando para ela.'},
         {x:'O todo é maior do que as partes.', c:'pri'},
-        {x:'O álcool em excesso provoca cirroses.', c:'pos', e:'É a posteriori: foi preciso investigar (medicina).'}
+        {x:'O álcool em excesso provoca cirroses.', c:'pos', e:'É a posteriori: foi preciso investigar (medicina).'},
+        // Manual, p. 14
+        {x:'As avestruzes não voam.', c:'pos'},
+        {x:'A segunda maior cidade portuguesa é o Porto.', c:'pos'},
+        {x:'A Suíça é um país europeu.', c:'pos'},
+        {x:'Em Portugal o ensino secundário termina no 12.º ano.', c:'pos'},
+        {x:'As baleias são mamíferos.', c:'pos'},
+        {x:'O dobro de 30 é metade de 120.', c:'pri'},
+        {x:'723 + 168 = 891', c:'pri'},
+        {x:'Tudo o que é verde é colorido.', c:'pri'},
+        {x:'Duas coisas iguais a uma terceira são iguais entre si.', c:'pri'}
       ]
     },
     /* Grupo III da Simulação do Teste: tabela a priori / a posteriori (escolhe 4 de cada) */
@@ -736,7 +855,12 @@ const CONTEUDO = {
         {x:'Alguns irmãos são competitivos.', c:'pos'},
         {x:'O álcool em excesso provoca cirroses.', c:'pos', e:'É a posteriori: foi preciso investigar (medicina).'},
         {x:'Todos os sólidos ocupam espaço.', c:'pos'},
-        {x:'A maçã é o fruto da macieira.', c:'pos'}
+        {x:'A maçã é o fruto da macieira.', c:'pos'},
+        // Manual, p. 14
+        {x:'As avestruzes não voam.', c:'pos'},
+        {x:'As baleias são mamíferos.', c:'pos'},
+        {x:'Tudo o que é verde é colorido.', c:'pri'},
+        {x:'Duas coisas iguais a uma terceira são iguais entre si.', c:'pri'}
       ]
     },
     tipos: {
@@ -773,7 +897,19 @@ const CONTEUDO = {
         {x:'A Julieta consegue fingir na perfeição que está a dormir.', c:'pr', e:'Fingir que dorme é uma competência: saber-fazer.'},
         {x:'O filho da Julieta já sabe comer de faca e garfo.', c:'pr', e:'Atenção: “sabe comer” é saber-fazer, não proposicional.'},
         {x:'A Julieta sabe o que é um neutrino.', c:'p', e:'Sabe que um neutrino é uma certa partícula: proposicional.'},
-        {x:'A Julieta conhece o primeiro namorado da sua mãe.', c:'c', e:'Conhece diretamente uma pessoa: por contacto.'}
+        {x:'A Julieta conhece o primeiro namorado da sua mãe.', c:'c', e:'Conhece diretamente uma pessoa: por contacto.'},
+        // Tabela da Alice (manual, p. 10)
+        {x:'A Alice sabe fazer chá.', c:'pr'},
+        {x:'A Alice consegue assobiar o hino nacional.', c:'pr', e:'Uma capacidade: prático (mesmo sem a palavra «sabe»).'},
+        {x:'A Alice conhece o Museu Nacional de Arte Antiga.', c:'c'},
+        {x:'A Alice conhece a diretora da sua escola.', c:'c'},
+        {x:'A Alice conhece o seu corpo.', c:'c', e:'Conhecimento direto, pelos sentidos: por contacto.'},
+        {x:'A Alice sabe que Platão foi um filósofo grego.', c:'p'},
+        {x:'A Alice sabe que um soneto tem catorze versos.', c:'p'},
+        {x:'A Alice compreende a teoria da relatividade.', c:'p', e:'O objeto são ideias de uma teoria: proposicional.'},
+        {x:'Sei fritar ovos.', c:'pr'},
+        {x:'Conheço o Castelo dos Mouros.', c:'c'},
+        {x:'Sei o que é uma alucinação.', c:'p'}
       ]
     },
     ceticos: {
@@ -827,7 +963,7 @@ const CONTEUDO = {
       ['Pirro de Élis', 'Devemos suspender o juízo sobre tudo para alcançar a tranquilidade.'],
       ['Ceticismo radical', 'Põe em causa toda e qualquer espécie de conhecimento.'],
       ['Ceticismo moderado', 'Põe em causa só certos domínios, como a moral ou a existência de Deus.'],
-      ['Ilusão dos sentidos', 'Os sentidos enganam-nos, logo não podemos confiar neles.']
+      ['Enganos sensoriais (ilusão dos sentidos)', 'Os sentidos enganam-nos, logo não podemos confiar neles.']
     ]},
     origem: { titulo:'Liga cada conceito à definição', colA:'Conceito', colB:'Definição', pares:[
       ['Racionalismo', 'A principal fonte do conhecimento é a razão.'],
@@ -874,7 +1010,16 @@ const CONTEUDO = {
     { id:'c33', m:3, aberta:true, frente:'“Na religião não existe conhecimento, mas sim opiniões.” É preciso ser cético radical para defender isto?', verso:'Não. Basta ser cético moderado, porque só se põe em causa o conhecimento num domínio (a religião), e não todo o conhecimento.', exemplo:'Radical seria dizer que nenhum conhecimento é possível, em domínio nenhum.' },
     { id:'c34', m:4, aberta:true, frente:'“A justificação da crença A é a crença B, a de B é a crença C, e assim sucessivamente.” Que dificuldade levanta esta situação?', verso:'Levanta o problema da regressão infinita da justificação: a cadeia de justificações nunca termina, logo nenhuma crença fica justificada. E, como a justificação é condição necessária do conhecimento, não há conhecimento.', exemplo:'O fundacionalismo responde que a cadeia termina em crenças básicas, autoevidentes.' },
     { id:'c35', m:3, aberta:true, frente:'Dá dois exemplos de enganos sensoriais.', verso:'Um pau parece partido dentro de água; uma miragem no deserto; a estrada parece molhada num dia de calor.', exemplo:'São usados pelo argumento cético da ilusão dos sentidos.' },
-    { id:'c36', m:5, aberta:false, frente:'“A Maria tem o cabelo castanho” e “As esferas não têm arestas”: a priori ou a posteriori?', verso:'“A Maria tem o cabelo castanho” é a posteriori: só se sabe olhando para ela.\n“As esferas não têm arestas” é a priori: basta compreender o conceito de esfera.', exemplo:'Truque: o contrário podia ser verdade sem contradição? A Maria podia ser loura (a posteriori); uma esfera com arestas é contraditória (a priori).' }
+    { id:'c36', m:5, aberta:false, frente:'“A Maria tem o cabelo castanho” e “As esferas não têm arestas”: a priori ou a posteriori?', verso:'“A Maria tem o cabelo castanho” é a posteriori: só se sabe olhando para ela.\n“As esferas não têm arestas” é a priori: basta compreender o conceito de esfera.', exemplo:'Truque: o contrário podia ser verdade sem contradição? A Maria podia ser loura (a posteriori); uma esfera com arestas é contraditória (a priori).' },
+    { id:'c37', m:1, aberta:false, frente:'O que é o conhecimento? (sujeito e objeto)', verso:'Em todos os casos de conhecimento há um sujeito (quem conhece) e um objeto (aquilo que é conhecido). O conhecimento é uma relação entre um sujeito e um objeto. No autoconhecimento, o sujeito e o objeto coincidem.', exemplo:'Na frase «A Alice conhece o Museu», a Alice é o sujeito e o Museu é o objeto.' },
+    { id:'c38', m:2, aberta:true, frente:'Distingue os três tipos de conhecimento, indicando o objeto de cada um.', verso:'Prático (saber-fazer): o objeto é uma aptidão ou capacidade; o sujeito sabe realizar uma ação.\nPor contacto: o sujeito conhece diretamente algo pelos sentidos externos; o objeto são lugares, pessoas, animais, objetos físicos.\nProposicional (saber-que): o objeto são proposições verdadeiras; é conhecer ideias.', exemplo:'Saber fritar ovos (prático); conhecer o Castelo dos Mouros (por contacto); saber o que é uma alucinação (proposicional).' },
+    { id:'c39', m:1, aberta:true, frente:'Explica porque é que a crença, a verdade e a justificação são condições necessárias do conhecimento.', verso:'Crença: dizer «conheço P, mas não acredito em P» é contraditório.\nVerdade: uma crença falsa não é conhecimento; não podemos saber que os pardais falam, porque não falam.\nJustificação: uma crença verdadeira por sorte, como um palpite certeiro, não é conhecimento; são precisas boas razões que liguem a crença à verdade.\nBasta faltar uma para não haver conhecimento; as três juntas são suficientes.', exemplo:'Os autores do manual sabem que os Países Baixos são uma monarquia: acreditam, é verdade e têm boas razões.' },
+    { id:'c40', m:3, aberta:true, frente:'Em que consiste o ceticismo? (revisão da ficha)', verso:'O ceticismo é a perspetiva filosófica que responde «não» à pergunta «Será o conhecimento possível?»: põe em causa a possibilidade do conhecimento. O ceticismo radical (global, pirrónico) duvida de todo e qualquer conhecimento e defende a suspensão do juízo; o moderado (regional) só duvida em certas áreas, como a Ética ou a religião.', exemplo:'Pirro de Élis: como não podemos ter a certeza de nada, devemos suspender o juízo.' },
+    { id:'c41', m:3, aberta:true, frente:'De que forma argumentam os céticos a favor da sua perspetiva? (revisão da ficha)', verso:'Defendem que as nossas crenças não estão justificadas e que, sem justificação, não há conhecimento. Para isso usam o argumento dos enganos sensoriais (os sentidos às vezes enganam-nos, por isso podemos ser sempre enganados e as justificações dos sentidos são inadequadas) e, sobretudo, o argumento da regressão infinita da justificação (cada crença precisa de outra para a justificar, sem fim, logo nenhuma fica justificada).', exemplo:'Um lápis parece partido dentro de um copo de água.' },
+    { id:'c42', m:4, aberta:true, frente:'Concordas com o argumento cético da regressão infinita? Porquê? (discussão)', verso:'Não há uma única resposta certa: o importante é justificar. Uma resposta possível: não concordo. O argumento é válido, mas não é sólido, porque a premissa 1 é falsa: como defende o fundacionalismo, nem todas as crenças se justificam com base noutras; há crenças básicas, autoevidentes, que se justificam a si mesmas, e a cadeia de justificação termina nelas. Além disso, o ceticismo radical autorrefuta-se: afirma saber que nada se pode saber.', exemplo:'Se concordares, tens de mostrar porque as premissas são verdadeiras (ex.: dizer que nenhuma crença é autoevidente).' },
+    { id:'c43', m:5, aberta:true, frente:'«Eu estou aqui agora»: é conhecimento a priori ou a posteriori? Dá-nos informação acerca do mundo? (discussão da ficha)', verso:'É uma pergunta de discussão, sem uma única resposta certa. Pode defender-se que é a priori: quem a diz sabe que é verdadeira só por compreender as palavras («eu» é quem fala, «aqui» é onde está, «agora» é o momento em que fala), sem observar nada. Mas parece dar alguma informação sobre o mundo (que alguém existe num lugar e num momento). Por isso serve para o debate: os racionalistas diriam que há conhecimento a priori com informação sobre o mundo; os empiristas diriam que não informa sobre como o mundo é.', exemplo:'Compara com «Os solteiros não são casados»: é a priori, mas não diz se existe algum solteiro.' },
+    { id:'c44', m:3, aberta:false, frente:'Ceticismo global e regional', verso:'Radical = global: duvida de todo e qualquer conhecimento (também se chama pirrónico).\nModerado = regional ou localizado: duvida em algumas áreas, mas não noutras.', exemplo:'Duvidar que haja conhecimento na Ética e na Estética, mas não na Física e na Matemática (moderado).' },
+    { id:'c45', m:3, aberta:false, frente:'Pirro, Sexto Empírico e Francisco Sanches', verso:'Pirro de Élis (c. 360/365–270 a.C.): o cético radical mais antigo; não escreveu nenhum livro.\nSexto Empírico (c. 160–210 d.C.): apresentou as ideias de Pirro nas «Hipóteses Pirrónicas».\nFrancisco Sanches (c. 1551–1623): filósofo cético, matemático e médico português, autor de «Que Nada se Sabe».', exemplo:'Suspender o juízo = não acreditar nem deixar de acreditar.' }
   ],
 
   /* Simulação do Teste: formato do teste real, segundo a professora.
@@ -890,14 +1035,14 @@ const CONTEUDO = {
       'Formula o problema: “Será possível conhecer alguma coisa?”',
       'Define ceticismo: pôr em causa a possibilidade do conhecimento (não é só ter dúvidas).',
       'Distingue radical (todo o conhecimento; Pirro de Élis, suspensão do juízo) de moderado (só certos domínios, ex.: religião).',
-      'Apresenta os argumentos céticos: ilusão dos sentidos (com exemplo), diversidade de opiniões, regressão infinita.',
+      'Apresenta os argumentos céticos: enganos sensoriais / ilusão dos sentidos (com exemplo), regressão infinita (e diversidade de opiniões).',
       'Expõe o argumento da regressão infinita (5 passos) e diz que é válido.',
       'Apresenta uma resposta/objeção: fundacionalismo (rejeita a premissa 1; crenças básicas autoevidentes) e/ou autorrefutação do ceticismo radical.',
       'Usa vocabulário rigoroso e dá pelo menos um exemplo.'
     ],
     desenvolvimento:[
       { id:'a', pergunta:'Explica em que consiste o ceticismo e apresenta os argumentos que os céticos usam para negar a possibilidade do conhecimento.', pontos:[1,2,3,6],
-        modelo:'O ceticismo é a posição que põe em causa a possibilidade do conhecimento. O cético radical, como Pirro de Élis, defende que não podemos conhecer nada e que devemos suspender o juízo; o moderado só duvida em certos domínios, como a religião. Os céticos apresentam três argumentos. Primeiro, a ilusão dos sentidos: os sentidos enganam-nos às vezes (um pau parece partido dentro de água), logo não podemos confiar neles. Segundo, a diversidade de opiniões: as pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão. Terceiro, a regressão infinita da justificação: cada crença justifica-se com outra, que precisa de outra, sem fim; assim, nenhuma crença fica justificada e, como a justificação é condição necessária do conhecimento, não há conhecimento.' },
+        modelo:'O ceticismo é a posição que põe em causa a possibilidade do conhecimento. O cético radical, como Pirro de Élis, defende que não podemos conhecer nada e que devemos suspender o juízo; o moderado só duvida em certos domínios, como a religião. Os céticos apresentam três argumentos. Primeiro, a ilusão dos sentidos (o argumento dos enganos sensoriais): os sentidos enganam-nos às vezes (um pau parece partido dentro de água), logo não podemos confiar neles. Segundo, a diversidade de opiniões: as pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão. Terceiro, a regressão infinita da justificação: cada crença justifica-se com outra, que precisa de outra, sem fim; assim, nenhuma crença fica justificada e, como a justificação é condição necessária do conhecimento, não há conhecimento.' },
       { id:'b', pergunta:'Apresenta o argumento cético da regressão infinita e explica uma resposta possível ao ceticismo.', pontos:[0,1,4,5,6],
         modelo:'O ceticismo põe em causa a possibilidade do conhecimento, respondendo negativamente à pergunta “Será possível conhecer alguma coisa?”. O seu principal argumento é o da regressão infinita da justificação:\n1. As nossas crenças justificam-se com base noutras crenças.\n2. Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.\n3. Se sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação, então nunca temos crenças justificadas.\n4. Se nunca temos crenças justificadas, não há conhecimento.\n5. Logo, não há conhecimento.\nO argumento é válido: se as premissas forem verdadeiras, a conclusão também é. Por isso, quem não aceita a conclusão tem de rejeitar pelo menos uma premissa. O fundacionalismo rejeita a premissa 1: nem todas as crenças se justificam com base noutras, porque há crenças básicas, autoevidentes, que se justificam a si mesmas. Tal como as fundações de um edifício, sustentam as outras crenças sem precisarem de ser sustentadas. A cadeia de justificação termina nelas, logo não há regressão infinita e o conhecimento é possível.' },
       { id:'c', pergunta:'Distingue ceticismo radical de ceticismo moderado e explica por que razão muitos consideram o ceticismo radical contraditório.', pontos:[0,1,2,5,6],
