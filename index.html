@@ -4,10 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
-</head>
-<body>
 <title>Desafio Cético — Filosofia 11.º ano</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Jogo para estudar Filosofia 11.º ano: conhecimento, ceticismo e origem do conhecimento.">
+<meta name="theme-color" content="#ECEFF6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1322" media="(prefers-color-scheme: dark)">
+<!-- PWA: manifest e ícones (pode ser adicionado ao ecrã principal e funciona sem internet) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Desafio Cético">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=GFS+Didot&family=IBM+Plex+Mono:wght@500;600&family=Young+Serif&display=swap">
@@ -94,7 +101,7 @@ p{margin:0}
 .chip.lock svg{width:12px; height:12px; fill:currentColor}
 .pct{font-family:var(--f-mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
 
-.acoes{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.acoes{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
 @media (max-width:560px){ .acoes{grid-template-columns:1fr} }
 .acao{background:var(--surface); border:2px solid var(--line); border-radius:var(--r); padding:14px; text-align:left; display:flex; flex-direction:column; gap:4px; min-height:92px; transition:border-color .15s, transform .15s}
 .acao:hover{border-color:var(--accent); transform:translateY(-1px)}
@@ -123,7 +130,7 @@ p{margin:0}
 .acts .btn{flex:1 1 180px}
 
 /* ---------- Ecrã de jogo ---------- */
-.playbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center; padding-block:10px}
+.playbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); display:grid; grid-template-columns:auto 1fr auto auto; gap:10px; align-items:center; padding-block:10px}
 body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
 .icon-btn{width:44px; height:44px; border-radius:50%; border:2px solid var(--line); background:var(--surface); font-size:18px; display:grid; place-items:center}
 .pb-title{font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -237,7 +244,8 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .face{width:100%; min-height:300px; border:none; border-radius:22px; box-shadow:var(--shadow); background:var(--surface); padding:24px 20px; display:flex; flex-direction:column; gap:14px; justify-content:center; text-align:left; transition:transform .16s ease-in}
 .face.verso{background:var(--surface-2); border:2px solid var(--accent)}
 .face.flip-out{transform:rotateY(90deg)}
-.face .ft{font-family:var(--f-display); font-size:clamp(22px,5.6vw,30px); line-height:1.25}
+.face .ft{font-family:var(--f-display); font-size:clamp(22px,5.6vw,30px); line-height:1.25; white-space:pre-line}
+.face .ft.longa{font-size:19px; line-height:1.4}
 .face .vt{font-size:17px; white-space:pre-line}
 .face .ex{font-size:15px; color:var(--muted); border-top:1px dashed var(--line); padding-top:10px}
 .face .ex b{color:var(--ink)}
@@ -263,12 +271,77 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 @keyframes toastIn{0%{opacity:0; transform:translateY(-8px)} 12%{opacity:1; transform:none} 80%{opacity:1} 100%{opacity:0; transform:translateY(-6px)}}
 @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important} }
 
+/* ---------- Matéria (lições) ---------- */
+.acao.estudo{grid-column:1 / -1; border-color:var(--ok); background:var(--ok-soft)}
+.acao.estudo .t{font-size:20px}
+.licao{display:flex; flex-direction:column; gap:18px}
+.li-ideia{font-size:18px; color:var(--muted)}
+.li-sec h3{font-size:20px; color:var(--accent); margin-bottom:8px}
+.li-sec dl{margin:0; display:flex; flex-direction:column; gap:8px}
+.li-row{display:grid; grid-template-columns:minmax(110px, 28%) 1fr; gap:12px; padding:10px 12px; border-radius:12px; background:var(--surface-2)}
+.li-row dt{font-weight:700}
+.li-row dd{margin:0; min-width:0}
+@media (max-width:520px){ .li-row{grid-template-columns:1fr; gap:2px} }
+.li-truque{background:var(--gold-soft); border-radius:14px; padding:14px; font-size:17px}
+.mat-b{height:44px; padding:0 14px; border-radius:99px; border:2px solid var(--accent); background:var(--surface); font-weight:700; font-size:14px}
+.sheet{position:fixed; inset:0; z-index:50; display:flex; justify-content:center; align-items:flex-end}
+.sheet-fundo{position:absolute; inset:0; background:rgba(8,12,28,.5)}
+.sheet-painel{position:relative; width:100%; max-width:720px; max-height:92%; overflow-y:auto; overscroll-behavior:contain; background:var(--surface); border-radius:22px 22px 0 0; box-shadow:var(--shadow); padding-top:18px; padding-bottom:calc(18px + env(safe-area-inset-bottom,0px)); padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); display:flex; flex-direction:column; gap:14px; animation:sobe .25s ease both}
+.sheet-top{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+html.sem-scroll{overflow:hidden}
+@keyframes sobe{from{transform:translateY(40px); opacity:.4} to{transform:none; opacity:1}}
+.gr{font-family:var(--f-greek); font-size:18px; line-height:1}
+/* ---------- Continuar e recomeçar ---------- */
+.mrow{display:grid; grid-template-columns:1fr auto; gap:8px}
+.reset-b{width:52px; border-radius:var(--r); border:2px solid var(--line); background:var(--surface); font-size:22px; color:var(--muted)}
+.reset-b:hover{border-color:var(--bad); color:var(--bad)}
+.confirma{margin-top:8px; border-radius:14px; padding:12px 14px; background:var(--bad-soft); display:flex; flex-direction:column; gap:10px; position:relative; z-index:1}
+.chip.cont{background:var(--gold-soft); text-transform:none; letter-spacing:0; font-size:12px}
+.mini-b.armado{border-color:var(--bad); color:var(--bad); font-weight:700}
+
+/* ---------- Simulação do teste ---------- */
+.grupos{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+.grupos li{display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:baseline; padding:10px 12px; border-radius:12px; background:var(--surface-2)}
+.grupos .gn{font-family:var(--f-display); font-size:18px; color:var(--accent)}
+.grupos .gc{font-family:var(--f-mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+.tab{display:flex; flex-direction:column; gap:8px}
+.tab-h{display:none}
+.tab-row{display:flex; flex-direction:column; gap:8px; padding:10px 12px; border-radius:12px; border:2px solid var(--line); background:var(--surface-2)}
+.tab-row .fr{font-size:16px}
+.tab-row .seg{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.tab-row.right{border-color:var(--ok); background:var(--ok-soft)}
+.tab-row.wrong{border-color:var(--bad); background:var(--bad-soft)}
+.tab-row .corr{font-size:14px; font-weight:700; color:var(--bad)}
+.seg-b{min-height:46px; border-radius:10px; border:2px solid var(--line); background:var(--surface); font-size:15px; font-weight:700}
+.seg-b[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.seg-b:disabled{cursor:default}
+@media (min-width:600px){
+  .tab-h{display:grid; grid-template-columns:1fr 130px 130px; gap:8px; padding:0 14px}
+  .tab-h span{font-family:var(--f-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:center}
+  .tab-h span:first-child{text-align:left}
+  .tab-row{display:grid; grid-template-columns:1fr 268px; align-items:center}
+  .tab-row .corr{grid-column:1 / -1}
+}
+.dev{width:100%; min-height:220px; resize:vertical; border:2px solid var(--line); border-radius:14px; padding:12px 14px; font:inherit; font-size:16px; line-height:1.5; background:var(--surface); color:var(--ink)}
+.dev:focus{outline:3px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+.caixa{border-radius:14px; padding:14px; background:var(--surface-2); white-space:pre-wrap; font-size:16px}
+.caixa.modelo{border:2px solid var(--ok); background:var(--ok-soft)}
+.check{display:flex; flex-direction:column; gap:8px}
+.check label{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; padding:12px; border-radius:12px; border:2px solid var(--line); background:var(--surface); cursor:pointer; font-size:16px}
+.check input{width:22px; height:22px; margin:1px 0 0; accent-color:var(--accent)}
+.check label:has(input:checked){border-color:var(--ok); background:var(--ok-soft)}
+.cotas{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%}
+@media (max-width:480px){ .cotas{grid-template-columns:repeat(2,1fr)} }
+.cotas div{background:var(--surface-2); border-radius:12px; padding:10px; display:flex; flex-direction:column; gap:2px}
+.cotas b{font-family:var(--f-mono); font-size:18px; font-variant-numeric:tabular-nums}
+.cotas span{font-size:13px; color:var(--muted)}
+
 /* ---------- Fundo de slime ---------- */
 #fundo{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:var(--fundo-op)}
 #app{position:relative; z-index:1}
-.com-fundo :is(.q,.mini,.res,.player,.mundo,.acao:not(.final),.sp-card,.face,.hero,.rodape,.playbar,.mini-b:not(.on)){background:var(--glass); -webkit-backdrop-filter:blur(12px) saturate(1.15); backdrop-filter:blur(12px) saturate(1.15)}
+.com-fundo :is(.q,.mini,.res,.player,.mundo,.acao:not(.final):not(.estudo),.reset-b,.sp-card,.face,.hero,.rodape,.playbar,.mini-b:not(.on)){background:var(--glass); -webkit-backdrop-filter:blur(12px) saturate(1.15); backdrop-filter:blur(12px) saturate(1.15)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .com-fundo :is(.q,.mini,.res,.player,.mundo,.acao:not(.final),.sp-card,.face,.hero,.rodape,.playbar,.mini-b:not(.on)){background:var(--surface)}
+  .com-fundo :is(.q,.mini,.res,.player,.mundo,.acao:not(.final):not(.estudo),.reset-b,.sp-card,.face,.hero,.rodape,.playbar,.mini-b:not(.on)){background:var(--surface)}
 }
 .com-fundo .mundo:disabled{opacity:.88}
 .com-fundo .hero{border-radius:20px; padding:16px}
@@ -277,6 +350,8 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .com-fundo .sec-h{text-shadow:0 0 10px var(--bg), 0 0 3px var(--bg)}
 .mini-b[aria-pressed="true"]{border-color:var(--accent); font-weight:700}
 </style>
+</head>
+<body>
 
 <div id="app"></div>
 <div id="toasts" aria-live="polite"></div>
@@ -302,12 +377,125 @@ const CONTEUDO = {
   ],
 
   mundos: [
-    { n:1, letra:'α', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:10, especiais:[{k:'ligar', set:'problemas'}], teste:false },
-    { n:2, letra:'β', titulo:'Tipos de conhecimento', resumo:'Proposicional, prático e por contacto.', nPerguntas:9, especiais:[{k:'ligar', set:'tipos'}, {k:'sprint', set:'tipos'}], teste:true },
-    { n:3, letra:'γ', titulo:'Será possível conhecer?', resumo:'Problema da possibilidade, o desafio cético, os três argumentos céticos e Pirro de Élis.', nPerguntas:11, especiais:[{k:'ligar', set:'ceticismo'}, {k:'sprint', set:'ceticos'}], teste:true },
-    { n:4, letra:'δ', titulo:'A regressão infinita e a resposta fundacionalista', resumo:'O argumento cético, a sua validade e as crenças básicas.', nPerguntas:9, especiais:[{k:'ordem'}], teste:true },
-    { n:5, letra:'ε', titulo:'De onde vem o conhecimento?', resumo:'Problema da origem, racionalismo e empirismo, a priori e a posteriori.', nPerguntas:9, especiais:[{k:'ligar', set:'origem'}, {k:'sprint', set:'apriori'}], teste:true }
+    { n:1, letra:'α', curto:'Conhecer', titulo:'O que é conhecer', resumo:'Epistemologia, os seus problemas e a definição tradicional.', nPerguntas:10, especiais:[{k:'ligar', set:'problemas'}], teste:false },
+    { n:2, letra:'β', curto:'Tipos', titulo:'Tipos de conhecimento', resumo:'Proposicional, prático e por contacto, com o exercício da Julieta.', nPerguntas:10, especiais:[{k:'ligar', set:'tipos'}, {k:'sprint', set:'tipos'}], teste:true },
+    { n:3, letra:'γ', curto:'Ceticismo', titulo:'Será possível conhecer?', resumo:'Problema da possibilidade, o desafio cético, os três argumentos céticos e Pirro de Élis.', nPerguntas:11, especiais:[{k:'ligar', set:'ceticismo'}, {k:'sprint', set:'ceticos'}], teste:true },
+    { n:4, letra:'δ', curto:'Regressão', titulo:'A regressão infinita e a resposta fundacionalista', resumo:'O argumento cético, a sua validade e as crenças básicas.', nPerguntas:9, especiais:[{k:'ordem'}], teste:true },
+    { n:5, letra:'ε', curto:'Origem', titulo:'De onde vem o conhecimento?', resumo:'Problema da origem, racionalismo e empirismo, a priori e a posteriori.', nPerguntas:9, especiais:[{k:'ligar', set:'origem'}, {k:'sprint', set:'apriori'}], teste:true }
   ],
+
+  /* Lições: a matéria explicada, mostrada ANTES das perguntas de cada mundo.
+     Cada secção tem linhas [termo, explicação] (pode ter <b>negrito</b> e <i>itálico</i>). */
+  licoes: {
+    1: { ideia:'Antes de perguntar se podemos conhecer, é preciso saber o que é conhecer.',
+      seccoes:[
+        { t:'A epistemologia', l:[
+          ['Epistemologia','Área da filosofia que estuda o <b>conhecimento</b> (também se chama <b>teoria do conhecimento</b>). Vem do grego <i>epistéme</i> (conhecimento) + <i>logos</i> (estudo).'] ]},
+        { t:'Os 3 problemas da epistemologia', l:[
+          ['Definição','«<b>O que é conhecer?</b>» Quais são as condições necessárias e suficientes para alguém saber que algo é o caso?'],
+          ['Possibilidade','«<b>Será possível conhecer alguma coisa?</b>» ou «Será que temos crenças justificadas?» (Mundo 3)'],
+          ['Origem','«<b>Qual é a origem do conhecimento: a razão ou a experiência?</b>» (Mundo 5)'] ]},
+        { t:'Condições', l:[
+          ['Necessária','Sem ela <b>não há</b> conhecimento.'],
+          ['Suficiente','Se estiver presente, <b>há</b> conhecimento.'] ]},
+        { t:'Definição tradicional (Platão, Teeteto)', l:[
+          ['Conhecimento','= <b>crença verdadeira justificada</b>. S sabe que P se e só se: <b>1)</b> S acredita que P; <b>2)</b> P é verdadeira; <b>3)</b> S tem justificação para acreditar que P. Cada condição é necessária; as três juntas seriam suficientes.'],
+          ['Crença','É contraditório dizer «sei que o mar tem ondas, mas não acredito nisso». Mas a crença sozinha não basta: «acredito em extraterrestres» não é saber que existem.'],
+          ['Verdade','Só se sabe o que é verdadeiro: o conhecimento é <b>factivo</b>.'],
+          ['Justificação','Sozinha não basta: na Antiguidade havia boas razões para acreditar que a Terra era plana, e não é.'],
+          ['Crença verdadeira','Também não basta: pode ser verdadeira <b>por sorte</b>. O João acredita que vai chover só porque lhe apetece, e chove: não sabia, era um palpite.'],
+          ['Crença e conhecimento','Todo o conhecimento é uma crença, mas <b>nem todas as crenças são conhecimento</b>.'],
+          ['A calculadora','Não «sabe» que 356 ÷ 4 = 89: não tem estados mentais nem crenças; só dá o resultado porque foi programada.'] ]},
+        { t:'Exemplos do manual', l:[
+          ['Luísa','Acredita, por estudos científicos, que o albinismo tem causa genética → <b>tem</b> conhecimento.'],
+          ['Teresa','Acredita que a Terra é maior do que a Lua porque o nome é maior → <b>não tem</b>: verdadeira, mas mal justificada.'],
+          ['Carlos','Leu que o álcool em excesso provoca cirroses, mas pensou que era falso → <b>não tem</b>: falta a crença.'] ]}
+      ],
+      truque:'Para saber se alguém sabe, verifica as 3 condições por ordem: <b>acredita? é verdade? tem boas razões?</b> Se faltar uma, não há conhecimento.' },
+
+    2: { ideia:'Há três maneiras de “saber”. A pista está no que vem a seguir ao verbo.',
+      seccoes:[
+        { t:'Os 3 tipos de conhecimento', l:[
+          ['Proposicional','<b>Saber-que</b>: saber que uma proposição é verdadeira. Também se chama conhecimento <b>factual</b>. É o que a epistemologia mais estuda. Ex.: «Sei que Lisboa é a capital de Portugal.»'],
+          ['Prático','<b>Saber-fazer</b>: ter uma competência. Ex.: «Sei andar de bicicleta», «Sei nadar», «Sei tocar guitarra».'],
+          ['Por contacto','<b>Familiaridade</b>: conhecer diretamente pessoas, lugares ou coisas. Ex.: «Conheço o Porto», «Conheço a Maria», «Conheço o sabor da manga».'] ]},
+        { t:'Proposição', l:[
+          ['Proposição','Pensamento expresso por uma <b>frase declarativa</b>, que pode ser verdadeiro ou falso. «Fecha a porta!» e «Que horas são?» não exprimem proposições.'],
+          ['Atenção','Escreve-se <b>proposicional</b> (de proposição), não «proporcional».'] ]},
+        { t:'Exercício 1 do manual (sai no teste)', l:[
+          ['A','A Julieta sabe preparar batidos de frutas → <b>prático</b>'],
+          ['B','Conhece de trás para a frente o sítio onde o Mondego nasce → <b>por contacto</b> (um lugar)'],
+          ['C','Sabe qual é a diferença entre um romance e uma novela → <b>proposicional</b>'],
+          ['D','Consegue fingir na perfeição que está a dormir → <b>prático</b>'],
+          ['E','O filho dela já sabe comer de faca e garfo → <b>prático</b>'],
+          ['F','Sabe o que é um neutrino → <b>proposicional</b>'],
+          ['G','Conhece o primeiro namorado da sua mãe → <b>por contacto</b> (uma pessoa)'] ]}
+      ],
+      truque:'«Sei <b>que</b>…» → proposicional. «Sei + verbo» (sei <b>fazer</b>, sei preparar, sei comer) → prático. «<b>Conheço</b>» + pessoa, lugar ou sabor → por contacto. Cuidado: «sabe» nem sempre é proposicional! «Sabe o que é um neutrino» pode dizer-se «sabe que um neutrino é…», por isso é proposicional.' },
+
+    3: { ideia:'O cético desafia a nossa pretensão de saber. Este é um dos temas que sai no teste.',
+      seccoes:[
+        { t:'O problema da possibilidade', l:[
+          ['Formulação','«<b>Será possível conhecer alguma coisa?</b>» ou «<b>Será que temos crenças justificadas?</b>»'] ]},
+        { t:'O que é ser cético', l:[
+          ['No dia a dia','Cético = quem duvida («sou um pouco cético quanto ao sushi»). Isto <b>não</b> é ceticismo filosófico.'],
+          ['Em filosofia','O cético <b>põe em causa a possibilidade do conhecimento</b>. Para ser cético quanto ao sushi, teria de achar que <b>não é de todo possível saber</b> se o sushi é saboroso.'],
+          ['Desafio cético','Na forma mais radical: nenhum conhecimento é possível, por isso devemos <b>suspender o juízo</b> sobre todas as coisas.'] ]},
+        { t:'Radical e moderado', l:[
+          ['Radical','Põe em causa <b>todo</b> e qualquer conhecimento.'],
+          ['Moderado','Só põe em causa <b>certos domínios</b>: livre-arbítrio, moral, existência de Deus, religião. «Na religião só há opiniões» → basta ser moderado.'],
+          ['Pirro de Élis','(c. 365–270 a.C.) O mais antigo e radical. Nunca sabemos como as coisas realmente são → <b>suspender o juízo</b> (não considerar nada verdadeiro nem falso) → paz de espírito, tranquilidade, felicidade.'] ]},
+        { t:'Os 3 argumentos céticos', l:[
+          ['Ilusão dos sentidos','Os sentidos às vezes enganam-nos (um pau parece partido dentro de água; uma miragem no deserto; a estrada parece molhada num dia de calor) → não podemos confiar neles.'],
+          ['Diversidade de opiniões','As pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão.'],
+          ['Regressão infinita','Cada crença precisa de outra para a justificar, sem fim → nenhuma fica justificada → não há conhecimento. (É o principal; vês tudo no Mundo 4.)'],
+          ['Atenção','As <b>crenças básicas autoevidentes</b> não são um argumento cético: são a resposta do fundacionalismo.'] ]},
+        { t:'Objeção: o ceticismo radical é contraditório (exercício 9, sai no teste)', l:[
+          ['Autorrefutação','O cético radical diz que nada se pode conhecer. Mas, ao dizê-lo, apresenta a tese como verdadeira: pretende <b>saber pelo menos uma coisa</b>, que nada se pode saber. Se a tese fosse verdadeira, nem o próprio cético a poderia conhecer. Por isso <b>refuta-se a si mesmo</b>.'],
+          ['E mais','Se nenhuma crença está justificada, as premissas do próprio cético também não estão.'] ]}
+      ],
+      truque:'Duvida de <b>tudo</b> → radical. Duvida só de <b>um domínio</b> → moderado. Só desconfia de uma coisa do dia a dia → <b>não é</b> ceticismo filosófico.' },
+
+    4: { ideia:'O principal argumento cético, passo a passo, e a resposta do fundacionalismo.',
+      seccoes:[
+        { t:'A ideia', l:[
+          ['Os “porquês”','Como uma criança: «Come a sopa!» «Porquê?» «Porque te faz bem.» «Porquê?»… Podemos sempre pedir justificação. «Porque sim!» não justifica nada: só mostra que a pessoa desistiu.'],
+          ['Cadeia sem fim','Cada justificação é outra crença, que também precisa de justificação.'] ]},
+        { t:'O argumento (decora a ordem)', l:[
+          ['P1','As nossas crenças justificam-se com base noutras crenças.'],
+          ['P2','Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.'],
+          ['P3','Se sempre que tentamos justificar uma crença caímos numa regressão infinita, então nunca temos crenças justificadas.'],
+          ['P4','Se nunca temos crenças justificadas, não há conhecimento. (Liga-se à definição tradicional: sem justificação não há conhecimento.)'],
+          ['C','Logo, não há conhecimento.'],
+          ['Válido','Se as premissas forem verdadeiras, a conclusão também é. Quem não aceita a conclusão tem de <b>rejeitar pelo menos uma premissa</b>.'] ]},
+        { t:'A resposta fundacionalista', l:[
+          ['Fundacionalismo','Rejeita a <b>premissa 1</b>: nem todas as crenças se justificam com base noutras. Aceita a 2, a 3 e a 4.'],
+          ['Crenças básicas','<b>Autoevidentes</b>: justificam-se a si mesmas, não precisam de outras.'],
+          ['Não-básicas','Não são autoevidentes: são <b>inferidas</b> a partir de outras crenças.'],
+          ['Metáfora','Como as <b>fundações (alicerces)</b> de um edifício: sustentam tudo sem serem sustentadas. A cadeia de justificação termina nas crenças básicas, logo <b>não há regressão infinita</b>.'] ]}
+      ],
+      truque:'O fundacionalista só diz que a <b>premissa 1</b> é falsa. Se a pergunta for «que premissa rejeita?», a resposta é sempre a 1.' },
+
+    5: { ideia:'De onde vem o conhecimento: da razão ou da experiência? E como distinguir a priori de a posteriori.',
+      seccoes:[
+        { t:'O problema da origem (sai no teste)', l:[
+          ['Formulação','«<b>Qual é a origem do conhecimento? Provém da razão ou da experiência?</b>»'],
+          ['Resposta-modelo','O problema da origem do conhecimento consiste em saber qual é a fonte do nosso conhecimento: se é a razão, independentemente da experiência, ou a experiência sensível.'] ]},
+        { t:'Duas respostas', l:[
+          ['Racionalismo','A principal fonte é a <b>razão</b>. As crenças básicas são conhecidas <b>a priori</b>. É possível conhecimento a priori sobre o mundo.'],
+          ['Empirismo','A principal fonte é a <b>experiência sensível</b> (do grego <i>empeiria</i>). As crenças básicas são <b>a posteriori</b>. O a priori só diz respeito a relações entre ideias, não informa sobre o mundo.'],
+          ['Ligação','O fundacionalismo diz que há crenças básicas; o problema da origem pergunta de onde vêm. Há fundacionalistas racionalistas e empiristas.'] ]},
+        { t:'A priori e a posteriori', l:[
+          ['A priori','Pode saber-se <b>só pelo pensamento</b>, sem experiência. Matemática, lógica, geometria. Ex.: «Nenhum solteiro é casado», «2 + 2 = 4», «As esferas não têm arestas».'],
+          ['A posteriori','Só se sabe <b>pela experiência</b>, olhando para o mundo. Física, química, biologia, história, geografia. Ex.: «Os ursos polares são brancos», «A água é H2O», «A Maria tem o cabelo castanho».'] ]},
+        { t:'Armadilhas', l:[
+          ['Calculadora','Saber 2 + 2 = 4 numa calculadora continua a ser <b>a priori</b>: <b>podia</b> saber-se só pelo pensamento.'],
+          ['Conceitos','Precisamos de experiência para aprender o que é «solteiro», mas não para saber que «nenhum solteiro é casado» é verdade.'],
+          ['Esfera','A definição de esfera é a priori; «A Terra é aproximadamente esférica» é a posteriori.'],
+          ['Existência','«Os solteiros não são casados» é a priori, mas não diz se existe algum solteiro. Pode o a priori informar sobre o mundo? Racionalistas: sim. Empiristas: não.'] ]}
+      ],
+      truque:'Pergunta: «<b>o contrário podia ser verdade sem contradição?</b>» Sim (os ursos podiam ser castanhos) → a posteriori. Não (um solteiro casado é contraditório) → a priori.' }
+  },
 
   perguntas: [
     /* ---------- Mundo 1 · O que é conhecer ---------- */
@@ -341,6 +529,12 @@ const CONTEUDO = {
     { id:'m1-28', m:1, t:'vf', destaque:true, q:'Uma calculadora sabe que 356 a dividir por 4 dá 89.', a:false, e:'Não tem estados mentais nem crenças, logo não tem conhecimento.' },
     { id:'m1-29', m:1, t:'vf', destaque:true, q:'É contraditório dizer “sei que o mar tem ondas, mas não acredito nisso”.', a:true, e:'É por isso que a crença é condição necessária do conhecimento.' },
     { id:'m1-30', m:1, t:'completa', destaque:true, q:'O conhecimento é ___: só se sabe o que é verdadeiro.', o:['factivo','provável','subjetivo','prático'], e:'Factivo: se S sabe que P, então P é verdadeira.' },
+    // Treino extra do manual: tem ou não conhecimento?
+    { id:'m1-31', m:1, t:'mc', destaque:true, q:'A Luísa acredita, devido a estudos científicos que leu, que o albinismo tem causa genética. Segundo a definição tradicional, a Luísa:', o:['tem conhecimento: é uma crença verdadeira e justificada','não tem conhecimento: falta a crença','não tem conhecimento: a crença não está justificada','não tem conhecimento: a crença é falsa'], e:'Tem as três condições: acredita, é verdade e tem boas razões (os estudos científicos).' },
+    { id:'m1-32', m:1, t:'mc', destaque:true, q:'A Teresa acredita que a Terra é maior do que a Lua porque ouviu dizer que o tamanho dos nomes exprime o tamanho das coisas. Segundo a definição tradicional, a Teresa:', o:['não tem conhecimento: a crença é verdadeira, mas mal justificada','tem conhecimento: a crença é verdadeira','não tem conhecimento: a crença é falsa','não tem conhecimento: falta a crença'], e:'A Terra é mesmo maior do que a Lua, mas a razão da Teresa não justifica nada. Sem boa justificação não há conhecimento.' },
+    { id:'m1-33', m:1, t:'mc', destaque:true, q:'O Carlos leu numa revista médica que o álcool em excesso provoca cirroses, mas pensou que era falso. Segundo a definição tradicional, o Carlos:', o:['não tem conhecimento: falta a crença','tem conhecimento: leu numa revista médica','não tem conhecimento: a afirmação é falsa','tem conhecimento: a afirmação é verdadeira'], e:'É verdade e havia justificação, mas o Carlos não acredita. Não se sabe aquilo em que não se acredita.' },
+    { id:'m1-34', m:1, t:'vf', destaque:true, q:'A Teresa sabe que a Terra é maior do que a Lua, porque a sua crença é verdadeira.', a:false, e:'É uma crença verdadeira, mas mal justificada (o tamanho dos nomes não diz nada sobre o tamanho das coisas).' },
+    { id:'m1-35', m:1, t:'vf', destaque:true, q:'O Carlos não tem conhecimento de que o álcool em excesso provoca cirroses, porque não acredita no que leu.', a:true, e:'Falta a condição da crença.' },
 
     /* ---------- Mundo 2 · Tipos de conhecimento (sai no teste) ---------- */
     { id:'m2-01', m:2, t:'mc', q:'“Sei andar de bicicleta” é conhecimento:', o:['prático','proposicional','por contacto','a priori'], e:'É saber-fazer: uma competência. Conhecimento prático.' },
@@ -365,6 +559,21 @@ const CONTEUDO = {
     { id:'m2-20', m:2, t:'completa', q:'“Sei que…” indica conhecimento ___.', o:['proposicional','prático','por contacto','a priori'], e:'Truque: “sei que…” → proposicional.' },
     { id:'m2-21', m:2, t:'completa', q:'“Sei fazer…” indica conhecimento ___.', o:['prático','proposicional','por contacto','a posteriori'], e:'Truque: “sei fazer…” → prático.' },
     { id:'m2-22', m:2, t:'completa', q:'O conhecimento por contacto também se chama conhecimento por ___.', o:['familiaridade','dedução','proposição','competência'], e:'Por contacto = familiaridade.' },
+    // Exercício 1 do manual (sai no teste): a Julieta
+    { id:'m2-23', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta sabe preparar batidos de frutas.”', o:['prático','proposicional','por contacto','a priori'], e:'Atenção: “sabe” nem sempre é proposicional. “Sabe preparar” é saber-fazer, uma competência.' },
+    { id:'m2-24', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta conhece de trás para a frente o sítio onde o rio Mondego nasce.”', o:['por contacto','proposicional','prático','a priori'], e:'Conhece diretamente um lugar: conhecimento por contacto.' },
+    { id:'m2-25', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta sabe qual é a diferença entre um romance e uma novela.”', o:['proposicional','prático','por contacto','a posteriori'], e:'Sabe que a diferença é esta e aquela: é saber-que, conhecimento proposicional.' },
+    { id:'m2-26', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta consegue fingir na perfeição que está a dormir.”', o:['prático','proposicional','por contacto','a priori'], e:'Fingir que dorme é uma competência: saber-fazer.' },
+    { id:'m2-27', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “O filho da Julieta já sabe comer de faca e garfo.”', o:['prático','proposicional','por contacto','a posteriori'], e:'Atenção: “sabe comer” é saber-fazer, não proposicional.' },
+    { id:'m2-28', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta sabe o que é um neutrino.”', o:['proposicional','prático','por contacto','a priori'], e:'Sabe que um neutrino é uma certa partícula: saber-que, conhecimento proposicional.' },
+    { id:'m2-29', m:2, t:'mc', destaque:true, q:'Indica o tipo de conhecimento: “A Julieta conhece o primeiro namorado da sua mãe.”', o:['por contacto','proposicional','prático','a posteriori'], e:'Conhece diretamente uma pessoa: conhecimento por contacto.' },
+    { id:'m2-30', m:2, t:'mc', destaque:true, q:'Em “A Julieta sabe preparar batidos de frutas”, o verbo “saber” indica:', o:['saber-fazer (conhecimento prático), apesar de se usar “sabe”','conhecimento proposicional, porque se usa “sabe”','conhecimento por contacto','conhecimento a priori'], e:'O que conta não é o verbo, mas o que se sabe: preparar batidos é uma competência.' },
+    { id:'m2-31', m:2, t:'vf', destaque:true, q:'“A Julieta sabe preparar batidos de frutas” é conhecimento proposicional, porque usa o verbo saber.', a:false, e:'É conhecimento prático: “sabe preparar” é saber-fazer.' },
+    { id:'m2-32', m:2, t:'vf', destaque:true, q:'“A Julieta sabe o que é um neutrino” é conhecimento proposicional.', a:true, e:'É saber-que: sabe que um neutrino é uma certa partícula.' },
+    { id:'m2-33', m:2, t:'vf', destaque:true, q:'“A Julieta conhece o primeiro namorado da sua mãe” é conhecimento por contacto.', a:true, e:'Conhece diretamente uma pessoa.' },
+    { id:'m2-34', m:2, t:'vf', destaque:true, q:'“O filho da Julieta já sabe comer de faca e garfo” é conhecimento por contacto.', a:false, e:'É conhecimento prático: saber comer de faca e garfo é uma competência.' },
+    { id:'m2-35', m:2, t:'vf', destaque:true, q:'Sempre que uma frase usa o verbo “saber”, o conhecimento é proposicional.', a:false, e:'“Sabe preparar”, “sabe comer” são saber-fazer (prático). Só “sabe que…” é proposicional.' },
+    { id:'m2-36', m:2, t:'vf', destaque:true, q:'“A Julieta conhece de trás para a frente o sítio onde o rio Mondego nasce” é conhecimento por contacto.', a:true, e:'Conhece diretamente um lugar.' },
 
     /* ---------- Mundo 3 · Possibilidade e ceticismo (sai no teste) ---------- */
     { id:'m3-01', m:3, t:'mc', q:'Em filosofia, um cético é quem:', o:['põe em causa a possibilidade do conhecimento','tem dúvidas sobre se o sushi é bom','acredita em tudo','defende que há crenças básicas'], e:'O cético filosófico desafia a nossa pretensão de saber: põe em causa a possibilidade do conhecimento.' },
@@ -403,6 +612,15 @@ const CONTEUDO = {
     { id:'m3-34', m:3, t:'vf', destaque:true, q:'A existência de crenças básicas autoevidentes é um argumento cético.', a:false, e:'É a resposta do fundacionalismo contra o ceticismo.' },
     { id:'m3-35', m:3, t:'vf', destaque:true, q:'Segundo o desafio cético, na sua forma mais radical, devemos suspender o juízo sobre todas as coisas.', a:true, e:'Como nenhum conhecimento seria possível, o cético radical suspende o juízo sobre tudo.' },
     { id:'m3-36', m:3, t:'vf', destaque:true, q:'O exemplo do pau que parece partido dentro de água ilustra o argumento da diversidade de opiniões.', a:false, e:'Ilustra o argumento da ilusão dos sentidos.' },
+    // Exercício 9 do manual (sai no teste) e treino extra
+    { id:'m3-37', m:3, t:'vf', destaque:true, q:'O ceticismo radical é contraditório porque afirma saber que nada se pode saber.', a:true, e:'Ao apresentar a sua tese como verdadeira, o cético pretende saber pelo menos uma coisa: que nada se pode saber.' },
+    { id:'m3-38', m:3, t:'vf', destaque:true, q:'Se a tese do cético radical fosse verdadeira, o próprio cético poderia conhecê-la.', a:false, e:'Se nada se pudesse conhecer, o cético também não poderia conhecer a sua tese. Por isso ela refuta-se a si mesma.' },
+    { id:'m3-39', m:3, t:'vf', destaque:true, q:'Diz-se que o ceticismo radical é autorrefutante: refuta-se a si mesmo.', a:true, e:'A sua tese, se fosse verdadeira, não poderia ser conhecida, nem sequer pelo cético.' },
+    { id:'m3-40', m:3, t:'mc', destaque:true, q:'Muitas pessoas pensam que o ceticismo radical é contraditório. Porquê?', o:['Porque, ao afirmar que nada se pode conhecer, apresenta essa tese como verdadeira: pretende saber pelo menos uma coisa.','Porque os sentidos às vezes nos enganam.','Porque só põe em causa alguns domínios do conhecimento.','Porque aceita que há crenças básicas autoevidentes.'], e:'O cético radical pretende saber que nada se pode saber. Se isso fosse verdade, nem ele o poderia saber: o ceticismo radical é autorrefutante.' },
+    { id:'m3-41', m:3, t:'mc', destaque:true, q:'“Na religião não existe conhecimento, mas sim opiniões.” Para defender isto é preciso ser:', o:['apenas cético moderado, porque só põe em causa um domínio (a religião)','cético radical, porque põe em causa todo o conhecimento','fundacionalista','racionalista'], e:'Basta ser cético moderado: a dúvida limita-se ao domínio da religião.' },
+    { id:'m3-42', m:3, t:'mc', destaque:true, q:'Quais são dois exemplos de enganos sensoriais?', o:['Um pau que parece partido dentro de água e uma miragem no deserto.','A diversidade de opiniões e a regressão infinita.','“2 + 2 = 4” e “Nenhum solteiro é casado”.','O sabor da manga e o cheiro do café.'], e:'Outro exemplo: a estrada parece molhada num dia de calor.' },
+    { id:'m3-43', m:3, t:'vf', destaque:true, q:'A estrada parecer molhada num dia de calor é um exemplo de engano dos sentidos.', a:true, e:'Tal como a miragem no deserto ou o pau que parece partido dentro de água.' },
+    { id:'m3-44', m:3, t:'vf', destaque:true, q:'Para defender que na religião não há conhecimento, só opiniões, é preciso ser cético radical.', a:false, e:'Basta ser cético moderado, porque só põe em causa o conhecimento num domínio.' },
 
     /* ---------- Mundo 4 · Regressão infinita e fundacionalismo ---------- */
     { id:'m4-01', m:4, t:'mc', q:'O argumento da regressão infinita conclui que:', o:['não há conhecimento','há crenças básicas','os sentidos enganam','o conhecimento vem da razão'], e:'Conclusão: “Logo, não há conhecimento.”' },
@@ -428,6 +646,7 @@ const CONTEUDO = {
     { id:'m4-21', m:4, t:'vf', q:'O argumento cético da regressão infinita é inválido.', a:false, e:'É válido. Por isso, quem recusa a conclusão tem de rejeitar uma premissa.' },
     { id:'m4-22', m:4, t:'completa', q:'O fundacionalismo rejeita a premissa ___.', o:['1','2','3','4'], e:'Premissa 1: nem todas as crenças se justificam com base noutras.' },
     { id:'m4-23', m:4, t:'completa', q:'As crenças básicas são ___: justificam-se a si mesmas.', o:['autoevidentes','inferidas','falsas','duvidosas'], e:'Crenças básicas = autoevidentes.' },
+    { id:'m4-25', m:4, t:'mc', destaque:true, q:'“A justificação da crença A é a crença B, a de B é a crença C, e assim sucessivamente.” Que dificuldade levanta esta situação?', o:['A regressão infinita da justificação: a cadeia nunca termina, logo nenhuma crença fica justificada e não há conhecimento.','A ilusão dos sentidos.','A diversidade de opiniões.','A autorrefutação do ceticismo.'], e:'Sem justificação não há conhecimento, porque a justificação é condição necessária.' },
     { id:'m4-24', m:4, t:'completa', q:'A conclusão do argumento da regressão infinita é: “Logo, não há ___.”', o:['conhecimento','crenças','premissas','experiência'], e:'Conclusão: “Logo, não há conhecimento.”' },
 
     /* ---------- Mundo 5 · Origem do conhecimento (sai no teste) ---------- */
@@ -455,7 +674,11 @@ const CONTEUDO = {
     { id:'m5-22', m:5, t:'vf', q:'Para os empiristas, as crenças básicas são conhecidas a priori.', a:false, e:'Para os empiristas são a posteriori (vêm da experiência). Para os racionalistas são a priori.' },
     { id:'m5-23', m:5, t:'completa', q:'O problema da origem pergunta se o conhecimento provém da razão ou da ___.', o:['experiência','autoridade','fé','tradição'], e:'Razão ou experiência: é esta a pergunta do problema da origem.' },
     { id:'m5-24', m:5, t:'completa', q:'Para os racionalistas, as crenças básicas são conhecidas ___.', o:['a priori','a posteriori','por contacto','por palpite'], e:'Racionalismo → a priori.' },
-    { id:'m5-25', m:5, t:'completa', q:'A matemática, a lógica e a geometria são áreas de conhecimento ___.', o:['a priori','a posteriori','prático','por contacto'], e:'Sabem-se só pelo pensamento.' }
+    { id:'m5-25', m:5, t:'completa', q:'A matemática, a lógica e a geometria são áreas de conhecimento ___.', o:['a priori','a posteriori','prático','por contacto'], e:'Sabem-se só pelo pensamento.' },
+    { id:'m5-26', m:5, t:'mc', destaque:true, q:'“A Maria tem o cabelo castanho” é conhecida:', o:['a posteriori: só se sabe olhando para ela','a priori: basta compreender os conceitos','a priori: é uma verdade da lógica','por contacto, e por isso a priori'], e:'O contrário podia ser verdade sem contradição: a Maria podia ser loura.' },
+    { id:'m5-27', m:5, t:'mc', destaque:true, q:'“As esferas não têm arestas” é conhecida:', o:['a priori: basta compreender o conceito de esfera','a posteriori: é preciso observar esferas','a posteriori: é uma verdade da física','por contacto'], e:'Uma esfera com arestas seria contraditória.' },
+    { id:'m5-28', m:5, t:'vf', destaque:true, q:'“A Maria tem o cabelo castanho” é conhecida a priori.', a:false, e:'É a posteriori: só se sabe olhando para ela.' },
+    { id:'m5-29', m:5, t:'vf', destaque:true, q:'“As esferas não têm arestas” é conhecida a priori.', a:true, e:'Basta compreender o conceito de esfera.' }
   ],
 
   /* Minijogo "Classifica rápido". c = categoria certa; e = explicação opcional */
@@ -481,7 +704,39 @@ const CONTEUDO = {
         {x:'O céu é azul.', c:'pos'},
         {x:'A forma do planeta Terra é aproximadamente esférica.', c:'pos', e:'É a posteriori: foi preciso observar a Terra. Só a definição de esfera é a priori.'},
         {x:'Um triângulo tem três lados.', c:'pri'},
-        {x:'Lisboa fica junto ao rio Tejo.', c:'pos'}
+        {x:'Lisboa fica junto ao rio Tejo.', c:'pos'},
+        {x:'As esferas não têm arestas.', c:'pri', e:'É a priori: basta compreender o conceito de esfera.'},
+        {x:'A Maria tem o cabelo castanho.', c:'pos', e:'É a posteriori: só se sabe olhando para ela.'},
+        {x:'O todo é maior do que as partes.', c:'pri'},
+        {x:'O álcool em excesso provoca cirroses.', c:'pos', e:'É a posteriori: foi preciso investigar (medicina).'}
+      ]
+    },
+    /* Grupo III da Simulação do Teste: tabela a priori / a posteriori (escolhe 4 de cada) */
+    tabela: {
+      mundo:5, titulo:'Tabela a priori / a posteriori', instrucao:'Liga cada frase à coluna certa.',
+      cats:[ {k:'pri', l:'A priori', dica:'sabe-se só pelo pensamento'}, {k:'pos', l:'A posteriori', dica:'só se sabe pela experiência'} ],
+      porque:{ pri:'É a priori: pode saber-se só pelo pensamento; negar a frase seria contraditório.', pos:'É a posteriori: só se sabe olhando para o mundo; o contrário podia ser verdade sem contradição.' },
+      itens:[
+        {x:'As esferas não têm arestas.', c:'pri', e:'É a priori: basta compreender o conceito de esfera.'},
+        {x:'Nenhum solteiro é casado.', c:'pri'},
+        {x:'Três mais dois são cinco.', c:'pri'},
+        {x:'Nenhum irmão é filho único.', c:'pri'},
+        {x:'Um quadrado tem quatro lados iguais.', c:'pri'},
+        {x:'Uma camisola inteiramente verde não é vermelha.', c:'pri'},
+        {x:'Numa esfera, todos os pontos da superfície estão à mesma distância do centro.', c:'pri', e:'É a priori: é a definição de esfera (geometria).'},
+        {x:'Se foi o Francisco ou o Henrique e não foi o Francisco, então foi o Henrique.', c:'pri', e:'É a priori (lógica): sabe-se só pelo pensamento.'},
+        {x:'O todo é maior do que as partes.', c:'pri'},
+        {x:'Um triângulo tem três lados.', c:'pri'},
+        {x:'A Maria tem o cabelo castanho.', c:'pos', e:'É a posteriori: só se sabe olhando para ela.'},
+        {x:'Os ursos polares são brancos.', c:'pos', e:'É a posteriori: os ursos podiam ser castanhos sem contradição.'},
+        {x:'A água é H2O.', c:'pos', e:'É a posteriori: foi preciso investigar a água (química).'},
+        {x:'O céu é azul.', c:'pos'},
+        {x:'Alguma relva é verde.', c:'pos'},
+        {x:'A Terra é aproximadamente esférica.', c:'pos', e:'É a posteriori: foi preciso observar a Terra. Só a definição de esfera é a priori.'},
+        {x:'Alguns irmãos são competitivos.', c:'pos'},
+        {x:'O álcool em excesso provoca cirroses.', c:'pos', e:'É a posteriori: foi preciso investigar (medicina).'},
+        {x:'Todos os sólidos ocupam espaço.', c:'pos'},
+        {x:'A maçã é o fruto da macieira.', c:'pos'}
       ]
     },
     tipos: {
@@ -510,7 +765,15 @@ const CONTEUDO = {
         {x:'Conheço o som do mar.', c:'c'},
         {x:'Sei que o Tejo desagua em Lisboa.', c:'p'},
         {x:'Sei fazer o pino.', c:'pr'},
-        {x:'Conheço a minha avó.', c:'c'}
+        {x:'Conheço a minha avó.', c:'c'},
+        // Exercício 1 do manual (sai no teste)
+        {x:'A Julieta sabe preparar batidos de frutas.', c:'pr', e:'Atenção: “sabe” nem sempre é proposicional. “Sabe preparar” é saber-fazer.'},
+        {x:'A Julieta conhece de trás para a frente o sítio onde o rio Mondego nasce.', c:'c', e:'Conhece diretamente um lugar: por contacto.'},
+        {x:'A Julieta sabe qual é a diferença entre um romance e uma novela.', c:'p', e:'Sabe que a diferença é esta: saber-que, proposicional.'},
+        {x:'A Julieta consegue fingir na perfeição que está a dormir.', c:'pr', e:'Fingir que dorme é uma competência: saber-fazer.'},
+        {x:'O filho da Julieta já sabe comer de faca e garfo.', c:'pr', e:'Atenção: “sabe comer” é saber-fazer, não proposicional.'},
+        {x:'A Julieta sabe o que é um neutrino.', c:'p', e:'Sabe que um neutrino é uma certa partícula: proposicional.'},
+        {x:'A Julieta conhece o primeiro namorado da sua mãe.', c:'c', e:'Conhece diretamente uma pessoa: por contacto.'}
       ]
     },
     ceticos: {
@@ -576,36 +839,71 @@ const CONTEUDO = {
 
   /* Cartões de estudo. aberta:true = pergunta de resposta aberta (estilo teste) */
   cartoes: [
-    { id:'c01', aberta:true, frente:'Formula o problema da possibilidade do conhecimento.', verso:'O problema da possibilidade do conhecimento consiste em saber se é possível conhecermos alguma coisa, isto é, se temos crenças justificadas. Formula-se assim: “Será possível conhecer alguma coisa?” ou “Será que temos crenças justificadas?”', exemplo:'O cético radical responde que não: nenhum conhecimento é possível.' },
-    { id:'c02', aberta:true, frente:'Identifica o problema da origem do conhecimento.', verso:'O problema da origem do conhecimento consiste em saber qual é a fonte do nosso conhecimento: se é a razão, independentemente da experiência, ou a experiência sensível.', exemplo:'Racionalistas: a fonte principal é a razão. Empiristas: é a experiência.' },
-    { id:'c03', aberta:true, frente:'Distingue ceticismo radical de ceticismo moderado, com um exemplo.', verso:'O ceticismo radical põe em causa toda e qualquer espécie de conhecimento. O ceticismo moderado limita-se a certos tipos ou domínios de conhecimento.', exemplo:'Radical: Pirro de Élis, que defende suspender o juízo sobre tudo. Moderado: quem diz que não podemos saber se Deus existe, mas aceita a ciência.' },
-    { id:'c04', aberta:true, frente:'Apresenta o argumento cético da regressão infinita.', verso:'1. As nossas crenças justificam-se com base noutras crenças.\n2. Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.\n3. Se sempre que tentamos justificar uma crença caímos numa regressão infinita, então nunca temos crenças justificadas.\n4. Se nunca temos crenças justificadas, não há conhecimento.\n5. Logo, não há conhecimento.', exemplo:'Como a criança dos “porquês”: cada justificação precisa de outra justificação, sem fim.' },
-    { id:'c05', aberta:true, frente:'Explica como o fundacionalismo responde ao ceticismo.', verso:'O argumento cético é válido, por isso, para recusar a conclusão, é preciso rejeitar uma premissa. O fundacionalismo rejeita a premissa 1: nem todas as crenças se justificam com base noutras. Há crenças básicas, autoevidentes, que se justificam a si mesmas. A cadeia de justificação termina nelas, logo não há regressão infinita.', exemplo:'Tal como as fundações sustentam um edifício sem serem sustentadas por ele.' },
-    { id:'c06', aberta:true, frente:'Distingue crenças básicas de crenças não-básicas.', verso:'Crenças básicas (fundacionais): são autoevidentes, justificam-se a si mesmas e não precisam de outras crenças. Crenças não-básicas: não são autoevidentes e são inferidas a partir de outras crenças.', exemplo:'Básicas = alicerces do edifício; não-básicas = os andares construídos por cima.' },
-    { id:'c07', aberta:true, frente:'Apresenta uma objeção ao ceticismo.', verso:'O ceticismo radical autorrefuta-se: ao afirmar que nada se pode conhecer, o cético afirma saber pelo menos uma coisa. Além disso, se nenhuma crença está justificada, as premissas do argumento cético também não estão.', exemplo:'“Sei que nada se sabe” contradiz-se a si mesma.' },
-    { id:'c08', aberta:true, frente:'Distingue conhecimento a priori de a posteriori, com exemplos.', verso:'A priori: pode ser conhecido independentemente da experiência, só pelo pensamento (matemática, lógica, geometria). A posteriori: só pode ser conhecido através da experiência, olhando para o mundo (física, química, biologia, história, geografia).', exemplo:'A priori: “Nenhum solteiro é casado”. A posteriori: “Os ursos polares são brancos”.' },
-    { id:'c09', aberta:false, frente:'Epistemologia', verso:'Área da filosofia que estuda o conhecimento (teoria do conhecimento). Do grego epistéme (conhecimento) + logos (estudo).', exemplo:'Problemas: definição, possibilidade e origem do conhecimento.' },
-    { id:'c10', aberta:false, frente:'Os três problemas da epistemologia', verso:'Definição: “O que é conhecer?”\nPossibilidade: “Será possível conhecer alguma coisa?”\nOrigem: “O conhecimento provém da razão ou da experiência?”', exemplo:'Saem no teste: possibilidade e origem.' },
-    { id:'c11', aberta:false, frente:'Definição tradicional de conhecimento', verso:'Crença verdadeira justificada (Platão, Teeteto). S sabe que P se e só se: S acredita que P; P é verdadeira; S tem justificação para acreditar que P.', exemplo:'O João acerta na chuva por palpite: crença verdadeira, não justificada → não sabe.' },
-    { id:'c12', aberta:false, frente:'Condição necessária vs. suficiente', verso:'Necessária: sem ela não há conhecimento.\nSuficiente: se estiver presente, há conhecimento.', exemplo:'Na definição tradicional, cada condição é necessária e as três juntas seriam suficientes.' },
-    { id:'c13', aberta:false, frente:'Conhecimento proposicional', verso:'Saber-que: saber que uma proposição é verdadeira. Também se chama conhecimento factual. É o que a epistemologia mais estuda.', exemplo:'“Sei que Lisboa é a capital de Portugal.”' },
-    { id:'c14', aberta:false, frente:'Conhecimento prático', verso:'Saber-fazer: ter uma competência.', exemplo:'“Sei andar de bicicleta”, “Sei nadar”, “Sei tocar guitarra”.' },
-    { id:'c15', aberta:false, frente:'Conhecimento por contacto', verso:'Familiaridade: conhecer diretamente pessoas, lugares ou coisas.', exemplo:'“Conheço o Porto”, “Conheço a Maria”, “Conheço o sabor da manga”.' },
-    { id:'c16', aberta:false, frente:'Proposição', verso:'Pensamento expresso por uma frase declarativa, que pode ser verdadeiro ou falso. Atenção: escreve-se “proposicional”, não “proporcional”.', exemplo:'“O céu é azul” exprime uma proposição; “Fecha a porta!” não.' },
-    { id:'c17', aberta:false, frente:'Cético no uso comum vs. em filosofia', verso:'No uso comum, cético é quem duvida. Em filosofia, o cético põe em causa a possibilidade do conhecimento.', exemplo:'Para ser cético quanto ao sushi, teria de acreditar que não é de todo possível saber se o sushi é saboroso.' },
-    { id:'c18', aberta:false, frente:'Pirro de Élis', verso:'C. 365–270 a.C. O mais antigo e radical cético. Como nunca podemos saber como as coisas realmente são, devemos suspender o juízo sobre tudo.', exemplo:'Assim libertamo-nos dos desejos e alcançamos a paz de espírito, para sermos felizes.' },
-    { id:'c19', aberta:false, frente:'Argumentos céticos', verso:'Ilusão dos sentidos: os sentidos enganam-nos, logo não podemos confiar neles.\nDiversidade de opiniões: as pessoas discordam sobre tudo; não há forma segura de saber quem tem razão.\nRegressão infinita da justificação: o principal.', exemplo:'Um pau dentro de água parece torto: ilusão dos sentidos.' },
-    { id:'c20', aberta:false, frente:'Validade do argumento da regressão', verso:'O argumento é válido: se as premissas forem verdadeiras, a conclusão também é. Quem não aceita a conclusão tem de rejeitar pelo menos uma premissa.', exemplo:'A premissa 4 liga-se à definição tradicional: sem justificação não há conhecimento.' },
-    { id:'c21', aberta:false, frente:'Racionalismo', verso:'A principal fonte do conhecimento é a razão. As crenças básicas são conhecidas a priori. É possível conhecimento a priori sobre o mundo.', exemplo:'Debate: pode haver conhecimento a priori com informação sobre o mundo? Racionalistas: sim.' },
-    { id:'c22', aberta:false, frente:'Empirismo', verso:'A principal fonte do conhecimento é a experiência sensível (do grego empeiria). As crenças básicas são conhecidas a posteriori. O a priori só diz respeito a relações entre ideias.', exemplo:'Debate: pode haver conhecimento a priori com informação sobre o mundo? Empiristas: não.' },
-    { id:'c23', aberta:false, frente:'Truque para a priori / a posteriori', verso:'Pergunta: “O contrário podia ser verdade sem contradição?”\nSe sim → a posteriori. Se não → a priori.', exemplo:'Os ursos podiam ser castanhos → a posteriori. Um solteiro casado é contraditório → a priori.' },
-    { id:'c24', aberta:false, frente:'Armadilhas do a priori', verso:'Saber 2 + 2 = 4 numa calculadora continua a ser a priori, porque podia saber-se só pelo pensamento. Precisamos de experiência para aprender os conceitos, mas não para saber que a frase é verdadeira.', exemplo:'A definição de esfera é a priori; “A Terra é aproximadamente esférica” é a posteriori.' },
-    { id:'c25', aberta:true, frente:'A Manuela pergunta quanto dá 356 euros a dividir por 4. O Eurico usa a calculadora e diz que ela “sabe” que dá 89 euros. A calculadora sabe?', verso:'Não. Segundo a definição tradicional, saber implica ter uma crença, que é um estado mental. A calculadora não tem estados mentais nem crenças; dá o resultado certo apenas porque foi programada. Logo, não tem conhecimento.', exemplo:'A resposta é verdadeira, mas falta a condição da crença.' },
-    { id:'c26', aberta:true, frente:'O que é o desafio cético?', verso:'É a posição que, na forma mais radical, considera que nenhum conhecimento é possível e que, por isso, devemos suspender o juízo sobre todas as coisas.', exemplo:'Pirro de Élis: suspender o juízo sobre tudo para alcançar a tranquilidade.' },
-    { id:'c27', aberta:true, frente:'Apresenta os três argumentos dos céticos radicais.', verso:'1. Ilusão dos sentidos: os sentidos às vezes enganam-nos, logo não podemos confiar neles como fonte de conhecimento.\n2. Diversidade de opiniões: as pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão.\n3. Regressão infinita da justificação: cada crença precisa de outra para a justificar, sem fim, logo nenhuma crença fica justificada e não há conhecimento.', exemplo:'Um pau parece partido dentro de água: ilusão dos sentidos.' },
-    { id:'c28', aberta:false, frente:'Relação entre crença e conhecimento', verso:'Todo o conhecimento é uma crença, mas nem todas as crenças são conhecimento.', exemplo:'“Acredito em extraterrestres” é uma crença, mas não é saber que existem.' },
-    { id:'c29', aberta:true, frente:'Explica porque é que cada condição da definição tradicional é necessária, mas nenhuma é suficiente sozinha.', verso:'Crença: é contraditório dizer “sei que o mar tem ondas, mas não acredito nisso”. Mas a crença não basta: “acredito em extraterrestres” não é saber que existem.\nVerdade: só se sabe o que é verdadeiro (o conhecimento é factivo).\nJustificação: não basta, porque podemos ter boas razões para acreditar em algo falso.\nCrença verdadeira: não basta, porque pode ser verdadeira por acaso (um palpite); o conhecimento tem de estar apoiado em boas razões.', exemplo:'Na Antiguidade havia razões para acreditar que a Terra era plana, e não é.' }
+    { id:'c01', m:3, aberta:true, frente:'Formula o problema da possibilidade do conhecimento.', verso:'O problema da possibilidade do conhecimento consiste em saber se é possível conhecermos alguma coisa, isto é, se temos crenças justificadas. Formula-se assim: “Será possível conhecer alguma coisa?” ou “Será que temos crenças justificadas?”', exemplo:'O cético radical responde que não: nenhum conhecimento é possível.' },
+    { id:'c02', m:5, aberta:true, frente:'Identifica o problema da origem do conhecimento.', verso:'O problema da origem do conhecimento consiste em saber qual é a fonte do nosso conhecimento: se é a razão, independentemente da experiência, ou a experiência sensível.', exemplo:'Racionalistas: a fonte principal é a razão. Empiristas: é a experiência.' },
+    { id:'c03', m:3, aberta:true, frente:'Distingue ceticismo radical de ceticismo moderado, com um exemplo.', verso:'O ceticismo radical põe em causa toda e qualquer espécie de conhecimento. O ceticismo moderado limita-se a certos tipos ou domínios de conhecimento.', exemplo:'Radical: Pirro de Élis, que defende suspender o juízo sobre tudo. Moderado: quem diz que não podemos saber se Deus existe, mas aceita a ciência.' },
+    { id:'c04', m:4, aberta:true, frente:'Apresenta o argumento cético da regressão infinita.', verso:'1. As nossas crenças justificam-se com base noutras crenças.\n2. Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.\n3. Se sempre que tentamos justificar uma crença caímos numa regressão infinita, então nunca temos crenças justificadas.\n4. Se nunca temos crenças justificadas, não há conhecimento.\n5. Logo, não há conhecimento.', exemplo:'Como a criança dos “porquês”: cada justificação precisa de outra justificação, sem fim.' },
+    { id:'c05', m:4, aberta:true, frente:'Explica como o fundacionalismo responde ao ceticismo.', verso:'O argumento cético é válido, por isso, para recusar a conclusão, é preciso rejeitar uma premissa. O fundacionalismo rejeita a premissa 1: nem todas as crenças se justificam com base noutras. Há crenças básicas, autoevidentes, que se justificam a si mesmas. A cadeia de justificação termina nelas, logo não há regressão infinita.', exemplo:'Tal como as fundações sustentam um edifício sem serem sustentadas por ele.' },
+    { id:'c06', m:4, aberta:true, frente:'Distingue crenças básicas de crenças não-básicas.', verso:'Crenças básicas (fundacionais): são autoevidentes, justificam-se a si mesmas e não precisam de outras crenças. Crenças não-básicas: não são autoevidentes e são inferidas a partir de outras crenças.', exemplo:'Básicas = alicerces do edifício; não-básicas = os andares construídos por cima.' },
+    { id:'c07', m:3, aberta:true, frente:'Apresenta uma objeção ao ceticismo.', verso:'O ceticismo radical autorrefuta-se: ao afirmar que nada se pode conhecer, o cético afirma saber pelo menos uma coisa. Além disso, se nenhuma crença está justificada, as premissas do argumento cético também não estão.', exemplo:'“Sei que nada se sabe” contradiz-se a si mesma.' },
+    { id:'c08', m:5, aberta:true, frente:'Distingue conhecimento a priori de a posteriori, com exemplos.', verso:'A priori: pode ser conhecido independentemente da experiência, só pelo pensamento (matemática, lógica, geometria). A posteriori: só pode ser conhecido através da experiência, olhando para o mundo (física, química, biologia, história, geografia).', exemplo:'A priori: “Nenhum solteiro é casado”. A posteriori: “Os ursos polares são brancos”.' },
+    { id:'c09', m:1, aberta:false, frente:'Epistemologia', verso:'Área da filosofia que estuda o conhecimento (teoria do conhecimento). Do grego epistéme (conhecimento) + logos (estudo).', exemplo:'Problemas: definição, possibilidade e origem do conhecimento.' },
+    { id:'c10', m:1, aberta:false, frente:'Os três problemas da epistemologia', verso:'Definição: “O que é conhecer?”\nPossibilidade: “Será possível conhecer alguma coisa?”\nOrigem: “O conhecimento provém da razão ou da experiência?”', exemplo:'Saem no teste: possibilidade e origem.' },
+    { id:'c11', m:1, aberta:false, frente:'Definição tradicional de conhecimento', verso:'Crença verdadeira justificada (Platão, Teeteto). S sabe que P se e só se: S acredita que P; P é verdadeira; S tem justificação para acreditar que P.', exemplo:'O João acerta na chuva por palpite: crença verdadeira, não justificada → não sabe.' },
+    { id:'c12', m:1, aberta:false, frente:'Condição necessária vs. suficiente', verso:'Necessária: sem ela não há conhecimento.\nSuficiente: se estiver presente, há conhecimento.', exemplo:'Na definição tradicional, cada condição é necessária e as três juntas seriam suficientes.' },
+    { id:'c13', m:2, aberta:false, frente:'Conhecimento proposicional', verso:'Saber-que: saber que uma proposição é verdadeira. Também se chama conhecimento factual. É o que a epistemologia mais estuda.', exemplo:'“Sei que Lisboa é a capital de Portugal.”' },
+    { id:'c14', m:2, aberta:false, frente:'Conhecimento prático', verso:'Saber-fazer: ter uma competência.', exemplo:'“Sei andar de bicicleta”, “Sei nadar”, “Sei tocar guitarra”.' },
+    { id:'c15', m:2, aberta:false, frente:'Conhecimento por contacto', verso:'Familiaridade: conhecer diretamente pessoas, lugares ou coisas.', exemplo:'“Conheço o Porto”, “Conheço a Maria”, “Conheço o sabor da manga”.' },
+    { id:'c16', m:2, aberta:false, frente:'Proposição', verso:'Pensamento expresso por uma frase declarativa, que pode ser verdadeiro ou falso. Atenção: escreve-se “proposicional”, não “proporcional”.', exemplo:'“O céu é azul” exprime uma proposição; “Fecha a porta!” não.' },
+    { id:'c17', m:3, aberta:false, frente:'Cético no uso comum vs. em filosofia', verso:'No uso comum, cético é quem duvida. Em filosofia, o cético põe em causa a possibilidade do conhecimento.', exemplo:'Para ser cético quanto ao sushi, teria de acreditar que não é de todo possível saber se o sushi é saboroso.' },
+    { id:'c18', m:3, aberta:false, frente:'Pirro de Élis', verso:'C. 365–270 a.C. O mais antigo e radical cético. Como nunca podemos saber como as coisas realmente são, devemos suspender o juízo sobre tudo.', exemplo:'Assim libertamo-nos dos desejos e alcançamos a paz de espírito, para sermos felizes.' },
+    { id:'c19', m:3, aberta:false, frente:'Argumentos céticos', verso:'Ilusão dos sentidos: os sentidos enganam-nos, logo não podemos confiar neles.\nDiversidade de opiniões: as pessoas discordam sobre tudo; não há forma segura de saber quem tem razão.\nRegressão infinita da justificação: o principal.', exemplo:'Um pau dentro de água parece torto: ilusão dos sentidos.' },
+    { id:'c20', m:4, aberta:false, frente:'Validade do argumento da regressão', verso:'O argumento é válido: se as premissas forem verdadeiras, a conclusão também é. Quem não aceita a conclusão tem de rejeitar pelo menos uma premissa.', exemplo:'A premissa 4 liga-se à definição tradicional: sem justificação não há conhecimento.' },
+    { id:'c21', m:5, aberta:false, frente:'Racionalismo', verso:'A principal fonte do conhecimento é a razão. As crenças básicas são conhecidas a priori. É possível conhecimento a priori sobre o mundo.', exemplo:'Debate: pode haver conhecimento a priori com informação sobre o mundo? Racionalistas: sim.' },
+    { id:'c22', m:5, aberta:false, frente:'Empirismo', verso:'A principal fonte do conhecimento é a experiência sensível (do grego empeiria). As crenças básicas são conhecidas a posteriori. O a priori só diz respeito a relações entre ideias.', exemplo:'Debate: pode haver conhecimento a priori com informação sobre o mundo? Empiristas: não.' },
+    { id:'c23', m:5, aberta:false, frente:'Truque para a priori / a posteriori', verso:'Pergunta: “O contrário podia ser verdade sem contradição?”\nSe sim → a posteriori. Se não → a priori.', exemplo:'Os ursos podiam ser castanhos → a posteriori. Um solteiro casado é contraditório → a priori.' },
+    { id:'c24', m:5, aberta:false, frente:'Armadilhas do a priori', verso:'Saber 2 + 2 = 4 numa calculadora continua a ser a priori, porque podia saber-se só pelo pensamento. Precisamos de experiência para aprender os conceitos, mas não para saber que a frase é verdadeira.', exemplo:'A definição de esfera é a priori; “A Terra é aproximadamente esférica” é a posteriori.' },
+    { id:'c25', m:1, aberta:true, frente:'A Manuela pergunta quanto dá 356 euros a dividir por 4. O Eurico usa a calculadora e diz que ela “sabe” que dá 89 euros. A calculadora sabe?', verso:'Não. Segundo a definição tradicional, saber implica ter uma crença, que é um estado mental. A calculadora não tem estados mentais nem crenças; dá o resultado certo apenas porque foi programada. Logo, não tem conhecimento.', exemplo:'A resposta é verdadeira, mas falta a condição da crença.' },
+    { id:'c26', m:3, aberta:true, frente:'O que é o desafio cético?', verso:'É a posição que, na forma mais radical, considera que nenhum conhecimento é possível e que, por isso, devemos suspender o juízo sobre todas as coisas.', exemplo:'Pirro de Élis: suspender o juízo sobre tudo para alcançar a tranquilidade.' },
+    { id:'c27', m:3, aberta:true, frente:'Apresenta os três argumentos dos céticos radicais.', verso:'1. Ilusão dos sentidos: os sentidos às vezes enganam-nos, logo não podemos confiar neles como fonte de conhecimento.\n2. Diversidade de opiniões: as pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão.\n3. Regressão infinita da justificação: cada crença precisa de outra para a justificar, sem fim, logo nenhuma crença fica justificada e não há conhecimento.', exemplo:'Um pau parece partido dentro de água: ilusão dos sentidos.' },
+    { id:'c28', m:1, aberta:false, frente:'Relação entre crença e conhecimento', verso:'Todo o conhecimento é uma crença, mas nem todas as crenças são conhecimento.', exemplo:'“Acredito em extraterrestres” é uma crença, mas não é saber que existem.' },
+    { id:'c29', m:1, aberta:true, frente:'Explica porque é que cada condição da definição tradicional é necessária, mas nenhuma é suficiente sozinha.', verso:'Crença: é contraditório dizer “sei que o mar tem ondas, mas não acredito nisso”. Mas a crença não basta: “acredito em extraterrestres” não é saber que existem.\nVerdade: só se sabe o que é verdadeiro (o conhecimento é factivo).\nJustificação: não basta, porque podemos ter boas razões para acreditar em algo falso.\nCrença verdadeira: não basta, porque pode ser verdadeira por acaso (um palpite); o conhecimento tem de estar apoiado em boas razões.', exemplo:'Na Antiguidade havia razões para acreditar que a Terra era plana, e não é.' },
+    { id:'c30', m:3, aberta:true, frente:'Muitas pessoas pensam que o ceticismo radical é contraditório. Porquê? (Exercício 9, sai no teste)', verso:'O cético radical defende que não é possível conhecer nada. Mas, ao afirmar isso, está a apresentar a sua tese como verdadeira, ou seja, pretende saber pelo menos uma coisa: que nada se pode saber. Se a tese fosse verdadeira, o próprio cético não a poderia conhecer. Por isso, o ceticismo radical refuta-se a si mesmo (é autorrefutante).', exemplo:'“Sei que nada se pode saber” contradiz-se.' },
+    { id:'c31', m:2, aberta:true, frente:'Indica o tipo de conhecimento atribuído ao sujeito (Exercício 1, sai no teste):\nA. A Julieta sabe preparar batidos de frutas.\nB. Conhece de trás para a frente o sítio onde o Mondego nasce.\nC. Sabe qual é a diferença entre um romance e uma novela.\nD. Consegue fingir na perfeição que está a dormir.\nE. O filho dela já sabe comer de faca e garfo.\nF. Sabe o que é um neutrino.\nG. Conhece o primeiro namorado da sua mãe.', verso:'A. Prático (saber-fazer)\nB. Por contacto (conhece diretamente um lugar)\nC. Proposicional (sabe que…)\nD. Prático\nE. Prático\nF. Proposicional\nG. Por contacto (conhece diretamente uma pessoa)', exemplo:'Atenção: “sabe” nem sempre é proposicional. “Sabe preparar” e “sabe comer” são saber-fazer. “Conhece” uma pessoa ou um lugar é por contacto.' },
+    { id:'c32', m:1, aberta:true, frente:'Tem ou não conhecimento?\nA. A Luísa acredita, por estudos científicos que leu, que o albinismo tem causa genética.\nB. A Teresa acredita que a Terra é maior do que a Lua porque ouviu dizer que o tamanho dos nomes exprime o tamanho das coisas.\nC. O Carlos leu numa revista médica que o álcool em excesso provoca cirroses, mas pensou que era falso.', verso:'A. Tem conhecimento: crença, verdadeira e justificada.\nB. Não tem: a crença é verdadeira, mas mal justificada.\nC. Não tem: falta a crença.', exemplo:'Verifica sempre as três condições: crença, verdade e justificação.' },
+    { id:'c33', m:3, aberta:true, frente:'“Na religião não existe conhecimento, mas sim opiniões.” É preciso ser cético radical para defender isto?', verso:'Não. Basta ser cético moderado, porque só se põe em causa o conhecimento num domínio (a religião), e não todo o conhecimento.', exemplo:'Radical seria dizer que nenhum conhecimento é possível, em domínio nenhum.' },
+    { id:'c34', m:4, aberta:true, frente:'“A justificação da crença A é a crença B, a de B é a crença C, e assim sucessivamente.” Que dificuldade levanta esta situação?', verso:'Levanta o problema da regressão infinita da justificação: a cadeia de justificações nunca termina, logo nenhuma crença fica justificada. E, como a justificação é condição necessária do conhecimento, não há conhecimento.', exemplo:'O fundacionalismo responde que a cadeia termina em crenças básicas, autoevidentes.' },
+    { id:'c35', m:3, aberta:true, frente:'Dá dois exemplos de enganos sensoriais.', verso:'Um pau parece partido dentro de água; uma miragem no deserto; a estrada parece molhada num dia de calor.', exemplo:'São usados pelo argumento cético da ilusão dos sentidos.' },
+    { id:'c36', m:5, aberta:false, frente:'“A Maria tem o cabelo castanho” e “As esferas não têm arestas”: a priori ou a posteriori?', verso:'“A Maria tem o cabelo castanho” é a posteriori: só se sabe olhando para ela.\n“As esferas não têm arestas” é a priori: basta compreender o conceito de esfera.', exemplo:'Truque: o contrário podia ser verdade sem contradição? A Maria podia ser loura (a posteriori); uma esfera com arestas é contraditória (a priori).' }
   ],
+
+  /* Simulação do Teste: formato do teste real, segundo a professora.
+     Cotações em valores (total 20). Grupo IV é corrigido pela checklist. */
+  simulacao: {
+    grupos:[
+      { nome:'Grupo I',   tipo:'Escolha múltipla',        n:10, cotacao:6 },
+      { nome:'Grupo II',  tipo:'Verdadeiro ou falso',     n:8,  cotacao:4 },
+      { nome:'Grupo III', tipo:'Tabela a priori / a posteriori', n:8, cotacao:4 },
+      { nome:'Grupo IV',  tipo:'Desenvolvimento sobre o ceticismo', n:1, cotacao:6 }
+    ],
+    pontos:[
+      'Formula o problema: “Será possível conhecer alguma coisa?”',
+      'Define ceticismo: pôr em causa a possibilidade do conhecimento (não é só ter dúvidas).',
+      'Distingue radical (todo o conhecimento; Pirro de Élis, suspensão do juízo) de moderado (só certos domínios, ex.: religião).',
+      'Apresenta os argumentos céticos: ilusão dos sentidos (com exemplo), diversidade de opiniões, regressão infinita.',
+      'Expõe o argumento da regressão infinita (5 passos) e diz que é válido.',
+      'Apresenta uma resposta/objeção: fundacionalismo (rejeita a premissa 1; crenças básicas autoevidentes) e/ou autorrefutação do ceticismo radical.',
+      'Usa vocabulário rigoroso e dá pelo menos um exemplo.'
+    ],
+    desenvolvimento:[
+      { id:'a', pergunta:'Explica em que consiste o ceticismo e apresenta os argumentos que os céticos usam para negar a possibilidade do conhecimento.', pontos:[1,2,3,6],
+        modelo:'O ceticismo é a posição que põe em causa a possibilidade do conhecimento. O cético radical, como Pirro de Élis, defende que não podemos conhecer nada e que devemos suspender o juízo; o moderado só duvida em certos domínios, como a religião. Os céticos apresentam três argumentos. Primeiro, a ilusão dos sentidos: os sentidos enganam-nos às vezes (um pau parece partido dentro de água), logo não podemos confiar neles. Segundo, a diversidade de opiniões: as pessoas discordam sobre quase tudo e não há forma segura de decidir quem tem razão. Terceiro, a regressão infinita da justificação: cada crença justifica-se com outra, que precisa de outra, sem fim; assim, nenhuma crença fica justificada e, como a justificação é condição necessária do conhecimento, não há conhecimento.' },
+      { id:'b', pergunta:'Apresenta o argumento cético da regressão infinita e explica uma resposta possível ao ceticismo.', pontos:[0,1,4,5,6],
+        modelo:'O ceticismo põe em causa a possibilidade do conhecimento, respondendo negativamente à pergunta “Será possível conhecer alguma coisa?”. O seu principal argumento é o da regressão infinita da justificação:\n1. As nossas crenças justificam-se com base noutras crenças.\n2. Se as nossas crenças se justificam com base noutras crenças, então sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação.\n3. Se sempre que tentamos justificar uma crença caímos numa regressão infinita da justificação, então nunca temos crenças justificadas.\n4. Se nunca temos crenças justificadas, não há conhecimento.\n5. Logo, não há conhecimento.\nO argumento é válido: se as premissas forem verdadeiras, a conclusão também é. Por isso, quem não aceita a conclusão tem de rejeitar pelo menos uma premissa. O fundacionalismo rejeita a premissa 1: nem todas as crenças se justificam com base noutras, porque há crenças básicas, autoevidentes, que se justificam a si mesmas. Tal como as fundações de um edifício, sustentam as outras crenças sem precisarem de ser sustentadas. A cadeia de justificação termina nelas, logo não há regressão infinita e o conhecimento é possível.' },
+      { id:'c', pergunta:'Distingue ceticismo radical de ceticismo moderado e explica por que razão muitos consideram o ceticismo radical contraditório.', pontos:[0,1,2,5,6],
+        modelo:'O ceticismo é a posição que põe em causa a possibilidade do conhecimento, isto é, responde negativamente à pergunta “Será possível conhecer alguma coisa?”. Não se trata apenas de ter dúvidas, como quem diz que é “cético” quanto ao sushi. O ceticismo radical põe em causa todo e qualquer conhecimento: Pirro de Élis, por exemplo, defendia que devemos suspender o juízo sobre tudo. O ceticismo moderado só põe em causa o conhecimento em certos domínios: quem diz que na religião não há conhecimento, só opiniões, é um cético moderado. Muitos consideram o ceticismo radical contraditório porque, ao afirmar que nada se pode conhecer, o cético apresenta essa tese como verdadeira, ou seja, pretende saber pelo menos uma coisa: que nada se pode saber. Se a tese fosse verdadeira, o próprio cético não a poderia conhecer. Por isso, o ceticismo radical refuta-se a si mesmo (é autorrefutante).' }
+    ]
+  },
 
   /* Teste final: quantas perguntas de cada tipo (total 20) */
   testeFinal: { perguntas:14, classificar:6, minDestaque:4 },
@@ -621,7 +919,9 @@ const CONTEUDO = {
    ===================================================================== */
 const C = CONTEUDO;
 const CHAVE = 'desafio-cetico-v1';
-const base = () => ({ xp:0, mundos:{}, erros:{}, cartoes:{}, recordes:{}, teste:null, def:{ fundo:true, som:false } });
+// prog: jogos a meio (mundos "m1"…"m5", "teste", "sim"), para continuar onde se parou
+// abertos: mundos já desbloqueados (continuam abertos mesmo que se recomece o anterior)
+const base = () => ({ xp:0, mundos:{}, erros:{}, cartoes:{}, recordes:{}, teste:null, prog:{}, abertos:[], def:{ fundo:true, som:false } });
 function carregar(){ try { const r = localStorage.getItem(CHAVE); return r ? JSON.parse(r) : null; } catch(e){ return null; } }
 function guardar(){ try { localStorage.setItem(CHAVE, JSON.stringify(S)); } catch(e){} }
 let S = base();
@@ -642,7 +942,7 @@ const $app = $('#app');
 let TIMERS = [];
 let combo = 0;
 
-function limpar(){ TIMERS.forEach(clearInterval); TIMERS = []; }
+function limpar(){ TIMERS.forEach(clearInterval); TIMERS = []; fecharMateria(); }
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function baralhar(a){ const b = a.slice(); for (let i = b.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 function sorte(a){ return a[Math.floor(Math.random() * a.length)]; }
@@ -680,7 +980,34 @@ function erro(id){
 
 /* ---------- Estado dos mundos ---------- */
 function infoMundo(n){ return S.mundos[n] || { best:0, est:0 }; }
-function desbloqueado(n){ return n === 1 || infoMundo(n - 1).best >= 0.7; }
+function desbloqueado(n){ return n === 1 || S.abertos.indexOf(n) >= 0 || infoMundo(n - 1).best >= 0.7; }
+function temProgresso(n){ return !!S.mundos[n] || !!S.prog['m' + n]; }
+/* Recomeçar um mundo: apaga as estrelas e a pergunta onde se ia; os mundos já abertos continuam abertos */
+function recomecarMundo(n){
+  C.mundos.forEach(m => { if (desbloqueado(m.n) && S.abertos.indexOf(m.n) < 0) S.abertos.push(m.n); });
+  delete S.mundos[n]; delete S.prog['m' + n]; guardar();
+}
+/* Confirmação com 2 toques (o confirm() não funciona em todos os browsers dentro de apps) */
+function doisToques(btn, msg, acao){
+  let armado = false, tm = 0; const txt = btn.textContent;
+  btn.onclick = () => {
+    if (armado){ clearTimeout(tm); acao(); return; }
+    armado = true; btn.textContent = msg; btn.classList.add('armado');
+    tm = setTimeout(() => { armado = false; btn.textContent = txt; btn.classList.remove('armado'); }, 4000);
+  };
+}
+/* Jogos a meio: as perguntas guardam-se pelo id; as respostas, pelo texto da opção escolhida */
+function progOk(ch){
+  const p = S.prog[ch]; if (!p) return false;
+  if (p.passos && p.passos.every(x => x.k !== 'q' || ITENS[x.id])) return true;
+  delete S.prog[ch]; guardar(); return false;
+}
+const serPasso = p => p.k === 'q' ? { k:'q', id:p.it.id } : p;
+const desPasso = p => p.k === 'q' ? { k:'q', it:ITENS[p.id] } : p;
+const serRes = x => x.Q ? { c:x.c, ok:x.ok, id:x.Q.id, esc:x.Q.opts[x.i].txt } : { c:x.c };
+function desResposta(x){ const Q = preparar(ITENS[x.id]); return { ok:x.ok, Q, i:Math.max(0, Q.opts.findIndex(o => o.txt === x.esc)) }; }
+const desRes = (x, p) => x.id ? Object.assign({ p, c:x.c }, desResposta(x)) : { p, c:x.c };
+let pedirReset = 0; // mundo cujo "Recomeçar?" está aberto no mapa
 function estrelas(p){ return p >= 0.95 ? 3 : p >= 0.85 ? 2 : p >= 0.7 ? 1 : 0; }
 
 /* =====================================================================
@@ -688,19 +1015,32 @@ function estrelas(p){ return p >= 0.95 ? 3 : p >= 0.85 ? 2 : p >= 0.7 ? 1 : 0; }
    ===================================================================== */
 function inicio(){
   limpar(); combo = 0; topo();
+  const pr = pedirReset; pedirReset = 0; // "Recomeçar o Mundo n?" só fica aberto até à próxima ação
   const nv = nivel(S.xp);
-  const nErros = Object.keys(S.erros).filter(id => ITENS[id]).length;
+  const nErros = errosAtivos().length;
+  const nSabidos = C.cartoes.filter(c => S.cartoes[c.id] === 1).length;
   const meander = '<div class="meander" aria-hidden="true"><svg preserveAspectRatio="none"><defs><pattern id="mq" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 11H9V1H19V8H13V4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></pattern></defs><rect width="100%" height="12" fill="url(#mq)"/></svg></div>';
 
   const mundos = C.mundos.map(m => {
-    const inf = infoMundo(m.n), livre = desbloqueado(m.n), feito = inf.best >= 0.7;
-    return '<li><button class="mundo ' + (feito ? 'feito' : '') + '" data-m="' + m.n + '" ' + (livre ? '' : 'disabled') + ' type="button">' +
+    const inf = infoMundo(m.n), livre = desbloqueado(m.n), feito = inf.best >= 0.7, pg = progOk('m' + m.n) && S.prog['m' + m.n];
+    return '<li><div class="mrow"><button class="mundo ' + (feito ? 'feito' : '') + '" data-m="' + m.n + '" ' + (livre ? '' : 'disabled') + ' type="button">' +
       '<span class="no" aria-hidden="true">' + m.letra + '</span>' +
       '<span class="tx"><span class="eyebrow">Mundo ' + m.n + '</span><span class="tt">' + esc(m.titulo) + '</span><span class="rs">' + esc(m.resumo) + '</span>' +
-      '<span class="rw">' + (livre ? estrelasHTML(inf.est) + (inf.best ? '<span class="pct">melhor: ' + Math.round(inf.best * 100) + '%</span>' : '<span class="pct">por jogar</span>')
+      '<span class="rw">' + (livre ? estrelasHTML(inf.est) +
+          (pg ? '<span class="chip cont">continua na pergunta ' + (pg.k + 1) + ' de ' + pg.passos.length + '</span>' : inf.best ? '<span class="pct">melhor: ' + Math.round(inf.best * 100) + '%</span>' : '<span class="pct">começa com a lição</span>')
         : '<span class="chip lock">' + LOCK + 'Faz 70% no Mundo ' + (m.n - 1) + ' para abrir</span>') +
-      (m.teste ? '<span class="chip">Sai no teste</span>' : '') + '</span></span></button></li>';
+      (m.teste ? '<span class="chip">Sai no teste</span>' : '') + '</span></span></button>' +
+      (temProgresso(m.n) ? '<button class="reset-b" data-reset="' + m.n + '" type="button" aria-label="Recomeçar o Mundo ' + m.n + '" title="Recomeçar este mundo">↺</button>' : '') + '</div>' +
+      (pr === m.n ? '<div class="confirma" id="confirma"><p>Recomeçar o <b>Mundo ' + m.n + '</b>? Perdes as estrelas' + (pg ? ' e a pergunta onde ias' : '') + '. Os outros mundos continuam abertos.</p>' +
+        '<div class="acts"><button class="btn danger" id="rs-sim" type="button">Sim, recomeçar</button><button class="btn ghost" id="rs-nao" type="button">Cancelar</button></div></div>' : '') + '</li>';
   }).join('');
+
+  const pt = progOk('teste') && S.prog.teste, ps = simValida(S.prog.sim) && S.prog.sim;
+  const resets = [];
+  if (pt) resets.push(['r-teste', '↺ Recomeçar o teste final']);
+  if (ps) resets.push(['r-simul', '↺ Recomeçar a simulação']);
+  if (nErros) resets.push(['r-erros', 'Limpar a revisão dos erros (' + nErros + ')']);
+  if (nSabidos) resets.push(['r-cart', 'Pôr os cartões todos como “por saber”']);
 
   $app.innerHTML =
   '<div class="wrap">' +
@@ -710,13 +1050,15 @@ function inicio(){
     '<section class="player" aria-label="O teu nível"><div class="lvl">' + (nv.i + 1) + '</div><div><p class="eyebrow">Nível ' + (nv.i + 1) + '</p><p class="nm">' + esc(nv.nome) + '</p>' +
       '<div class="xpbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(nv.prog * 100) + '"><i style="width:' + (nv.prog * 100) + '%"></i></div>' +
       '<p class="meta"><span>' + S.xp + ' XP</span><span>' + (nv.prox ? 'faltam ' + nv.falta + ' XP para ' + esc(nv.prox.nome) : 'nível máximo!') + '</span></p></div></section>' +
-    '<p class="aviso"><b>Sai no teste:</b> tipos de conhecimento, problema da possibilidade do conhecimento, identificar o problema da origem e o ceticismo.</p>' +
+    '<p class="aviso"><b>Sai no teste:</b> tipos de conhecimento (exercício 1 da Julieta), problema da possibilidade do conhecimento, identificar o problema da origem e o ceticismo (exercício 9). <b>Formato:</b> escolha múltipla, verdadeiro ou falso, tabela a priori/a posteriori e uma pergunta de desenvolvimento sobre o ceticismo.</p>' +
+    '<section class="acoes"><button class="acao estudo" id="b-mat" type="button"><span class="t">Aprender a matéria</span><span class="d">Começa por aqui: a matéria dos 5 mundos explicada, com exemplos e truques. Cada mundo também abre com a sua lição.</span></button></section>' +
     '<section><div class="sec-h"><h2>Mapa dos mundos</h2><span class="pct">' + C.mundos.filter(m => infoMundo(m.n).best >= 0.7).length + '/5 completos</span></div></section>' +
     '<ol class="mapa">' + mundos + '</ol>' +
     '<section class="acoes">' +
-      '<button class="acao" id="b-cartoes" type="button"><span class="t">Cartões de estudo</span><span class="d">' + C.cartoes.length + ' cartões, incluindo as respostas abertas do teste</span></button>' +
+      '<button class="acao" id="b-cartoes" type="button"><span class="t">Cartões de estudo</span><span class="d">' + C.cartoes.length + ' cartões por tema, incluindo as respostas abertas do teste · já sabes ' + nSabidos + '</span></button>' +
       '<button class="acao" id="b-rev" type="button"><span class="t">Revisão dos erros' + (nErros ? '<span class="badge">' + nErros + '</span>' : '') + '</span><span class="d">' + (nErros ? 'Acerta cada uma 2 vezes seguidas' : 'Ainda não há erros guardados') + '</span></button>' +
-      '<button class="acao final" id="b-teste" type="button"><span class="t">Teste final</span><span class="d">20 perguntas, nota de 0 a 20' + (S.teste ? ' · melhor: ' + S.teste.melhor + ' valores' : '') + '</span></button>' +
+      '<button class="acao" id="b-teste" type="button"><span class="t">Teste final</span><span class="d">' + (pt ? '<b>Continua na pergunta ' + (pt.k + 1) + ' de ' + pt.passos.length + '</b>' : '20 perguntas rápidas, nota de 0 a 20' + (S.teste ? ' · melhor: ' + S.teste.melhor + ' valores' : '')) + '</span></button>' +
+      '<button class="acao final" id="b-sim" type="button"><span class="t">Simulação do Teste</span><span class="d">' + (ps ? '<b>Continua: ' + descreverSim(ps) + '</b>' : 'Igual ao teste real: 4 grupos, com tabela e desenvolvimento' + (S.simulacao ? ' · melhor: ' + virgula(S.simulacao.melhor) + ' valores' : '')) + '</span></button>' +
     '</section>' +
     '<section style="display:flex;flex-direction:column;gap:10px"><div class="sec-h"><h2>Minijogos rápidos</h2></div><div class="minis">' +
       '<button class="mini-b" data-mini="sprint:apriori" type="button">A priori ou a posteriori?</button>' +
@@ -725,22 +1067,37 @@ function inicio(){
       '<button class="mini-b" data-mini="ordem" type="button">Ordena o argumento</button>' +
       '<button class="mini-b" data-mini="ligar:problemas" type="button">Liga o problema à pergunta</button>' +
     '</div></section>' +
+    (resets.length ? '<section style="display:flex;flex-direction:column;gap:10px"><div class="sec-h"><h2>Recomeçar</h2><span class="pct">toca duas vezes para confirmar</span></div><div class="minis">' +
+      resets.map(r => '<button class="mini-b" id="' + r[0] + '" type="button">' + esc(r[1]) + '</button>').join('') + '</div><p class="small muted">Para recomeçar um mundo, usa o botão ↺ ao lado dele no mapa.</p></section>' : '') +
     '<section style="display:flex;flex-direction:column;gap:10px"><div class="sec-h"><h2>Definições</h2></div><div class="minis">' +
       '<button class="mini-b" id="d-fundo" type="button" aria-pressed="' + S.def.fundo + '">Fundo: ' + (S.def.fundo ? 'ligado' : 'desligado') + '</button>' +
       '<button class="mini-b" id="d-som" type="button" aria-pressed="' + S.def.som + '">Som: ' + (S.def.som ? 'ligado' : 'desligado') + '</button>' +
     '</div></section>' +
-    '<footer class="rodape"><p>O progresso fica guardado neste browser, neste dispositivo.</p><div class="row" id="reset-row"><button class="link-b" id="b-reset" type="button">Apagar todo o progresso</button></div></footer>' +
+    '<footer class="rodape"><p>O progresso fica guardado neste browser, neste dispositivo: XP, estrelas, jogos a meio, erros, cartões e o texto que escreves. Podes sair a meio e continuar depois.</p><div class="row" id="reset-row"><button class="link-b" id="b-reset" type="button">Apagar todo o progresso</button></div></footer>' +
   '</div>';
 
   $app.querySelectorAll('.mundo').forEach(b => b.onclick = () => jogarMundo(+b.dataset.m));
+  $app.querySelectorAll('[data-reset]').forEach(b => b.onclick = () => {
+    pedirReset = +b.dataset.reset; inicio();
+    const c = $('#confirma'); if (c) try { c.scrollIntoView({ block:'center' }); } catch(e){}
+  });
+  const rsS = $('#rs-sim'); if (rsS) rsS.onclick = () => { recomecarMundo(pr); inicio(); toast('Mundo ' + pr + ' recomeçado.'); };
+  const rsN = $('#rs-nao'); if (rsN) rsN.onclick = inicio;
+  $('#b-mat').onclick = () => materia(1);
   $('#b-cartoes').onclick = () => cartoes('todos');
   $('#b-rev').onclick = revisao;
   $('#b-teste').onclick = testeFinal;
+  $('#b-sim').onclick = simulacao;
   $app.querySelectorAll('[data-mini]').forEach(b => b.onclick = () => minijogo(b.dataset.mini, b.textContent));
+  const liga = (id, f, msg) => { const b = $('#' + id); if (b) doisToques(b, 'Toca outra vez para confirmar', () => { f(); guardar(); inicio(); toast(msg); }); };
+  liga('r-teste', () => { delete S.prog.teste; }, 'Teste final recomeçado.');
+  liga('r-simul', () => { delete S.prog.sim; }, 'Simulação recomeçada.');
+  liga('r-erros', () => { S.erros = {}; }, 'Revisão dos erros limpa.');
+  liga('r-cart', () => { S.cartoes = {}; }, 'Cartões todos por saber.');
   $('#d-fundo').onclick = () => { S.def.fundo = !S.def.fundo; guardar(); FUNDO.aplicar(); inicio(); };
   $('#d-som').onclick = () => { S.def.som = !S.def.som; guardar(); if (S.def.som) somSquish(); inicio(); };
   $('#b-reset').onclick = () => {
-    $('#reset-row').innerHTML = '<span>Apagar XP, estrelas, erros e cartões?</span><button class="btn danger" id="r-sim" type="button">Sim, apagar</button><button class="btn ghost" id="r-nao" type="button">Cancelar</button>';
+    $('#reset-row').innerHTML = '<span>Apagar XP, estrelas, jogos a meio, erros e cartões?</span><button class="btn danger" id="r-sim" type="button">Sim, apagar</button><button class="btn ghost" id="r-nao" type="button">Cancelar</button>';
     $('#r-sim').onclick = () => { const d = S.def; S = base(); S.def = d; guardar(); inicio(); toast('Progresso apagado.'); };
     $('#r-nao').onclick = inicio;
   };
@@ -749,14 +1106,20 @@ function inicio(){
 /* =====================================================================
    PALCO (barra de topo) e PERGUNTAS
    ===================================================================== */
-function palco(titulo, modo){
+function palco(titulo, modo, chave, materiaN){
   limpar(); topo();
   $app.innerHTML = '<div class="wrap" style="gap:12px"><header class="playbar"><button class="icon-btn" id="sair" type="button" aria-label="Sair para o início">✕</button>' +
     '<div class="pb-mid"><p class="pb-title">' + esc(titulo) + '</p><div class="bar"><i id="pbar"></i></div></div>' +
+    '<button class="mat-b" id="pmat" type="button" hidden>Matéria</button>' +
     '<div class="pb-right"><span id="pcount"></span><span class="pb-combo" id="pcombo"></span></div></header><main class="stage" id="stage"></main></div>';
-  $('#sair').onclick = inicio;
+  $('#sair').onclick = () => { const guardado = chave && S.prog[chave]; inicio(); if (guardado) toast('Fica guardado: continuas onde paraste.'); };
   mostrarCombo();
-  return { body:$('#stage'), modo:modo || 'normal', prog(f, l){ $('#pbar').style.width = (f * 100) + '%'; $('#pcount').textContent = l || ''; } };
+  // "Matéria": rever a lição do tema sem sair do jogo (não aparece no teste nem na simulação)
+  let alvo = 0; const mb = $('#pmat');
+  const setMateria = n => { alvo = n; mb.hidden = modo === 'teste' || !(n && C.licoes[n]); };
+  mb.onclick = () => abrirMateria(alvo);
+  setMateria(materiaN);
+  return { body:$('#stage'), modo:modo || 'normal', setMateria, prog(f, l){ $('#pbar').style.width = (f * 100) + '%'; $('#pcount').textContent = l || ''; } };
 }
 
 function preparar(it){
@@ -789,23 +1152,28 @@ function telaPergunta(ctx, it, done){
     if (ok) acerto(); else erro(Q.id);
     const fb = ctx.body.querySelector('.fb');
     fb.hidden = false; fb.className = 'fb pop-in ' + (ok ? 'is-ok' : 'is-bad');
-    fb.innerHTML = '<p class="fb-msg">' + esc(sorte(ok ? C.mensagens.certo : C.mensagens.errado)) + '</p>' + (Q.e ? '<p class="fb-e">' + esc(Q.e) + '</p>' : '') + '<button class="btn primary" type="button">Continuar</button>';
-    const nb = fb.querySelector('button');
+    fb.innerHTML = '<p class="fb-msg">' + esc(sorte(ok ? C.mensagens.certo : C.mensagens.errado)) + '</p>' + (Q.e ? '<p class="fb-e">' + esc(Q.e) + '</p>' : '') + '<button class="btn primary" type="button">Continuar</button>' +
+      (!ok && C.licoes[it.m] ? '<button class="link-b" data-mat type="button">Rever a matéria deste tema</button>' : '');
+    const nb = fb.querySelector('.btn');
+    const mt = fb.querySelector('[data-mat]'); if (mt) mt.onclick = () => abrirMateria(it.m);
     nb.onclick = () => done(ok, Q, i);
     try { nb.focus({ preventScroll:true }); fb.scrollIntoView({ block:'nearest', behavior:'smooth' }); } catch(e){}
   });
 }
 
 /* ---------- Sequência de passos (mundos, minijogos, teste) ---------- */
-function jogar(titulo, passos, fim, modo){
-  const ctx = palco(titulo, modo);
-  let k = 0, cred = 0; const res = [], xp0 = S.xp;
+function jogar(titulo, passos, fim, modo, chave, materiaN){
+  const ctx = palco(titulo, modo, chave, materiaN);
+  let k = 0, cred = 0, res = [], xp0 = S.xp;
+  const sv = chave && S.prog[chave];
+  if (sv){ passos = sv.passos.map(desPasso); k = sv.k; cred = sv.cred; xp0 = S.xp - (sv.xp || 0); res = sv.res.map((x, j) => desRes(x, passos[j])); }
+  const gravar = () => { if (chave){ S.prog[chave] = { passos:passos.map(serPasso), k, cred, xp:S.xp - xp0, res:res.map(serRes) }; guardar(); } };
   const passo = () => {
     topo();
-    if (k >= passos.length) return fim({ cred, total:passos.length, res, xp:S.xp - xp0 });
+    if (k >= passos.length){ if (chave){ delete S.prog[chave]; guardar(); } return fim({ cred, total:passos.length, res, xp:S.xp - xp0 }); }
     ctx.prog(k / passos.length, (k + 1) + '/' + passos.length);
     const p = passos[k];
-    const done = (c, extra) => { cred += c; res.push(Object.assign({ p, c }, extra || {})); k++; passo(); };
+    const done = (c, extra) => { cred += c; res.push(Object.assign({ p, c }, extra || {})); k++; gravar(); passo(); };
     if (p.k === 'q') telaPergunta(ctx, p.it, (ok, Q, i) => done(ok ? 1 : 0, { ok, Q, i }));
     else if (p.k === 'ordem') telaOrdem(ctx, done);
     else if (p.k === 'ligar') telaLigar(ctx, p.set, done);
@@ -814,14 +1182,17 @@ function jogar(titulo, passos, fim, modo){
   passo();
 }
 
-function jogarMundo(n){
+function jogarMundo(n, saltarLicao){
   const m = C.mundos[n - 1];
-  const passos = baralhar(C.perguntas.filter(p => p.m === n)).slice(0, m.nPerguntas).map(it => ({ k:'q', it }));
-  const esp = m.especiais;
-  const L = passos.length;
-  esp.forEach((s, i) => { passos.splice(Math.round((i + 1) * L / (esp.length + 1)) + i, 0, s); });
   combo = 0;
-  jogar('Mundo ' + n + ' · ' + m.titulo, passos, r => fimMundo(n, r));
+  if (progOk('m' + n)) return jogar('Mundo ' + n + ' · ' + m.titulo, [], r => fimMundo(n, r), 'normal', 'm' + n, n);
+  const comecar = () => {
+    const passos = baralhar(C.perguntas.filter(p => p.m === n)).slice(0, m.nPerguntas).map(it => ({ k:'q', it }));
+    const esp = m.especiais, L = passos.length;
+    esp.forEach((s, i) => { passos.splice(Math.round((i + 1) * L / (esp.length + 1)) + i, 0, s); });
+    jogar('Mundo ' + n + ' · ' + m.titulo, passos, r => fimMundo(n, r), 'normal', 'm' + n, n);
+  };
+  if (saltarLicao) comecar(); else telaLicao(n, comecar);
 }
 
 function fimMundo(n, r){
@@ -829,6 +1200,7 @@ function fimMundo(n, r){
   const prev = infoMundo(n);
   const abriaAntes = n < 5 && desbloqueado(n + 1);
   S.mundos[n] = { best:Math.max(prev.best || 0, pct), est:Math.max(prev.est || 0, est) };
+  if (n < 5 && pct >= 0.7 && S.abertos.indexOf(n + 1) < 0) S.abertos.push(n + 1);
   guardar();
   const abriuAgora = n < 5 && !abriaAntes && desbloqueado(n + 1);
   const m = C.mundos[n - 1];
@@ -987,6 +1359,7 @@ function telaLigar(ctx, key, done){
 function minijogo(cod, nome){
   const [k, set] = cod.split(':');
   combo = 0;
+  const TEMA = { 'sprint:apriori':5, 'sprint:tipos':2, 'sprint:ceticos':3, 'ordem':4, 'ligar:problemas':1 };
   jogar(nome, [{ k, set }], r => {
     const pct = r.total ? r.cred / r.total : 0;
     limpar(); topo();
@@ -995,7 +1368,7 @@ function minijogo(cod, nome){
       '<div class="acts"><button class="btn primary" id="m-rep" type="button">Jogar outra vez</button><button class="btn ghost" id="m-ini" type="button">Início</button></div></section></div>';
     $('#m-rep').onclick = () => minijogo(cod, nome);
     $('#m-ini').onclick = inicio;
-  });
+  }, 'normal', undefined, TEMA[cod]);
 }
 
 /* =====================================================================
@@ -1023,6 +1396,7 @@ function revisao(){
     }
     ctx.prog((totalIni - faltam) / totalIni, 'faltam ' + faltam);
     const id = fila.shift();
+    ctx.setMateria(ITENS[id].m);
     telaPergunta(ctx, ITENS[id], ok => {
       if (ok){
         const e = S.erros[id] || { s:0 }; e.s = (e.s || 0) + 1;
@@ -1041,12 +1415,16 @@ function revisao(){
    TESTE FINAL
    ===================================================================== */
 function testeFinal(){
+  combo = 0;
+  if (progOk('teste')) return jogar('Teste final · sem explicações até ao fim', [], fimTeste, 'teste', 'teste');
   const TF = C.testeFinal;
   const dest = baralhar(C.perguntas.filter(p => p.destaque)).slice(0, TF.minDestaque);
   const perg = dest.concat(baralhar(C.perguntas.filter(p => dest.indexOf(p) < 0)).slice(0, TF.perguntas - dest.length));
   const cls = baralhar(Object.values(ITENS).filter(it => it.t === 'cl')).slice(0, TF.classificar);
   const passos = baralhar(perg.concat(cls)).map(it => ({ k:'q', it }));
-  jogar('Teste final · sem explicações até ao fim', passos, r => {
+  jogar('Teste final · sem explicações até ao fim', passos, fimTeste, 'teste', 'teste');
+}
+function fimTeste(r){
     const certas = r.res.filter(x => x.ok).length, erradas = r.res.filter(x => !x.ok);
     S.xp += certas * 10;
     erradas.forEach(x => { S.erros[x.Q.id] = { s:0 }; });
@@ -1065,7 +1443,256 @@ function testeFinal(){
     const rv = $('#t-rev'); if (rv) rv.onclick = revisao;
     $('#t-ini').onclick = inicio;
     if (certas >= 18) setTimeout(confetis, 250);
-  }, 'teste');
+}
+
+/* =====================================================================
+   SIMULAÇÃO DO TESTE (formato do teste real: grupos I a IV)
+   Fica guardada a meio: perguntas sorteadas, respostas, tabela e texto do Grupo IV.
+   ===================================================================== */
+function virgula(n){ return (Math.round(n * 10) / 10).toFixed(1).replace('.', ','); }
+function descreverSim(st){
+  const G = C.simulacao.grupos;
+  if (st.r1.length < G[0].n) return 'Grupo I, pergunta ' + (st.r1.length + 1) + ' de ' + G[0].n;
+  if (st.r2.length < G[1].n) return 'Grupo II, pergunta ' + (st.r2.length + 1) + ' de ' + G[1].n;
+  if (!st.r3) return 'Grupo III (tabela)';
+  return 'Grupo IV (desenvolvimento)';
+}
+function simValida(st){
+  const tab = C.classificar.tabela.itens;
+  return !!st && Array.isArray(st.g1) && st.g1.concat(st.g2).every(id => ITENS[id]) && st.g3.every(i => tab[i]) && C.simulacao.desenvolvimento.some(d => d.id === st.dev);
+}
+function novaSim(){
+  const G = C.simulacao.grupos, tab = C.classificar.tabela.itens, meio = Math.floor(G[2].n / 2), idx = tab.map((_, i) => i);
+  return {
+    g1:baralhar(C.perguntas.filter(p => p.t === 'mc')).slice(0, G[0].n).map(p => p.id),
+    g2:baralhar(C.perguntas.filter(p => p.t === 'vf')).slice(0, G[1].n).map(p => p.id),
+    g3:baralhar(baralhar(idx.filter(i => tab[i].c === 'pri')).slice(0, meio).concat(baralhar(idx.filter(i => tab[i].c === 'pos')).slice(0, G[2].n - meio))),
+    dev:sorte(C.simulacao.desenvolvimento).id,
+    r1:[], r2:[], tab:{}, r3:null, texto:'', submetido:false, marcados:[]
+  };
+}
+
+function simulacao(){
+  combo = 0;
+  const SIM = C.simulacao, G = SIM.grupos, tab = C.classificar.tabela.itens;
+  let st = S.prog.sim;
+  if (!simValida(st)){ delete S.prog.sim; st = novaSim(); }
+  const dev = SIM.desenvolvimento.find(d => d.id === st.dev);
+  const total = G[0].n + G[1].n + 2;
+  const ctx = palco('Simulação do Teste', 'teste', 'sim');
+  const titulo = t => { const el = $app.querySelector('.pb-title'); if (el) el.textContent = t; };
+  const gravar = () => { S.prog.sim = st; guardar(); };
+  const mostrarProg = () => { const f = st.r1.length + st.r2.length + (st.r3 ? 1 : 0); ctx.prog(f / total, Math.min(f + 1, total) + '/' + total); };
+
+  if (S.prog.sim) return continuar();
+  // Ecrã de entrada com a estrutura e as cotações
+  ctx.prog(0, '');
+  ctx.body.innerHTML = '<article class="mini pop-in"><p class="tag">Simulação do Teste</p><h2 class="qtext">Igual ao teste real</h2>' +
+    '<p class="lead">Responde como no teste: não há explicações até ao fim. No final tens a nota de 0 a 20 valores e a correção. Se saíres a meio, fica guardado.</p>' +
+    '<ol class="grupos">' + G.map(g => '<li><span class="gn">' + g.nome + '</span><span>' + esc(g.tipo) + (g.n > 1 ? ' · ' + g.n + (g.nome === 'Grupo III' ? ' frases' : ' perguntas') : '') + '</span><span class="gc">' + g.cotacao + ' val.</span></li>').join('') + '</ol>' +
+    '<button class="btn primary big" id="sim-go" type="button">Começar o teste</button></article>';
+  $('#sim-go').onclick = () => { gravar(); continuar(); };
+
+  function continuar(){
+    topo(); mostrarProg();
+    if (st.r1.length < G[0].n) return pergunta(0);
+    if (st.r2.length < G[1].n) return pergunta(1);
+    if (!st.r3) return grupo3();
+    grupo4();
+  }
+  function pergunta(gi){
+    const lista = gi ? st.g2 : st.g1, dest = gi ? st.r2 : st.r1, k = dest.length;
+    titulo('Simulação · ' + G[gi].nome + ' · ' + G[gi].tipo);
+    telaPergunta(ctx, ITENS[lista[k]], (ok, Q, i) => { dest.push({ id:Q.id, ok, esc:Q.opts[i].txt }); gravar(); continuar(); });
+    ctx.body.querySelector('.tag').textContent = G[gi].nome + ' · ' + (k + 1) + ' de ' + lista.length;
+  }
+  function grupo3(){
+    titulo('Simulação · Grupo III · Tabela');
+    telaTabela(ctx, st.g3.map(i => tab[i]), st.tab, resp => { st.tab = resp; gravar(); }, res => { st.r3 = res.map(x => ({ r:x.r, ok:x.ok })); gravar(); continuar(); });
+  }
+  function grupo4(){
+    titulo('Simulação · Grupo IV · Desenvolvimento');
+    telaDesenvolvimento(ctx, dev, st, gravar, fim);
+  }
+
+  function fim(dv){
+    delete S.prog.sim;
+    const R = { g1:st.r1.map(desResposta), g2:st.r2.map(desResposta), g3:st.r3.map((x, j) => ({ it:tab[st.g3[j]], r:x.r, ok:x.ok })), dev:dv };
+    const c1 = R.g1.filter(x => x.ok).length, c2 = R.g2.filter(x => x.ok).length, c3 = R.g3.filter(x => x.ok).length;
+    const n1 = c1 * G[0].cotacao / G[0].n, n2 = c2 * G[1].cotacao / G[1].n, n3 = c3 * G[2].cotacao / G[2].n;
+    const n4 = R.dev.marcados.length / R.dev.total * G[3].cotacao;
+    const nota = Math.round((n1 + n2 + n3 + n4) * 10) / 10;
+    const certas = c1 + c2 + c3;
+    S.xp += certas * 10;
+    const e1 = R.g1.filter(x => !x.ok), e2 = R.g2.filter(x => !x.ok), e3 = R.g3.filter(x => !x.ok);
+    e1.concat(e2).forEach(x => { S.erros[x.Q.id] = { s:0 }; });
+    e3.forEach(x => { S.erros[x.it.id] = { s:0 }; });
+    S.simulacao = { melhor:Math.max(S.simulacao ? S.simulacao.melhor : 0, nota), ultima:nota };
+    guardar();
+    const msg = nota >= 18 ? 'Excelente! Estás pronto para o teste.' : nota >= 14 ? 'Muito bom! Revê o que falhaste e chegas lá acima.' : nota >= 9.5 ? 'Positiva! Usa a revisão dos erros para subir a nota.' : 'Ainda não chegaste à positiva, mas agora sabes exatamente o que rever.';
+    const nomeCat = k => k === 'pri' ? 'A priori' : 'A posteriori';
+    const itemQ = x => { const certa = x.Q.opts.find(o => o.ok).txt;
+      return '<div class="revitem"><p class="qq">' + esc(x.Q.q.replace('___', '______')) + '</p><p class="tu">A tua resposta: ' + esc(x.Q.opts[x.i].txt) + '</p><p class="ce">Resposta certa: ' + esc(certa) + '</p>' + (x.Q.e ? '<p>' + esc(x.Q.e) + '</p>' : '') + '</div>'; };
+    const itemT = x => '<div class="revitem"><p class="qq">“' + esc(x.it.x) + '”</p><p class="tu">A tua resposta: ' + nomeCat(x.r) + '</p><p class="ce">Resposta certa: ' + nomeCat(x.it.c) + '</p><p>' + esc(x.it.e || C.classificar.tabela.porque[x.it.c]) + '</p></div>';
+    const bloco = (t, arr, f) => arr.length ? '<p class="col-h">' + t + ' (' + arr.length + ')</p>' + arr.map(f).join('') : '';
+    const faltou = SIM.pontos.filter((p, i) => dev.pontos.indexOf(i) >= 0 && R.dev.marcados.indexOf(i) < 0);
+    limpar(); topo();
+    $app.innerHTML = '<div class="wrap"><section class="res pop-in"><p class="eyebrow">Simulação do Teste</p><p class="big">' + virgula(nota) + '<small> valores</small></p><h2>' + esc(msg) + '</h2>' +
+      '<div class="cotas">' +
+        '<div><b>' + virgula(n1) + '/' + G[0].cotacao + '</b><span>Grupo I · ' + c1 + '/' + G[0].n + ' certas</span></div>' +
+        '<div><b>' + virgula(n2) + '/' + G[1].cotacao + '</b><span>Grupo II · ' + c2 + '/' + G[1].n + ' certas</span></div>' +
+        '<div><b>' + virgula(n3) + '/' + G[2].cotacao + '</b><span>Grupo III · ' + c3 + '/' + G[2].n + ' certas</span></div>' +
+        '<div><b>' + virgula(n4) + '/' + G[3].cotacao + '</b><span>Grupo IV · ' + R.dev.marcados.length + '/' + R.dev.total + ' pontos</span></div>' +
+      '</div>' +
+      '<div class="stats"><span>+' + (certas * 10) + ' XP</span><span>melhor: ' + virgula(S.simulacao.melhor) + ' valores</span></div>' +
+      '<div class="revlist">' +
+        bloco('Grupo I · erradas', e1, itemQ) + bloco('Grupo II · erradas', e2, itemQ) + bloco('Grupo III · erradas', e3, itemT) +
+        (faltou.length ? '<p class="col-h">Grupo IV · pontos que faltaram</p><div class="revitem">' + faltou.map(p => '<p>• ' + esc(p) + '</p>').join('') + '</div>' : '') +
+      '</div>' +
+      '<div class="acts"><button class="btn primary" id="s-rep" type="button">Fazer outra simulação</button>' + (e1.length + e2.length + e3.length ? '<button class="btn" id="s-rev" type="button">Rever os erros</button>' : '') + '<button class="btn ghost" id="s-ini" type="button">Início</button></div></section></div>';
+    $('#s-rep').onclick = simulacao;
+    const rv = $('#s-rev'); if (rv) rv.onclick = revisao;
+    $('#s-ini').onclick = inicio;
+    if (nota >= 18) setTimeout(confetis, 250);
+  }
+}
+
+/* Grupo III: cada frase liga-se à coluna "A priori" ou "A posteriori" (toque) */
+function telaTabela(ctx, itens, inicial, aoMudar, done){
+  const resp = Object.assign({}, inicial || {});
+  ctx.body.innerHTML = '<article class="mini pop-in"><p class="tag">Grupo III · Tabela</p><h2 class="qtext">Liga cada frase à coluna certa.</h2>' +
+    '<p class="lead">Toca em “A priori” ou “A posteriori” em cada linha. Podes mudar até carregares em Corrigir.</p>' +
+    '<div class="tab"><div class="tab-h" aria-hidden="true"><span>Frase</span><span>A priori</span><span>A posteriori</span></div>' +
+    itens.map((it, r) => '<div class="tab-row" data-r="' + r + '"><p class="fr">' + esc(it.x) + '</p><div class="seg" role="group" aria-label="Classificação">' +
+      ['pri', 'pos'].map(c => '<button class="seg-b" type="button" data-r="' + r + '" data-c="' + c + '" aria-pressed="' + (resp[r] === c) + '">' + (c === 'pri' ? 'A priori' : 'A posteriori') + '</button>').join('') + '</div></div>').join('') + '</div>' +
+    '<p class="small muted" id="tab-falta"></p>' +
+    '<button class="btn primary big" id="tab-ok" type="button">Corrigir</button><div class="fb" hidden></div></article>';
+  const ok = $('#tab-ok');
+  const estado = () => {
+    const falta = itens.length - Object.keys(resp).length;
+    $('#tab-falta').textContent = falta ? 'Faltam ' + falta + (falta === 1 ? ' frase.' : ' frases.') : 'Todas as frases estão ligadas.';
+    ok.disabled = falta > 0;
+  };
+  estado();
+  ctx.body.querySelectorAll('.seg-b').forEach(b => b.onclick = () => {
+    const r = +b.dataset.r; resp[r] = b.dataset.c;
+    ctx.body.querySelectorAll('.seg-b[data-r="' + r + '"]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    estado(); aoMudar(Object.assign({}, resp));
+  });
+  ok.onclick = () => {
+    const res = itens.map((it, r) => ({ it, r:resp[r], ok:resp[r] === it.c }));
+    const linhas = ctx.body.querySelectorAll('.tab-row');
+    res.forEach((x, r) => {
+      linhas[r].classList.add(x.ok ? 'right' : 'wrong');
+      if (!x.ok) linhas[r].insertAdjacentHTML('beforeend', '<p class="corr">Certo: ' + (x.it.c === 'pri' ? 'A priori' : 'A posteriori') + '</p>');
+    });
+    ctx.body.querySelectorAll('.seg-b').forEach(b => b.disabled = true);
+    ok.remove(); $('#tab-falta').remove();
+    const certas = res.filter(x => x.ok).length;
+    const fb = ctx.body.querySelector('.fb');
+    fb.hidden = false; fb.className = 'fb pop-in ' + (certas === itens.length ? 'is-ok' : 'is-info');
+    fb.innerHTML = '<p class="fb-msg">' + certas + ' de ' + itens.length + ' certas.</p><p class="fb-e">Truque: o contrário podia ser verdade sem contradição? Se sim, é a posteriori; se não, é a priori.</p><button class="btn primary" type="button">Continuar para o Grupo IV</button>';
+    fb.querySelector('button').onclick = () => done(res);
+    try { fb.scrollIntoView({ block:'nearest', behavior:'smooth' }); } catch(e){}
+  };
+}
+
+/* Grupo IV: resposta escrita (guardada enquanto se escreve), resposta-modelo e checklist */
+function telaDesenvolvimento(ctx, dev, st, gravar, done){
+  const SIM = C.simulacao;
+  if (st.submetido) return corrigir();
+  ctx.body.innerHTML = '<article class="mini pop-in"><p class="tag">Grupo IV · Desenvolvimento · ' + SIM.grupos[3].cotacao + ' valores</p><h2 class="qtext">' + esc(dev.pergunta) + '</h2>' +
+    '<p class="lead">Escreve a tua resposta como no teste. O texto fica guardado enquanto escreves. Depois comparas com a resposta-modelo e marcas os pontos que incluíste.</p>' +
+    '<label class="col-h" for="resp-dev">A tua resposta</label><textarea class="dev" id="resp-dev" placeholder="Começa por explicar o que é o ceticismo…"></textarea>' +
+    '<p class="small muted" id="dev-n"></p><p class="small" id="dev-aviso" hidden></p>' +
+    '<button class="btn primary big" id="dev-ok" type="button">Submeter resposta</button></article>';
+  const ta = $('#resp-dev');
+  ta.value = st.texto || '';
+  const palavras = () => (ta.value.trim().match(/\S+/g) || []).length;
+  const contar = () => { const n = palavras(); $('#dev-n').textContent = n + (n === 1 ? ' palavra' : ' palavras'); };
+  contar();
+  ta.oninput = () => { st.texto = ta.value; gravar(); contar(); };
+  let avisado = false;
+  $('#dev-ok').onclick = () => {
+    if (palavras() < 15 && !avisado){
+      avisado = true; const a = $('#dev-aviso'); a.hidden = false;
+      a.textContent = 'A tua resposta está muito curta. No teste, uma resposta de desenvolvimento tem vários parágrafos. Carrega outra vez em Submeter se quiseres continuar assim.';
+      return;
+    }
+    st.texto = ta.value.trim(); st.submetido = true; gravar();
+    corrigir();
+  };
+  function corrigir(){
+    topo();
+    ctx.body.innerHTML = '<article class="mini pop-in"><p class="tag">Grupo IV · Autoavaliação</p><h2 class="qtext">' + esc(dev.pergunta) + '</h2>' +
+      '<p class="col-h">A tua resposta</p><div class="caixa">' + (st.texto ? esc(st.texto) : '<span class="muted">(sem resposta)</span>') + '</div>' +
+      '<p class="col-h">Resposta-modelo</p><div class="caixa modelo">' + esc(dev.modelo) + '</div>' +
+      '<p class="col-h">Marca cada ponto que a tua resposta inclui</p><div class="check">' +
+      dev.pontos.map(i => '<label><input type="checkbox" id="pt-' + i + '" data-i="' + i + '"' + (st.marcados.indexOf(i) >= 0 ? ' checked' : '') + '><span>' + esc(SIM.pontos[i]) + '</span></label>').join('') + '</div>' +
+      '<p class="small muted">Sê honesto: só marcas o que escreveste mesmo. Cada ponto vale ' + virgula(SIM.grupos[3].cotacao / dev.pontos.length) + ' valores.</p>' +
+      '<button class="btn primary big" id="dev-fim" type="button">Ver a nota final</button></article>';
+    const marcados = () => Array.from(ctx.body.querySelectorAll('.check input:checked')).map(x => +x.dataset.i);
+    ctx.body.querySelectorAll('.check input').forEach(x => x.onchange = () => { st.marcados = marcados(); gravar(); });
+    $('#dev-fim').onclick = () => done({ texto:st.texto, marcados:marcados(), total:dev.pontos.length });
+  }
+}
+
+/* =====================================================================
+   MATÉRIA (lições) — explicada antes das perguntas
+   ===================================================================== */
+function htmlLicao(n){
+  const L = C.licoes[n]; if (!L) return '';
+  return '<div class="licao"><p class="li-ideia">' + L.ideia + '</p>' +
+    L.seccoes.map(s => '<section class="li-sec"><h3>' + esc(s.t) + '</h3><dl>' + s.l.map(r => '<div class="li-row"><dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd></div>').join('') + '</dl></section>').join('') +
+    '<p class="li-truque"><b>Truque:</b> ' + L.truque + '</p></div>';
+}
+/* Painel por cima do jogo, para rever a matéria sem perder a pergunta onde se vai */
+function abrirMateria(n){
+  fecharMateria();
+  const m = C.mundos[n - 1]; if (!m || !C.licoes[n]) return;
+  const el = document.createElement('div');
+  el.className = 'sheet'; el.id = 'sheet'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Matéria do Mundo ' + n);
+  el.innerHTML = '<div class="sheet-fundo" data-fechar></div><div class="sheet-painel"><header class="sheet-top"><div><p class="eyebrow">Matéria · Mundo ' + n + '</p><h2>' + esc(m.titulo) + '</h2></div>' +
+    '<button class="icon-btn" data-fechar type="button" aria-label="Fechar a matéria">✕</button></header>' + htmlLicao(n) +
+    '<button class="btn primary big" data-fechar type="button">Voltar ao jogo</button></div>';
+  document.body.appendChild(el); document.documentElement.classList.add('sem-scroll');
+  el.querySelectorAll('[data-fechar]').forEach(b => b.onclick = fecharMateria);
+  try { el.querySelector('.icon-btn').focus({ preventScroll:true }); } catch(e){}
+}
+function fecharMateria(){ const el = $('#sheet'); if (el) el.remove(); document.documentElement.classList.remove('sem-scroll'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharMateria(); });
+
+/* Ecrã da lição no início de cada mundo */
+function telaLicao(n, comecar){
+  limpar(); topo();
+  const m = C.mundos[n - 1], jaJogou = !!S.mundos[n];
+  $app.innerHTML = '<div class="wrap" style="gap:14px"><header class="playbar"><button class="icon-btn" id="sair" type="button" aria-label="Sair para o início">✕</button>' +
+    '<div class="pb-mid"><p class="pb-title">Mundo ' + n + ' · Aprende primeiro</p><div class="bar"><i style="width:0"></i></div></div><span></span><span></span></header>' +
+    (jaJogou ? '<button class="btn ghost" id="li-saltar" type="button">Já sei a matéria: saltar para as perguntas</button>' : '') +
+    '<article class="mini pop-in"><p class="tag">Mundo ' + n + ' · Lição</p><h2 class="qtext">' + esc(m.titulo) + '</h2>' + htmlLicao(n) +
+    '<p class="lead small">Durante as perguntas podes voltar a ler isto no botão “Matéria”, lá em cima.</p>' +
+    '<button class="btn primary big" id="li-go" type="button">Já li: começar as perguntas</button></article></div>';
+  $('#sair').onclick = inicio;
+  $('#li-go').onclick = comecar;
+  const s = $('#li-saltar'); if (s) s.onclick = comecar;
+}
+
+/* Secção "Aprender a matéria": as 5 lições, pela ordem dos mundos */
+function materia(n){
+  limpar(); topo(); n = n || 1;
+  const m = C.mundos[n - 1];
+  $app.innerHTML = '<div class="wrap" style="gap:14px"><header class="playbar"><button class="icon-btn" id="sair" type="button" aria-label="Sair para o início">✕</button>' +
+    '<div class="pb-mid"><p class="pb-title">Aprender a matéria</p><div class="bar"><i style="width:' + (n / 5 * 100) + '%"></i></div></div><span></span><span class="pb-right">' + n + '/5</span></header>' +
+    '<div class="filtros">' + C.mundos.map(x => '<button class="mini-b' + (x.n === n ? ' on' : '') + '" data-n="' + x.n + '" type="button" aria-pressed="' + (x.n === n) + '"><span class="gr">' + x.letra + '</span> ' + esc(x.curto) + '</button>').join('') + '</div>' +
+    '<article class="mini pop-in"><p class="tag">Mundo ' + n + '</p><h2 class="qtext">' + esc(m.titulo) + '</h2>' + htmlLicao(n) +
+    '<div class="acts"><button class="btn" id="mt-cart" type="button">Cartões deste tema</button>' +
+    (desbloqueado(n) ? '<button class="btn primary" id="mt-jogar" type="button">Jogar o Mundo ' + n + '</button>' : '') +
+    (n < 5 ? '<button class="btn ghost" id="mt-prox" type="button">Matéria seguinte →</button>' : '') + '</div></article></div>';
+  $('#sair').onclick = inicio;
+  $app.querySelectorAll('[data-n]').forEach(b => b.onclick = () => materia(+b.dataset.n));
+  $('#mt-cart').onclick = () => cartoes('m' + n);
+  const j = $('#mt-jogar'); if (j) j.onclick = () => jogarMundo(n, true);
+  const p = $('#mt-prox'); if (p) p.onclick = () => materia(n + 1);
 }
 
 /* =====================================================================
@@ -1073,18 +1700,22 @@ function testeFinal(){
    ===================================================================== */
 function cartoes(filtro){
   limpar(); topo();
-  const lista = C.cartoes.filter(c => filtro === 'todos' || (filtro === 'abertas' ? c.aberta : !c.aberta));
-  let fila = baralhar(lista.filter(c => S.cartoes[c.id] !== 1)).concat(baralhar(lista.filter(c => S.cartoes[c.id] === 1)));
+  const porTema = /^m[1-5]$/.test(filtro), tema = porTema ? +filtro[1] : 0;
+  const lista = C.cartoes.filter(c => filtro === 'todos' || (porTema ? c.m === tema : filtro === 'abertas' ? c.aberta : !c.aberta));
+  const ordenar = arr => baralhar(arr).sort((a, b) => a.m - b.m); // pela ordem da matéria
+  let fila = ordenar(lista.filter(c => S.cartoes[c.id] !== 1)).concat(ordenar(lista.filter(c => S.cartoes[c.id] === 1)));
   let virado = false;
   const sabidos = () => lista.filter(c => S.cartoes[c.id] === 1).length;
-  const filtros = [['todos','Todos'], ['abertas','Respostas abertas'], ['conceitos','Conceitos']];
+  const filtros = [['todos','Todos'], ['abertas','Respostas abertas'], ['conceitos','Conceitos']].concat(C.mundos.map(m => ['m' + m.n, m.letra + ' ' + m.curto]));
 
   $app.innerHTML = '<div class="wrap" style="gap:14px"><header class="playbar"><button class="icon-btn" id="sair" type="button" aria-label="Sair para o início">✕</button>' +
-    '<div class="pb-mid"><p class="pb-title">Cartões de estudo</p><div class="bar"><i id="pbar"></i></div></div><div class="pb-right"><span id="pcount"></span></div></header>' +
-    '<div class="filtros">' + filtros.map(f => '<button class="mini-b ' + (f[0] === filtro ? 'on' : '') + '" data-f="' + f[0] + '" type="button">' + f[1] + '</button>').join('') + '</div>' +
+    '<div class="pb-mid"><p class="pb-title">Cartões de estudo</p><div class="bar"><i id="pbar"></i></div></div><span></span><div class="pb-right"><span id="pcount"></span></div></header>' +
+    '<div class="filtros">' + filtros.map(f => '<button class="mini-b ' + (f[0] === filtro ? 'on' : '') + '" data-f="' + f[0] + '" type="button" aria-pressed="' + (f[0] === filtro) + '">' + esc(f[1]) + '</button>').join('') + '</div>' +
+    (porTema ? '<p class="aviso">Primeiro lê a matéria deste tema e só depois tenta os cartões. <button class="link-b" id="c-ler" type="button">Ler a matéria do Mundo ' + tema + '</button></p>' : '') +
     '<main class="stage" id="stage"></main></div>';
   $('#sair').onclick = inicio;
   $app.querySelectorAll('[data-f]').forEach(b => b.onclick = () => cartoes(b.dataset.f));
+  const ler = $('#c-ler'); if (ler) ler.onclick = () => abrirMateria(tema);
   const stage = $('#stage');
 
   const atualizar = () => { $('#pbar').style.width = (sabidos() / lista.length * 100) + '%'; $('#pcount').textContent = sabidos() + '/' + lista.length; };
@@ -1098,10 +1729,12 @@ function cartoes(filtro){
       return;
     }
     const c = fila[0];
-    stage.innerHTML = '<div class="cartao"><button class="face pop-in" id="face" type="button" aria-label="Virar cartão">' + frente(c) + '</button></div><div class="acts" id="c-acts"></div>';
+    stage.innerHTML = '<div class="cartao"><button class="face pop-in" id="face" type="button" aria-label="Virar cartão">' + frente(c) + '</button></div><div class="acts" id="c-acts"></div>' +
+      '<button class="btn ghost" id="c-mat" type="button">Ainda não sei: ler a matéria deste tema (Mundo ' + c.m + ')</button>';
     $('#face').onclick = virar;
+    $('#c-mat').onclick = () => abrirMateria(c.m);
   };
-  const frente = c => '<p class="tag">' + (c.aberta ? 'Resposta aberta (estilo teste)' : 'Conceito') + '</p><p class="ft">' + esc(c.frente) + '</p><p class="hint-t">Toca para ver a resposta</p>';
+  const frente = c => '<p class="tag">' + (c.aberta ? 'Resposta aberta (estilo teste)' : 'Conceito') + ' · Mundo ' + c.m + '</p><p class="ft' + (c.frente.length > 140 ? ' longa' : '') + '">' + esc(c.frente) + '</p><p class="hint-t">Pensa na resposta e toca para a ver</p>';
   const verso = c => '<p class="tag">Resposta</p><p class="vt">' + esc(c.verso) + '</p>' + (c.exemplo ? '<p class="ex"><b>Exemplo: </b>' + esc(c.exemplo) + '</p>' : '') + '<p class="hint-t">Toca para voltar à pergunta</p>';
   const virar = () => {
     const face = $('#face'), c = fila[0];
@@ -1328,7 +1961,7 @@ const FUNDO = (() => {
   }
   function toque(e){
     if (!raf || !e.target || !e.target.closest) return;
-    if (e.target.closest('button, a, input, select, textarea, .q, .mini, .res, .player, .mundo, .acao, .sp-card, .face, .playbar, .hero, .rodape, .aviso')) return;
+    if (e.target.closest('button, a, input, select, textarea, .q, .mini, .res, .player, .mundo, .acao, .sp-card, .face, .playbar, .hero, .rodape, .aviso, .sheet, .confirma')) return;
     const r = campoEm(e.clientX, e.clientY);
     if (r.s > 0.9 && r.melhor){ squish(r.melhor, 0.42); somSquish(); }
   }
@@ -1338,6 +1971,7 @@ const FUNDO = (() => {
 
 FUNDO.iniciar();
 inicio();
+if ('serviceWorker' in navigator && location.protocol !== 'file:'){ addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
 </script>
 
 </body>

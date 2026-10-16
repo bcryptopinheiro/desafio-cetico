@@ -1,0 +1,20 @@
+{
+  "name": "Desafio Cético — Filosofia 11.º ano",
+  "short_name": "Desafio Cético",
+  "description": "Jogo para estudar Filosofia 11.º ano: conhecimento, tipos de conhecimento, ceticismo, fundacionalismo e origem do conhecimento.",
+  "lang": "pt-PT",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2443D0",
+  "background_color": "#ECEFF6",
+  "categories": ["education", "games"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
