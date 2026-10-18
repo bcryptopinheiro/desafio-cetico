@@ -14,8 +14,8 @@ Site: https://bcryptopinheiro.github.io/desafio-cetico/
 - **Matéria toda**: as lições completas de cada tema, para ler ou rever de seguida
 - **Opções equilibradas**: as respostas erradas são plausíveis e do mesmo tamanho que a certa, para o tamanho não denunciar a resposta (o `verificar.mjs` controla isto)
 - Minijogos: escolha múltipla, verdadeiro ou falso, completa a frase, classifica rápido (60 s), ordena o argumento, liga
-- Cartões de estudo por tema (com as respostas abertas do teste), revisão dos erros e teste final de 0 a 20
-- **Simulação do Teste** no formato do teste real: Grupo I escolha múltipla, Grupo II verdadeiro ou falso, Grupo III tabela a priori/a posteriori, Grupo IV desenvolvimento sobre o ceticismo (autoavaliação com checklist)
+- Cartões de estudo por tema (com respostas abertas), revisão dos erros e treino geral de 20 perguntas. O treino geral revê todos os mundos e não prevê a nota do exame; a Simulação do Teste segue o formato e o âmbito registados para o teste
+- **Simulação do Teste** no formato indicado pela professora: Grupo I escolha múltipla, Grupo II verdadeiro ou falso, Grupo III tabela a priori/a posteriori, Grupo IV desenvolvimento sobre o ceticismo (autoavaliação com checklist). A pontuação serve para treino, não prevê a nota real
 - **Modo relaxar (ASMR)**: fundo animado de slime (toca nos blobs) com som «squish»; durante as partes de matéria o fundo fica mais discreto. Tudo opcional nas definições
 - Ecrã inicial arrumado: minijogos, «O que sai no teste», definições e recomeçar ficam em secções que abrem
 
