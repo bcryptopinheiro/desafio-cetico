@@ -12,6 +12,7 @@ Site: https://bcryptopinheiro.github.io/desafio-cetico/
 - 5 mundos que se desbloqueiam com 70%, com tempo estimado e 1 a 3 estrelas. **A matéria vem aos bocadinhos**: uma parte curta, perguntas só sobre essa parte, a parte seguinte… e os desafios no fim. Ao repetir um mundo, pode-se escolher «só perguntas». O botão «Matéria» deixa rever a lição toda a meio do jogo
 - **Respostas escritas dentro dos mundos** («Explica», «Justifica», «Distingue», incluindo a Julieta e o exercício 9): o aluno escreve (fica guardado), compara com a resposta-modelo e marca os pontos que incluiu
 - **Matéria toda**: as lições completas de cada tema, para ler ou rever de seguida
+- **Resumo simples para estudar**: nove ideias centrais em tópicos curtos e recolhidos, mais cinco afirmações de autoavaliação com resposta explicada
 - **Opções equilibradas**: as respostas erradas são plausíveis e do mesmo tamanho que a certa, para o tamanho não denunciar a resposta (o `verificar.mjs` controla isto)
 - Minijogos: escolha múltipla, verdadeiro ou falso, completa a frase, classifica rápido (60 s), ordena o argumento, liga
 - Cartões de estudo por tema (com respostas abertas), revisão dos erros e treino geral de 20 perguntas. O treino geral revê todos os mundos e não prevê a nota do exame; a Simulação do Teste segue o formato e o âmbito registados para o teste

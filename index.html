@@ -381,6 +381,14 @@ html.sem-scroll{overflow:hidden}
 .dobra[open] summary::after{content:"–"}
 .dobra summary .pct{margin-left:auto}
 .dobra-c{padding:0 16px 16px; font-size:15px}
+.resumo-topico{border-top:1px solid var(--line); padding:0 2px}
+.resumo-topico>summary{cursor:pointer; padding:12px 4px; color:var(--ink); list-style-position:inside}
+.resumo-topico>p{margin:0 4px 14px; line-height:1.6}
+.resumo-vf{padding-left:24px; line-height:1.5}
+.resumo-vf>li{padding:6px 0}
+.resumo-vf details{margin-top:4px; color:var(--muted)}
+.resumo-vf details summary{cursor:pointer; display:inline; color:var(--accent)}
+.resumo-vf details p{margin:4px 0; color:var(--ink)}
 .passos-m{margin:0; padding-left:22px; display:flex; flex-direction:column; gap:6px}
 #fundo{transition:opacity .6s ease}
 body.foco #fundo{opacity:calc(var(--fundo-op) * .3)}
@@ -1402,6 +1410,7 @@ function inicio(){
       '<button class="acao" id="b-teste" type="button"><span class="t">Treino geral · 20 perguntas</span><span class="d">' + (pt ? '<b>Continua na pergunta ' + (pt.k + 1) + ' de ' + pt.passos.length + '</b>' : 'Revisão rápida de todos os mundos · ≈ 10 min' + (S.teste ? ' · melhor: ' + S.teste.melhor + '/20' : '')) + '</span></button>' +
       '<button class="acao" id="b-mat" type="button"><span class="t">Matéria toda</span><span class="d">Ler ou rever a matéria de um tema de seguida, com exemplos e truques</span></button>' +
     '</section>' +
+    dobra('d-resumo', 'Resumo simples para estudar', '9 ideias', htmlResumoTeste()) +
     dobra('d-minis', 'Minijogos rápidos', MINIS.length + ' jogos', '<div class="minis">' + MINIS.map(x => '<button class="mini-b" data-mini="' + x[0] + '" type="button">' + esc(x[1]) + '</button>').join('') + '</div>') +
     dobra('d-teste', 'O que sai no teste', '', '<p><b>Âmbito registado para esta app:</b> tipos de conhecimento (incluindo o exercício da Julieta); possibilidade do conhecimento e ceticismo; argumento da regressão infinita e resposta fundacionalista; identificar o problema da origem; classificar conhecimento a priori e a posteriori.</p><p style="margin-top:8px">O Mundo 1 apresenta bases sobre a definição do conhecimento para ajudar a compreender os restantes temas, mas não está marcado como matéria de teste. Descartes e Hume também não estão incluídos.</p><p style="margin-top:8px"><b>Formato indicado:</b> escolha múltipla, verdadeiro ou falso, tabela a priori/a posteriori e uma pergunta de desenvolvimento sobre o ceticismo. A simulação sorteia perguntas apenas dos mundos assinalados «Sai no teste».</p>') +
     dobra('d-def', 'Definições', '', '<div class="minis">' + def('d-fundo', 'Fundo animado', S.def.fundo) + def('d-som', 'Sons', S.def.som) +
@@ -2145,6 +2154,29 @@ function htmlLicao(n){
   const L = C.licoes[n]; if (!L) return '';
   return '<div class="licao"><p class="li-ideia">' + L.ideia + '</p>' + L.seccoes.map(htmlSeccao).join('') +
     '<p class="li-truque"><b>Truque:</b> ' + L.truque + '</p></div>';
+}
+/* Resumo curto de revisão, baseado no resumo enviado pelo aluno e alinhado com a matéria do teste. */
+function htmlResumoTeste(){
+  const temas = [
+    ['Epistemologia e os seus problemas', 'A <b>epistemologia</b> estuda o conhecimento. Pergunta o que é conhecer, se podemos conhecer e de onde vem o conhecimento.'],
+    ['Três tipos de conhecimento', '<b>Prático:</b> saber fazer (andar de bicicleta). <b>Por contacto:</b> conhecer diretamente uma pessoa ou um lugar. <b>Proposicional:</b> saber que uma afirmação é verdadeira. Para distinguir, pergunta o que está a ser conhecido.'],
+    ['Definição tradicional', 'Segundo a definição tradicional estudada, conhecimento proposicional é <b>crença verdadeira justificada</b>. A pessoa acredita na afirmação, a afirmação é verdadeira e há boas razões para acreditar nela. As três condições são necessárias e, em conjunto, suficientes segundo esta definição.'],
+    ['Ceticismo', 'O problema da possibilidade pergunta se conseguimos realmente conhecer. O <b>ceticismo radical</b> põe em causa todo o conhecimento; o <b>moderado</b> duvida apenas de algumas áreas. Uma dúvida do dia a dia, por si só, não é uma posição cética filosófica. O ceticismo pirrónico é associado a Pirro: suspender o juízo é não afirmar nem negar uma ideia.'],
+    ['Enganos dos sentidos', 'Às vezes, a perceção engana-nos: um lápis pode parecer partido dentro de água. Isso mostra que os sentidos podem falhar e levanta uma pergunta: como sabemos que não estamos enganados noutras situações? O exemplo não prova que os sentidos nos enganam sempre.'],
+    ['Regressão infinita da justificação', 'O argumento cético diz: se cada crença precisa de outra crença para se justificar, e essa de outra, a cadeia pode continuar sem fim. Se nunca houver justificação adequada, não há conhecimento. A conclusão depende de aceitarmos as premissas do argumento.'],
+    ['Objeção da autorrefutação', 'Uma objeção diz que o cético parece contradizer-se se afirmar que <b>sabe</b> que nada pode ser conhecido: essa afirmação seria, ela própria, um conhecimento. É uma objeção debatida; o cético pode responder que não afirma saber a tese, mas que suspende o juízo ou apresenta um desafio.'],
+    ['Resposta fundacionalista', 'O fundacionalismo rejeita a ideia de que todas as crenças se justificam por outras crenças. Defende que há <b>crenças básicas</b>, que servem de fundamento, e <b>não básicas</b>, justificadas com base noutras. Assim, a cadeia pode terminar sem regressão infinita.'],
+    ['Origem do conhecimento; a priori e a posteriori', 'O problema da origem pergunta se o conhecimento vem sobretudo da <b>razão</b> (racionalismo) ou da <b>experiência sensível</b> (empirismo). <b>A priori:</b> pode ser conhecido sem observar o mundo, só pelo pensamento (por exemplo, «um triângulo tem três lados»). <b>A posteriori:</b> depende da experiência ou de informação sobre o mundo (por exemplo, «os ursos-polares têm pelo branco»). Pergunta como a afirmação pode ser conhecida, não apenas como a aprendeste.']
+  ];
+  return '<p class="small muted">Uma ideia de cada vez. Abre cada tópico e tenta explicá-lo pelas tuas palavras; depois confirma na «Matéria toda» ou treina com perguntas.</p>' +
+    temas.map((x, i) => '<details class="resumo-topico"><summary><b>' + (i + 1) + '. ' + x[0] + '</b></summary><p>' + x[1] + '</p></details>').join('') +
+    '<details class="resumo-topico"><summary><b>Autoavaliação rápida</b></summary><ol class="resumo-vf">' +
+      '<li>Saber fritar ovos é conhecimento prático. <details><summary>Ver resposta</summary><p>Verdadeiro: é saber fazer.</p></details></li>' +
+      '<li>Uma crença verdadeira por sorte basta para haver conhecimento. <details><summary>Ver resposta</summary><p>Falso: também é necessária uma justificação adequada.</p></details></li>' +
+      '<li>Os enganos dos sentidos provam que estamos sempre enganados. <details><summary>Ver resposta</summary><p>Falso: mostram que a perceção pode falhar e levantam um desafio.</p></details></li>' +
+      '<li>O fundacionalismo defende crenças básicas. <details><summary>Ver resposta</summary><p>Verdadeiro: elas servem de fundamento para justificar outras crenças.</p></details></li>' +
+      '<li>«A Terra é aproximadamente esférica» é a priori. <details><summary>Ver resposta</summary><p>Falso: depende de observação e evidência sobre o mundo, por isso é a posteriori.</p></details></li>' +
+    '</ol></details>';
 }
 /* Uma secção da lição (usada na matéria toda e nas partes dentro dos mundos) */
 function htmlSeccao(s){
