@@ -9,7 +9,7 @@ Site: https://bcryptopinheiro.github.io/desafio-cetico/
 
 - **Botão «Continuar»** no topo: leva sempre ao próximo passo certo (o jogo a meio, o mundo seguinte, a simulação ou a revisão dos erros)
 - **Plano até ao teste**: o aluno indica a data do teste e o jogo diz o que fazer hoje
-- 5 mundos que se desbloqueiam com 70%, com tempo estimado e 1 a 3 estrelas. **A matéria vem aos bocadinhos**: uma parte curta, perguntas só sobre essa parte, a parte seguinte… e os desafios no fim. Ao repetir um mundo, pode-se escolher «só perguntas». O botão «Matéria» deixa rever a lição toda a meio do jogo
+- **5 mundos todos abertos**, sem ser preciso concluir o anterior; cada um tem tempo estimado e 1 a 3 estrelas (70% dá a primeira estrela). **A matéria vem aos bocadinhos**: uma parte curta, perguntas só sobre essa parte, a parte seguinte… e os desafios no fim. Ao repetir um mundo, pode-se escolher «só perguntas». O botão «Matéria» deixa rever a lição toda a meio do jogo
 - **Respostas escritas dentro dos mundos** («Explica», «Justifica», «Distingue», incluindo a Julieta e o exercício 9): o aluno escreve (fica guardado), compara com a resposta-modelo e marca os pontos que incluiu
 - **Matéria toda**: as lições completas de cada tema, para ler ou rever de seguida
 - **Resumo simples para estudar**: nove ideias centrais em tópicos curtos e recolhidos, mais cinco afirmações de autoavaliação com resposta explicada

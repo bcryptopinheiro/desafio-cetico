@@ -1195,8 +1195,7 @@ const CHAVE = 'desafio-cetico-v1';
 // O campo `teste` nos mundos define os conteúdos que entram na simulação do teste.
 function incluidoNaSimulacao(m){ const mundo = C.mundos.find(x => x.n === m); return !!(mundo && mundo.teste); }
 // prog: jogos a meio (mundos "m1"…"m5", "teste", "sim"), para continuar onde se parou
-// abertos: mundos já desbloqueados (continuam abertos mesmo que se recomece o anterior)
-const base = () => ({ xp:0, mundos:{}, erros:{}, cartoes:{}, recordes:{}, teste:null, prog:{}, abertos:[], def:{ fundo:false, som:false } });
+const base = () => ({ xp:0, mundos:{}, erros:{}, cartoes:{}, recordes:{}, teste:null, prog:{}, def:{ fundo:false, som:false } });
 function carregar(){ try { const r = localStorage.getItem(CHAVE); return r ? JSON.parse(r) : null; } catch(e){ return null; } }
 function guardar(){ try { localStorage.setItem(CHAVE, JSON.stringify(S)); } catch(e){} }
 let S = base();
@@ -1225,7 +1224,6 @@ function topo(){ try { window.scrollTo({ top:0 }); } catch(e){ window.scrollTo(0
 
 const STAR = '<path d="M12 2.6l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/>';
 function estrelasHTML(n){ return '<span class="stars" aria-label="' + n + ' de 3 estrelas">' + [0,1,2].map(i => '<svg viewBox="0 0 24 24" class="' + (i < n ? 'on' : '') + '">' + STAR + '</svg>').join('') + '</span>'; }
-const LOCK = '<svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg>';
 
 /* ---------- XP, níveis, mensagens ---------- */
 function nivel(xp){
@@ -1274,11 +1272,10 @@ addEventListener('popstate', () => {
 
 /* ---------- Estado dos mundos ---------- */
 function infoMundo(n){ return S.mundos[n] || { best:0, est:0 }; }
-function desbloqueado(n){ return n === 1 || S.abertos.indexOf(n) >= 0 || infoMundo(n - 1).best >= 0.7; }
+function desbloqueado(n){ return Number.isInteger(n) && n >= 1 && n <= C.mundos.length; }
 function temProgresso(n){ return !!S.mundos[n] || !!S.prog['m' + n]; }
-/* Recomeçar um mundo: apaga as estrelas e a pergunta onde se ia; os mundos já abertos continuam abertos */
+/* Recomeçar um mundo: apaga as estrelas e a pergunta onde se ia. */
 function recomecarMundo(n){
-  C.mundos.forEach(m => { if (desbloqueado(m.n) && S.abertos.indexOf(m.n) < 0) S.abertos.push(m.n); });
   delete S.mundos[n]; delete S.prog['m' + n]; guardar();
 }
 /* Confirmação com 2 toques (o confirm() não funciona em todos os browsers dentro de apps) */
@@ -1365,13 +1362,12 @@ function inicio(){
   const px = proximoPasso(), relax = S.def.som && S.def.fundo;
 
   const mundos = C.mundos.map(m => {
-    const inf = infoMundo(m.n), livre = desbloqueado(m.n), feito = inf.best >= 0.7, pg = progOk('m' + m.n) && S.prog['m' + m.n];
-    return '<li><div class="mrow"><button class="mundo ' + (feito ? 'feito' : '') + '" data-m="' + m.n + '" ' + (livre ? '' : 'disabled') + ' type="button">' +
+    const inf = infoMundo(m.n), feito = inf.best >= 0.7, pg = progOk('m' + m.n) && S.prog['m' + m.n];
+    return '<li><div class="mrow"><button class="mundo ' + (feito ? 'feito' : '') + '" data-m="' + m.n + '" type="button">' +
       '<span class="no" aria-hidden="true">' + m.letra + '</span>' +
       '<span class="tx"><span class="eyebrow">Mundo ' + m.n + ' · ≈ ' + minutos(m.n) + ' min</span><span class="tt">' + esc(m.titulo) + '</span><span class="rs">' + esc(m.resumo) + '</span>' +
-      '<span class="rw">' + (livre ? estrelasHTML(inf.est) +
-          (pg ? '<span class="chip cont">continua no passo ' + (pg.k + 1) + ' de ' + pg.passos.length + '</span>' : inf.best ? '<span class="pct">melhor: ' + Math.round(inf.best * 100) + '%</span>' : '')
-        : '<span class="chip lock">' + LOCK + 'Faz 70% no Mundo ' + (m.n - 1) + ' para abrir</span>') +
+      '<span class="rw">' + estrelasHTML(inf.est) +
+          (pg ? '<span class="chip cont">continua no passo ' + (pg.k + 1) + ' de ' + pg.passos.length + '</span>' : inf.best ? '<span class="pct">melhor: ' + Math.round(inf.best * 100) + '%</span>' : '') +
       (m.teste ? '<span class="chip">Sai no teste</span>' : '') + '</span></span></button>' +
       (temProgresso(m.n) ? '<button class="reset-b" data-reset="' + m.n + '" type="button" aria-label="Recomeçar o Mundo ' + m.n + '" title="Recomeçar este mundo">↺</button>' : '') + '</div>' +
       (pr === m.n ? '<div class="confirma" id="confirma"><p>Recomeçar o <b>Mundo ' + m.n + '</b>? Perdes as estrelas' + (pg ? ' e o passo onde ias' : '') + '. Os outros mundos continuam abertos.</p>' +
@@ -1399,8 +1395,8 @@ function inicio(){
     '<section class="player" aria-label="O teu nível"><div class="lvl">' + (nv.i + 1) + '</div><div><p class="eyebrow">Nível ' + (nv.i + 1) + '</p><p class="nm">' + esc(nv.nome) + '</p>' +
       '<div class="xpbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(nv.prog * 100) + '"><i style="width:' + (nv.prog * 100) + '%"></i></div>' +
       '<p class="meta"><span>' + S.xp + ' XP</span><span>' + (nv.prox ? 'faltam ' + nv.falta + ' XP para ' + esc(nv.prox.nome) : 'nível máximo!') + '</span></p></div></section>' +
-    '<section><div class="sec-h"><h2>Mapa dos mundos</h2><span class="pct">' + C.mundos.filter(m => infoMundo(m.n).best >= 0.7).length + '/' + C.mundos.length + ' completos</span></div>' +
-      '<p class="small muted" style="margin-top:6px">Em cada mundo, a matéria vem aos bocadinhos: uma parte, umas perguntas, outra parte… Precisas de 70% para abrir o seguinte.</p></section>' +
+    '<section><div class="sec-h"><h2>Mapa dos mundos</h2><span class="pct">' + C.mundos.filter(m => infoMundo(m.n).best >= 0.7).length + '/' + C.mundos.length + ' com 70% ou mais</span></div>' +
+      '<p class="small muted" style="margin-top:6px">Podes escolher qualquer mundo, mesmo sem concluir os anteriores. Em cada um, a matéria vem aos bocadinhos: uma parte, umas perguntas, outra parte…</p></section>' +
     '<ol class="mapa">' + mundos + '</ol>' +
     dobra('d-plano', 'Plano até ao teste', 'opcional', htmlPlano()) +
     '<section class="acoes">' +
@@ -1645,7 +1641,7 @@ function telaInicioMundo(n){
     '<ol class="passos-m"><li><b>' + partes + ' partes de matéria</b>, curtas, cada uma seguida de perguntas só sobre isso</li>' +
       '<li><b>' + m.nPerguntas + ' perguntas</b> com explicação depois de cada resposta' + (temEscrita ? ', e <b>1 resposta escrita</b> como no teste («Explica…»), que corriges com a resposta-modelo' : '') + '</li>' +
       '<li><b>' + m.especiais.length + (m.especiais.length === 1 ? ' desafio' : ' desafios') + '</b> no fim (' + m.especiais.map(e => nomes[e.k]).join(', ') + ')</li></ol>' +
-    '<p class="small muted">Precisas de 70% para abrir o mundo seguinte. Podes sair quando quiseres: continuas no mesmo passo.</p>' +
+    '<p class="small muted">Este mundo está aberto mesmo que ainda não tenhas feito os anteriores. Podes sair quando quiseres: continuas no mesmo passo.</p>' +
     '<button class="btn primary big" id="mi-go" type="button">' + (jaJogou ? 'Jogar com a matéria' : 'Começar') + '</button>' +
     (jaJogou ? '<button class="btn ghost" id="mi-so" type="button">Já sei a matéria: só perguntas</button>' : '') + '</article></div>';
   $('#sair').onclick = inicio;
@@ -1670,21 +1666,17 @@ function telaParte(ctx, p, seguinte, done){
 function fimMundo(n, r){
   const pct = r.total ? r.cred / r.total : 0, est = estrelas(pct);
   const prev = infoMundo(n);
-  const abriaAntes = n < 5 && desbloqueado(n + 1);
   S.mundos[n] = { best:Math.max(prev.best || 0, pct), est:Math.max(prev.est || 0, est) };
-  if (n < 5 && pct >= 0.7 && S.abertos.indexOf(n + 1) < 0) S.abertos.push(n + 1);
   guardar();
-  const abriuAgora = n < 5 && !abriaAntes && desbloqueado(n + 1);
   const m = C.mundos[n - 1];
   let msg;
   if (est === 3) msg = 'Perfeito! Dominas este mundo.';
   else if (est === 2) msg = 'Muito bom! Falta pouco para as 3 estrelas.';
   else if (est === 1) msg = 'Passaste! Repete para ganhar mais estrelas.';
-  else msg = 'Precisas de 70% para passar. Os erros já estão na revisão: cada tentativa fica mais fácil.';
+  else msg = 'Ainda não ganhaste estrelas neste mundo. Podes repetir ou escolher qualquer outro mundo.';
   limpar(); topo();
   $app.innerHTML = '<div class="wrap"><section class="res pop-in"><p class="eyebrow">Mundo ' + n + ' · ' + esc(m.titulo) + '</p>' +
     estrelasHTML(est) + '<p class="big">' + Math.round(pct * 100) + '<small>%</small></p><h2>' + esc(msg) + '</h2>' +
-    (abriuAgora ? '<p class="aviso">Desbloqueaste o Mundo ' + (n + 1) + ': <b>' + esc(C.mundos[n].titulo) + '</b></p>' : '') +
     '<div class="stats"><span>+' + r.xp + ' XP</span><span>melhor: ' + Math.round(S.mundos[n].best * 100) + '%</span></div>' + htmlRespostas(r.res, 'Ver as tuas respostas') +
     '<div class="acts">' + (n < 5 && desbloqueado(n + 1) ? '<button class="btn primary" id="r-prox" type="button">Mundo ' + (n + 1) + '</button>' : '') +
     '<button class="btn" id="r-rep" type="button">Jogar outra vez</button><button class="btn ghost" id="r-ini" type="button">Voltar ao mapa</button></div></section></div>';
